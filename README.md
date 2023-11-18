@@ -18,6 +18,7 @@ In general avoid:
 
 ### Fonts Notes
 
+  * Under Linux, Bitstream Vera Sans Mono is typically built-in and not bad
   * Under Windows, the built-in Consolas is not bad (better than Courier New,
     that Putty defaults to), available since Microsoft Windows Vista.
     A similar (free) font is Inconsolata
