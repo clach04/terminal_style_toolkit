@@ -8,6 +8,7 @@ Scripts / tools / config for terminal styling and colors / colours
       * Unknown license, many different versions of this script online
   * show_colors2.bash my version derived from show_colors.bash
   * pyshow_colors2.py in-progress Python version of show_colors2.bash
+  * colors.py from https://gist.github.com/lilydjwg/fdeaf79e921c2f413f44b6f613f6ad53
 
 ## Putty
 
