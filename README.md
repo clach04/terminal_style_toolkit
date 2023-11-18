@@ -2,6 +2,20 @@
 
 Scripts / tools / config for terminal styling and colors / colours
 
+## Notes
+
+When testing out a color scheme/theme consider different use cases:
+
+  * `pyshow_colors2.py`
+  * ls colors (LSCOLORS, LS_COLORS, `dircolors` and .dir_colors)
+  * neofetch
+  * `vim` colorscheme
+
+In general avoid:
+
+  * Solutions that modify the TERM variable in .bashrc.
+  * Solutions that modify the Vim t_Co variable.
+
 ## Scripts for running in terminal
 
   * show_colors.bash from https://bbs.archlinux.org/viewtopic.php?id=51818&p=1%29
@@ -14,6 +28,8 @@ Scripts / tools / config for terminal styling and colors / colours
 
   * python_windows_registry_putty_colors.py - dumps session names and colors (only)
     along with simple show sessions that use the exact same same-color scheme feature
+  * Sane Putty settings https://web.archive.org/web/20191231204120/http://dag.wiee.rs/blog/content/improving-putty-settings-on-windows
+    lots of good tips, but it identifies the problem with the out of box blue color in Putty
 
 
 ## Resources
@@ -21,3 +37,10 @@ Scripts / tools / config for terminal styling and colors / colours
   * https://github.com/termstandard/colors
   * https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences/75985833#75985833
     useful table of codes
+
+### TODO Resources
+
+To checkout:
+
+  * https://github.com/fikovnik/bin-scripts/blob/master/color-test.sh
+  * https://github.com/fikovnik/bin-scripts/blob/master/term-colors.py
