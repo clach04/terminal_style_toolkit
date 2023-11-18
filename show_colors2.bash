@@ -23,15 +23,32 @@ T='gYw'   # The test text
 
 # standard ansi mappings, generated this by reviewing https://bluesock.org/~willkg/dev/ansi.html
 declare -A color_map=(
-    ['    m']="normal" ['   1m']="bold" ['  30m']="black" ['1;30m']="blackB" ['  31m']="red"
-    ['1;31m']="redB" ['  32m']="green" ['1;32m']="greenB" ['  33m']="yellow"
-    ['1;33m']="yellowB" ['  34m']="blue" ['1;34m']="blueB" ['  35m']="magenta"
-    ['1;35m']="magentaB" ['  36m']="cyan" ['1;36m']="cyanB" ['  37m']="white"
+    ['    m']="normal"
+    ['   1m']="bold"
+    ['  30m']="black"
+    ['1;30m']="blackB"
+    ['  31m']="red"
+    ['1;31m']="redB"
+    ['  32m']="green"
+    ['1;32m']="greenB"
+    ['  33m']="yellow"
+    ['1;33m']="yellowB"
+    ['  34m']="blue"
+    ['1;34m']="blueB"
+    ['  35m']="magenta"
+    ['1;35m']="magentaB"
+    ['  36m']="cyan"
+    ['1;36m']="cyanB"
+    ['  37m']="white"
     ['1;37m']="whiteB"
-
-    ['40m']="black" ['41m']="red" ['42m']="green" ['43m']="yellow"
-    ['44m']="blue"    ['45m']="magenta" ['46m']="cyan" ['47m']="white"
-
+    ['40m']="black"
+    ['41m']="red"
+    ['42m']="green"
+    ['43m']="yellow"
+    ['44m']="blue"
+    ['45m']="magenta"
+    ['46m']="cyan"
+    ['47m']="white"
 )
 
 
