@@ -16,6 +16,19 @@ In general avoid:
   * Solutions that modify the TERM variable in .bashrc.
   * Solutions that modify the Vim t_Co variable.
 
+### Fonts Notes
+
+  * Under Windows, the built-in Consolas is not bad (better than Courier New,
+    that Putty defaults to), available since Microsoft Windows Vista.
+    A similar (free) font is Inconsolata
+  * Many fonts at https://www.nerdfonts.com/ - worth checking out:
+      * EnvyCodeR
+      * FiraMono
+      * Go-Mono
+      * InconsolataGo
+      * Overpass
+      * UbuntuMono
+
 ## Sample files
 
   * sample_text_editor.txt utf-8 text file to test view/edit of fixed width fonts.
