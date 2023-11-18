@@ -7,6 +7,7 @@ Scripts / tools / config for terminal styling and colors / colours
   * show_colors.bash from https://bbs.archlinux.org/viewtopic.php?id=51818&p=1%29
       * Unknown license, many different versions of this script online
   * show_colors2.bash my version derived from show_colors.bash
+  * pyshow_colors2.py in-progress Python version of show_colors2.bash
 
 ## Putty
 
