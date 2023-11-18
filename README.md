@@ -14,3 +14,10 @@ Scripts / tools / config for terminal styling and colors / colours
 
   * python_windows_registry_putty_colors.py - dumps session names and colors (only)
     along with simple show sessions that use the exact same same-color scheme feature
+
+
+## Resources
+
+  * https://github.com/termstandard/colors
+  * https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences/75985833#75985833
+    useful table of codes
