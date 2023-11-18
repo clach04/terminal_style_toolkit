@@ -14,20 +14,31 @@ color_map_list_of_tuples_fg = [
     ('   1m', 'bold'),
     ('  30m', 'black'),
     ('1;30m', 'blackB'),
+    #('  90m', 'blackH'),
     ('  31m', 'red'),
     ('1;31m', 'redB'),
+    #('  91m', 'redH'),
     ('  32m', 'green'),
     ('1;32m', 'greenB'),
+    #('  92m', 'greenH'),
     ('  33m', 'yellow'),
     ('1;33m', 'yellowB'),
+    #('  93m', 'yellowH'),
     ('  34m', 'blue'),
     ('1;34m', 'blueB'),
+    #('  94m', 'blueH'),
     ('  35m', 'magenta'),
     ('1;35m', 'magentaB'),
+    #('  95m', 'magentaH'),  # Bright / High
     ('  36m', 'cyan'),
     ('1;36m', 'cyanB'),
+    #('  96m', 'cyanH'),
     ('  37m', 'white'),
     ('1;37m', 'whiteB'),
+    #('  97m', 'whiteH'),
+    #('  39m', 'Default'),  # TODO
+    #('1;39m', 'DefaultB'),  # TODO
+    #('  99m', 'DefaultH'),  # TODO
 ]
 color_map_list_of_tuples_bg = [
     ('40m', 'black'),
@@ -38,6 +49,15 @@ color_map_list_of_tuples_bg = [
     ('45m', 'magenta'),
     ('46m', 'cyan'),
     ('47m', 'white'),
+    #('100m', 'blackH'),
+    #('101m', 'redH'),
+    #('102m', 'greenH'),
+    #('103m', 'yellowH'),
+    #('104m', 'blueH'),
+    #('105m', 'magentaH'),
+    #('106m', 'cyanH'),
+    #('107m', 'whiteH'),
+    #('109m', 'DefaultH'),
 ]
 color_map_list_of_tuples = color_map_list_of_tuples_fg + color_map_list_of_tuples_bg
 
