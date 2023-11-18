@@ -16,6 +16,11 @@ In general avoid:
   * Solutions that modify the TERM variable in .bashrc.
   * Solutions that modify the Vim t_Co variable.
 
+## Sample files
+
+  * sample_text_editor.txt utf-8 text file to test view/edit of fixed width fonts.
+    Not suitable for syntax highlighting tests.
+
 ## Scripts for running in terminal
 
   * show_colors.bash from https://bbs.archlinux.org/viewtopic.php?id=51818&p=1%29

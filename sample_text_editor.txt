@@ -1,0 +1,165 @@
+# -*- coding: utf-8 -*-
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+Generate text file with range of characters/text/format.
+
+Suitable for testing the visuals in a text editor to make sure
+a font, colour/color, size, etc. "looks nice".
+
+http://www.cosmix.org/software/ Droid Sans Mono (w/ slashed zero)
+is pretty good. Pipe symbol is not split though.
+
+E.g. under GTK/Linux "Bitstream Vera Sans Mono" looks fine and has
+correct indentation (albeit zero looks like the letter oooh).
+"DejaVu Sans Mono" Under Windows also looks OK AND zero is decorated.
+
+Ubuntu Mono should have a slashed zero.
+
+Built-in Consolas under Windows 10 is not bad.
+
+>python -u "gen_text_editor_test_text.py"
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWX Big dubya
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwX little dubya
+iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiX little eye
+111111111111111111111111111111X one
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIX big eye
+llllllllllllllllllllllllllllllX little ell
+||||||||||||||||||||||||||||||X pipe
+LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLX big ell
+                              X do spaces line up?
+yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyX little why
+______________________________X underscore/underbar
+------------------------------X dash/hype
+##############################X hash/(US)pound - comment in Python/shell
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWX Repeat of above but in hash comments
+#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwX
+#iiiiiiiiiiiiiiiiiiiiiiiiiiiiiX
+#11111111111111111111111111111X
+#IIIIIIIIIIIIIIIIIIIIIIIIIIIIIX
+#lllllllllllllllllllllllllllllX
+#|||||||||||||||||||||||||||||X
+#LLLLLLLLLLLLLLLLLLLLLLLLLLLLLX
+#                             X
+#yyyyyyyyyyyyyyyyyyyyyyyyyyyyyX
+#_____________________________X
+#-----------------------------X
+##############################X
+j i 1 I l | L       # these should all be different
+o O 0               # these too, and comment should line with above comment
+x = {1: 1}
+y = [ 1, 2, O, 0 ]  # can you see the error?
+z = 1-2+3*4/5.0
+
+Typos that could be confusing to read with poor fonts:
+
+lookin
+1ook1n
+100k1n
+lOOkin
+lOOk1n
+l00k1n
+
+    Illegal1 = O0;
+
+# and now some C (esql/c ProC) code that has show spacing issues with some fonts.
+
+/* the varchar "buffer" def is supposed to line up with the slotbytesleft 2 lines above it*/
+
+    EXEC SQL BEGIN DECLARE SECTION;
+        unsigned int    offset=1;
+        unsigned int    chunksize=0;
+        unsigned int    temp_chunksize=0;
+        unsigned int    bytesleft=0;
+        unsigned int    slotbytesleft=0;
+    #define ORACLE_CLOB_MAX_SEG 4096 /*  same as BLOB_MAX_SEG in header file which ProC can't "see" -- consider increasing for performance */
+        varchar         buffer[ORACLE_CLOB_MAX_SEG] ;
+    EXEC SQL END DECLARE SECTION;
+
+INSTRUCTIONS!
+
+	View this in text editor and change "syntax highlighting mode" into:
+	   * text
+	   * C
+	   * Python
+	For example Scite with "Droid Sans Mono Slashed, 10pt" has issues in "C" mode but fine in text and Python.
+
+/* both of the "buffer" defs are supposed to line up, and also line up with the bytesleft 2 lines above it*/
+
+    EXEC SQL BEGIN DECLARE SECTION;
+        unsigned int    offset=1;
+        unsigned int    chunksize=0;
+        unsigned int    temp_chunksize=0;
+        unsigned int    bytesleft=0;
+    #define ORACLE_BLOB_MAX_SEG 4096 /*  same as BLOB_MAX_SEG in header file which ProC can't "see" -- consider increasing for performance */
+        unsigned char   buffer[ORACLE_BLOB_MAX_SEG] ;
+        EXEC SQL VAR    buffer IS RAW(ORACLE_BLOB_MAX_SEG) ;
+    EXEC SQL END DECLARE SECTION;
+
+
+Finally do operators line up?
+	
+More C-like code:
+
+    int  two_spaces_preceeding=0;
+    int *myintptr=NULL;
+        &myintptr;
+        +myintptr;
+        -myintptr;
+       --myintptr;
+       ++myintptr;
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWX
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwX
+iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiX
+111111111111111111111111111111X
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIX
+llllllllllllllllllllllllllllllX
+||||||||||||||||||||||||||||||X
+                              X
+yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyX
+______________________________X
+------------------------------X
+##############################X
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWX
+#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwX
+#iiiiiiiiiiiiiiiiiiiiiiiiiiiiiX
+#11111111111111111111111111111X
+#IIIIIIIIIIIIIIIIIIIIIIIIIIIIIX
+#lllllllllllllllllllllllllllllX
+#|||||||||||||||||||||||||||||X
+#                             X
+#yyyyyyyyyyyyyyyyyyyyyyyyyyyyyX
+#_____________________________X
+#-----------------------------X
+##############################X
+
+j i 1 I l | L       # these should all be different
+o O 0               # these too, and comment should line with above comment
+x = {1: 1}
+y = [ 1, 2, O, 0 ]  # can you see the error?
+
+TODO emdash endash
+
+Quotes
+
+'Hello world' Single quote
+`Hello world` backtick
+"Hello world" Double quote
+“Hello world” LEFT/RIGHT DOUBLE QUOTATION MARK
+‘Hello world’ LEFT/RIGHT SINGLE QUOTATION MARK
+
+Unicode glpyhs (encoded in UTF8)
+ö LATIN SMALL LETTER O WITH DIAERESIS
+ㄓ bopomofo not really sure what this is
+¥ yen sign
+© copyright
+€ euro
+¹ small 1
+® registered trademark
+酒 liquor; Unicode Han Character "wine, spirits, liquor, alcoholic beverage"
+☠ poison/skull crossbones
+☢ radioactive
+☣ biohazard
