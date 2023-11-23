@@ -33,12 +33,20 @@ def natural_sort(l):
 
 
 filename = sys.argv[1]
+strip_comments = True
 
 
 config_entry = []
 for line in get_lines_from_file(filename, get_all_lines, mode='r'):
     if not line.startswith('"'):
-        print(line)
+        if line.startswith(';'):
+            #import pdb ; pdb.set_trace()
+            if not strip_comments:
+                # NOTE is do not strip comments, will be out of scope of original registry entry/setting
+                # Also later strip any non-color entriees
+                print(line)
+        else:
+            print(line)
     else:
         config_entry.append(line)
 
@@ -47,6 +55,7 @@ config_entry = natural_sort(config_entry)
 
 for line in config_entry:
     if not line.startswith('"Colour'):
+        print('; IGNORED: %s' % line)  # TODO make this configurable?
         continue
     # NOTE assumes Color.... - no filtering..
     #print(line)
