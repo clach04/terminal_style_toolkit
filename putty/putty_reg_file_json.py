@@ -1,3 +1,4 @@
+# Clone of putty_reg_file_to_sorted.py - todo refactor and share code
 import json
 import re
 import shlex
@@ -35,21 +36,11 @@ def natural_sort(l):
 
 filename = sys.argv[1]
 strip_comments = True
-dump_json = True
 
 
 config_entry = []
 for line in get_lines_from_file(filename, get_all_lines, mode='r'):
-    if not line.startswith('"'):
-        if line.startswith(';'):
-            #import pdb ; pdb.set_trace()
-            if not strip_comments:
-                # NOTE is do not strip comments, will be out of scope of original registry entry/setting
-                # Also later strip any non-color entriees
-                print(line)
-        else:
-            print(line)
-    else:
+    if line.startswith('"'):
         config_entry.append(line)
 
 #config_entry.sort()
@@ -58,7 +49,7 @@ config_entry = natural_sort(config_entry)
 color_dict = {}
 for line in config_entry:
     if not line.startswith('"Colour'):
-        print('; IGNORED: %s' % line)  # TODO make this configurable?
+        #print('; IGNORED: %s' % line)  # TODO make this configurable?
         continue
     # NOTE assumes Color.... - no filtering..
     #print(line)
@@ -68,12 +59,12 @@ for line in config_entry:
     #print(color_number, decimal_rgb)
     r, g, b = map(int, decimal_rgb.split(','))
     # print('%s %s %d,%d,%d #%02x %02x %02x ' % (color_number, decimal_rgb, r, g, b, r, g, b))
-    print('; #%02x%02x%02x ' % (r, g, b))
-    print(line)
+    #print('; #%02x%02x%02x ' % (r, g, b))
+    #print(line)
     color_dict[color_number] = '%d,%d,%d' % (r, g, b)  # Decimal RGB, as used by Putty
     #color_dict[color_number] = '%02x%02x%02x' % (r, g, b)  # Hex RGB
 
-if dump_json:
-    print(';' * 65)
-    print('')
-    print('%s' % json.dumps(color_dict, indent=4))
+#print(';' * 65)
+#print('')
+print('%s' % json.dumps(color_dict, indent=4))
+
