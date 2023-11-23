@@ -1,4 +1,4 @@
-# Clone of putty_reg_file_to_sorted.py - todo refactor and share code
+# Clone of putty_reg_file_json.py / putty_reg_file_to_sorted.py - todo refactor and share code
 import json
 import re
 import shlex
