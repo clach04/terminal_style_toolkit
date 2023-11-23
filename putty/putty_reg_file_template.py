@@ -1,5 +1,6 @@
 # Clone of putty_reg_file_json.py / putty_reg_file_to_sorted.py - todo refactor and share code
 import json
+import os
 import re
 import shlex
 import sys
@@ -48,6 +49,13 @@ class UglyMustache:
 filename = sys.argv[1]
 strip_comments = True
 
+filename = os.path.abspath(filename)
+scheme_name = os.path.basename(filename)
+scheme_name = scheme_name.split('.', 1)[0]
+# FIXME clean filename some more
+#print(scheme_name)
+# Alternatively pick up scheme name from registry session name?
+
 
 config_entry = []
 for line in get_lines_from_file(filename, get_all_lines, mode='r'):
@@ -60,9 +68,9 @@ config_entry = natural_sort(config_entry)
 color_dict = {}
 template_dict = {}
 template_dict = {
-    'scheme-name': 'NAME_HERE',
+    'scheme-name': scheme_name,
     'scheme-author': 'AUTHOR_HERE',
-    'scheme-slug': 'SLUG_HERE',
+    'scheme-slug': scheme_name,
 }
 for line in config_entry:
     if not line.startswith('"Colour'):
@@ -87,7 +95,7 @@ for line in config_entry:
 
 #print(';' * 65)
 #print('')
-print('%s' % json.dumps(color_dict, indent=4))
+#print('%s' % json.dumps(color_dict, indent=4))
 
 # base16-like template (similar names for scheme, etc.)
 template_str = """Windows Registry Editor Version 5.00
@@ -201,8 +209,8 @@ template_str = """Windows Registry Editor Version 5.00
 "Colour21"="{{Colour21-rgb-r}},{{Colour21-rgb-g}},{{Colour21-rgb-b}}"
 """
 
-print('')
-print('')
+#print('')
+#print('')
 stache = UglyMustache()
 #print('%s' % UglyMustache.render(template_str, template_dict))  # classmethod
 print('%s' % stache.render(template_str, template_dict))
