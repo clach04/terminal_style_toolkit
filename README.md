@@ -50,7 +50,8 @@ In general avoid:
   * python_windows_registry_putty_colors.py - dumps session names and colors (only)
     along with simple show sessions that use the exact same same-color scheme feature
   * Sane Putty settings https://web.archive.org/web/20191231204120/http://dag.wiee.rs/blog/content/improving-putty-settings-on-windows
-    lots of good tips, but it identifies the problem with the out of box blue color in Putty
+    lots of good tips, identifies the problem with the out of box blue color in Putty
+  * https://www.thegeekstuff.com/2009/07/10-practical-putty-tips-and-tricks-you-probably-didnt-know/
 
 
 ## Resources
