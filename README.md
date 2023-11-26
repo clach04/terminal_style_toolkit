@@ -33,7 +33,7 @@ In general avoid:
 
 ## Sample files
 
-  * (sample_text_editor.txt)[sample_text_editor.txt] utf-8 text file to test view/edit of fixed width fonts.
+  * [sample_text_editor.txt](sample_text_editor.txt) utf-8 text file to test view/edit of fixed width fonts.
     Not suitable for in depth syntax highlighting tests.
   * https://github.com/altercation/solarized/tree/master/utils/tests has a collection of (small) different source code file types for testing syntax highlighting.
   * https://github.com/darekkay/config-files/tree/master/color-schemes/example-files
