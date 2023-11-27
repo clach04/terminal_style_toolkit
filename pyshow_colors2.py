@@ -99,3 +99,25 @@ for fg in foreground_colors:
     f.write('\033[0m')  # reset - not needed but send just-in-case
     f.write('\n')
 
+############
+color_map_list_of_tuples_bg_rest = [
+    ('100m', 'blackH'),
+    ('101m', 'redH'),
+    ('102m', 'greenH'),
+    ('103m', 'yellowH'),
+    ('104m', 'blueH'),
+    ('105m', 'magentaH'),
+    ('106m', 'cyanH'),
+    ('107m', 'whiteH'),
+    ('109m', 'DefaultH'),
+]
+demo_text = '   '
+f.write('\n')
+for bg_escape, bgcolor_name in color_map_list_of_tuples_bg:
+    f.write('\033[%s%s' % (bg_escape, demo_text))
+    f.write('\033[0m')  # reset - not needed but send just-in-case
+f.write('\n')
+for bg_escape, bgcolor_name in color_map_list_of_tuples_bg_rest:
+    f.write('\033[%s%s' % (bg_escape, demo_text))
+    f.write('\033[0m')  # reset - not needed but send just-in-case
+f.write('\n')
