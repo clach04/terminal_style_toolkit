@@ -77,5 +77,6 @@ print('-' * 65)
 print('sessions that have identical color schemes')
 for x in colors_to_session_names:
     print(colors_to_session_names[x])
+    print('\t%s' % x)
 # Showing similar would require diffing each scheme and having a thresh hold for differences in color / and/or levingstien distance (etc.) for fuzzy match
 print('-' * 65)
