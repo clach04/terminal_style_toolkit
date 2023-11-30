@@ -5,6 +5,7 @@ try:
 except ImportError:
     import _winreg as winreg
 
+import putty_colors_render_template
 
 try:
     FileNotFoundError
@@ -65,7 +66,7 @@ for i in range(0, winreg.QueryInfoKey(key)[0]):
                     # DisplayName doesn't exist in this skey
                     pass
         sessions[putty_session_name] = colors
-        color_key = json.dumps(colors)
+        color_key = json.dumps(colors)  # FIXME sort....
         tmp_list = colors_to_session_names.get(color_key, [])
         tmp_list.append(putty_session_name)
         colors_to_session_names[color_key] = tmp_list
@@ -78,5 +79,9 @@ print('sessions that have identical color schemes')
 for x in colors_to_session_names:
     print(colors_to_session_names[x])
     print('\t%s' % x)
+    putty_color_dict = json.loads(x)
+    putty_color_dict['scheme-name'] = colors_to_session_names[x][0]  # pick first one
+    reg_entries = putty_colors_render_template.render_template(putty_color_dict)
+    print('%s' % reg_entries)  # TODO dump to disk
 # Showing similar would require diffing each scheme and having a thresh hold for differences in color / and/or levingstien distance (etc.) for fuzzy match
 print('-' * 65)
