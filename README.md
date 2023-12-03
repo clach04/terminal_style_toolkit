@@ -45,6 +45,7 @@ In general avoid:
   * show_colors2.bash my version derived from show_colors.bash
   * pyshow_colors2.py in-progress Python version of show_colors2.bash
   * colors.py from https://gist.github.com/lilydjwg/fdeaf79e921c2f413f44b6f613f6ad53
+  * parse_palette_tools.py - tools for dumping palettes for easier read/conversion
 
 ## Putty
 
