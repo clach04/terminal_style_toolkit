@@ -52,8 +52,12 @@ filename = argv[1]
 color_names, color_names_list = open_parse_gimp_palette_gpl_file(filename)
 for color_name in color_names:
     (r, g, b) = color_names[color_name]
+    print('%02x%02x%02x\t%d,%d,%d\t%s' % (r, g, b, r, g, b, color_name, ))
+    """
     print('%s' % color_name)
-    print((r, g, b))
+    print('%d,%d,%d' % (r, g, b))
+    #print((r, g, b))
     print('%02x%02x%02x' % (r, g, b))
     print('')
+    """
 
