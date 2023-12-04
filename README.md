@@ -62,6 +62,12 @@ In general avoid:
   * https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences/75985833#75985833
     useful table of codes
 
+### Related projects
+
+  * https://github.com/anonimoanemico/puttier
+    * Supports previewing a theme
+  * https://github.com/mvelikikh/putty-session-manager
+
 ### TODO Resources
 
 To checkout:
