@@ -74,3 +74,4 @@ To checkout:
 
   * https://github.com/fikovnik/bin-scripts/blob/master/color-test.sh
   * https://github.com/fikovnik/bin-scripts/blob/master/term-colors.py
+  * https://github.com/mvelikikh/putty-session-manager
