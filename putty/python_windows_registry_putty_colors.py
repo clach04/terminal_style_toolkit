@@ -1,3 +1,7 @@
+
+# show sessions that have identical color schemes
+import os
+import sys
 import errno
 import json
 try:
@@ -20,6 +24,7 @@ access_type = winreg.KEY_READ
 key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, "SOFTWARE\\SimonTatham\\PuTTY\\Sessions\\", 0, access_type)
 sessions = {}
 colors_to_session_names = {}
+print('Processing...')
 for i in range(0, winreg.QueryInfoKey(key)[0]):
     putty_session_name = winreg.EnumKey(key, i)  # putty session name
     print('\t' + putty_session_name)
@@ -60,7 +65,7 @@ for i in range(0, winreg.QueryInfoKey(key)[0]):
             try:
                 key_name = 'Colour%d' % j
                 colors[key_name] = winreg.QueryValueEx(skey, key_name)[0]
-                print('\t\t' + key_name + ' ' + winreg.QueryValueEx(skey, key_name)[0])
+                #print('\t\t' + key_name + ' ' + winreg.QueryValueEx(skey, key_name)[0])
             except (OSError, FileNotFoundError) as e:
                 if e.errno == errno.ENOENT:
                     # DisplayName doesn't exist in this skey
@@ -78,10 +83,15 @@ print('-' * 65)
 print('sessions that have identical color schemes')
 for x in colors_to_session_names:
     print(colors_to_session_names[x])
-    print('\t%s' % x)
+    session_name = colors_to_session_names[x][0]  # pick the first one
+    #print('\t%s' % x)
     putty_color_dict = json.loads(x)
     putty_color_dict['scheme-name'] = colors_to_session_names[x][0]  # pick first one
     reg_entries = putty_colors_render_template.render_template(putty_color_dict)
-    print('%s' % reg_entries)  # TODO dump to disk
+    filename = os.path.join('generated', session_name) + '_sorted.reg'
+    f = open(filename, 'w')
+    f.write(reg_entries)
+    f.close()
+    #print('%s' % reg_entries)  # TODO dump to disk
 # Showing similar would require diffing each scheme and having a thresh hold for differences in color / and/or levingstien distance (etc.) for fuzzy match
 print('-' * 65)
