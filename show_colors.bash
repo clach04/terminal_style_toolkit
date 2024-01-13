@@ -14,6 +14,11 @@
 
 T='gYw'   # The test text
 
+if [ -z "$HIDE_COLOR_NAMES" ]
+then
+    echo -e "\n                Black    Red    Green  Yellow\
+   Blue   Magenta  Cyan    White";
+fi
 echo -e "\n                 40m     41m     42m     43m\
      44m     45m     46m     47m";
 
