@@ -1,3 +1,6 @@
+
+# library for rendering base16 - tinted theming templates
+
 import json
 import re
 import shlex
