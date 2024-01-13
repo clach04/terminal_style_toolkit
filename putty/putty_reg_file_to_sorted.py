@@ -1,3 +1,6 @@
+
+# takes in registry file (from a Putty session) prints sorted reg file to stdout (for easier diff-ing). optionally output json too
+
 import json
 import re
 import shlex
