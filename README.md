@@ -78,3 +78,8 @@ To checkout:
   * https://github.com/fikovnik/bin-scripts/blob/master/term-colors.py
   * https://github.com/mvelikikh/putty-session-manager
   * https://ciembor.github.io/4bit/ - could code from https://github.com/ciembor/4bit be used as a web viewer preview (compare with puttier)
+
+Color schemes that pass eyeball test but I'd like to checkout:
+
+  * https://github.com/mattly/iterm-colors-farmhouse - light and dark
+  * https://github.com/mattly/iterm-colors-pencil - light and dark
