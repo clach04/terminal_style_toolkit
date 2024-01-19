@@ -44,6 +44,10 @@ def natural_sort(l):
 filename = sys.argv[1]
 strip_comments = True
 dump_json = True
+verbose = True
+
+verbose = False
+dump_json = False
 
 
 config_entry = []
@@ -56,7 +60,8 @@ for line in get_lines_from_file(filename, get_all_lines, mode='r'):
                 # Also later strip any non-color entriees
                 print(line)
         else:
-            print(line)
+            if verbose:
+                print(line)
     else:
         config_entry.append(line)
 
@@ -76,8 +81,9 @@ for line in config_entry:
     #print(color_number, decimal_rgb)
     r, g, b = map(int, decimal_rgb.split(','))
     # print('%s %s %d,%d,%d #%02x %02x %02x ' % (color_number, decimal_rgb, r, g, b, r, g, b))
-    print('; #%02x%02x%02x ' % (r, g, b))
-    print(line)
+    if verbose:
+        print('; #%02x%02x%02x ' % (r, g, b))
+        print(line)
     color_dict[color_number] = '%d,%d,%d' % (r, g, b)  # Decimal RGB, as used by Putty
     #color_dict[color_number] = '%02x%02x%02x' % (r, g, b)  # Hex RGB
 
@@ -86,8 +92,9 @@ if dump_json:
     print('')
     print('%s' % json.dumps(color_dict, indent=4))
 
-print('')
-print('-' * 65)
+if verbose:
+    print('')
+    print('-' * 65)
 
 reg_entries = putty_colors_render_template.render_template(color_dict)
 print('%s' % reg_entries)
