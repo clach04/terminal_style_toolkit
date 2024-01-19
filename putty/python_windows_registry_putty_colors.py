@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: us-ascii -*-
+# vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
+#
 
 # show sessions that have identical color schemes
 import os

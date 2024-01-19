@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: us-ascii -*-
+# vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
+#
 
 # given a putty reg file, output a sorted, commented out reg file suitable for comparison/diff
 

@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: us-ascii -*-
+# vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
+#
 
 # takes in registry file (from a Putty session) prints sorted reg file to stdout (for easier diff-ing). optionally output json too
 
@@ -14,6 +18,7 @@ except NameError:
     except NameError:
         basestring = str
 
+import putty_colors_render_template
 
 def get_all_lines(readobject):
     for line in readobject:
@@ -80,3 +85,9 @@ if dump_json:
     print(';' * 65)
     print('')
     print('%s' % json.dumps(color_dict, indent=4))
+
+print('')
+print('-' * 65)
+
+reg_entries = putty_colors_render_template.render_template(color_dict)
+print('%s' % reg_entries)
