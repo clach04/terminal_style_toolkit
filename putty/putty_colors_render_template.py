@@ -49,6 +49,9 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
         template_dict['%s-rgb-g' % color_number] = g
         template_dict['%s-rgb-b' % color_number] = b
 
+    for entry in list(template_dict.keys()):
+        template_dict[entry.replace('-', '_')] = template_dict[entry]
+
     stache = UglyMustache()
     #print('%s' % UglyMustache.render(template_str, template_dict))  # classmethod
     return stache.render(template_str, template_dict)
