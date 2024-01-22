@@ -42,6 +42,10 @@ def natural_sort(l):
 
 
 filename = sys.argv[1]
+try:
+    template_filename = sys.argv[2]
+except IndexError:
+    template_filename = 'putty_reg.mustache'
 strip_comments = True
 dump_json = True
 verbose = True
@@ -96,5 +100,5 @@ if verbose:
     print('')
     print('-' * 65)
 
-reg_entries = putty_colors_render_template.render_template(color_dict)
+reg_entries = putty_colors_render_template.render_template(color_dict, template_filename=template_filename)
 print('%s' % reg_entries)
