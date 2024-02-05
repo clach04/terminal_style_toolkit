@@ -71,6 +71,10 @@ In general avoid:
     * Supports previewing a theme
   * https://github.com/mvelikikh/putty-session-manager
 
+#### Non-Terminal
+
+  * https://github.com/monolifed/scite_theme scite thems from base16 config
+
 ### TODO Resources
 
 To checkout:
