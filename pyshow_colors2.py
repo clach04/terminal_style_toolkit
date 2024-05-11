@@ -3,6 +3,7 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 """Python version of show_colors2.bash
+NOTE expects terminal to be 86 characters wide
 """
 
 import os
