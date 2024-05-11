@@ -6,6 +6,8 @@
 # also see http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
 
 # shows color/colour names. NOTE needs 86 columns (and regular 24 lines)
+# Also dumps detected terminal information
+# See pyshow_colors2.py for an enhanced version (without detected terminal information)
 
 #
 #   This file echoes a bunch of color codes to the 
@@ -86,5 +88,6 @@ for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' \
 done
 echo
 
+# Dump detected terminal information
 infocmp|grep colors
 env TERM=xterm-256color infocmp | grep colors
