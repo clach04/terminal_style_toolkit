@@ -43,6 +43,7 @@ In general avoid:
   * show_colors.bash from https://bbs.archlinux.org/viewtopic.php?id=51818&p=1%29
       * Unknown license, many different versions of this script online
   * show_colors2.bash my version derived from show_colors.bash
+  * color-test.bash - derived from https://gilesorr.com/bashprompt/howto/c333.html - shows all foreground colors as text with default background as a sanity check
   * pyshow_colors2.py in-progress Python version of show_colors2.bash
   * colors.py from https://gist.github.com/lilydjwg/fdeaf79e921c2f413f44b6f613f6ad53
   * parse_palette_tools.py - tools for dumping palettes for easier read/conversion
