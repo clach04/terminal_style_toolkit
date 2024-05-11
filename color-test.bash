@@ -9,8 +9,7 @@
 #
 #   Author: Giles Orr
 #   URL: http://gilesorr.com/bashprompt/howto/c350.html
-#   License: GNU Free Documentation License, Version 1.1 or any later version pu
-blished by the Free Software Foundation;
+#   License: GNU Free Documentation License, Version 1.1 or any later version published by the Free Software Foundation;
 #            http://gilesorr.com/bashprompt/howto/a1004.html
 
 
