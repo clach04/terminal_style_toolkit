@@ -21,6 +21,18 @@ except NameError:
     # py2
     FileNotFoundError = OSError  # FIXME review, use variable for tuple of exceptions instead?
 
+os_makedirs = os.makedirs
+def safe_mkdir(newdir):
+    """Create directory path(s), ignoring "already exists" errors"""
+    result_dir = os.path.abspath(newdir)
+    try:
+        os_makedirs(result_dir)
+    except OSError as info:
+        if info.errno == 17 and os.path.isdir(result_dir):
+            pass
+        else:
+            raise
+
 access_type = winreg.KEY_ALL_ACCESS  # needs admin, or get; WindowsError: [Error 5] Access is denied / PermissionError: [WinError 5] Access is denied 
 access_type = winreg.KEY_READ 
 
@@ -82,6 +94,8 @@ for i in range(0, winreg.QueryInfoKey(key)[0]):
     finally:
         skey.Close()
 
+output_dir = 'generated'
+safe_mkdir(output_dir)
 # show sessions that have identical color schemes
 print('-' * 65)
 print('sessions that have identical color schemes')
@@ -92,7 +106,7 @@ for x in colors_to_session_names:
     putty_color_dict = json.loads(x)
     putty_color_dict['scheme-name'] = colors_to_session_names[x][0]  # pick first one
     reg_entries = putty_colors_render_template.render_template(putty_color_dict)
-    filename = os.path.join('generated', session_name) + '_sorted.reg'
+    filename = os.path.join(output_dir, session_name) + '_sorted.reg'
     f = open(filename, 'w')
     f.write(reg_entries)
     f.close()
