@@ -2,12 +2,12 @@
 # -*- coding: us-ascii -*-
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
-"""Python version of show_colors2.bash
+"""Python version of show_colors2.bash - missing detected terminal features
 NOTE expects terminal to be 86 characters wide
 Shows:
   1. table of combinations of foreground and background colors
-  1. block colors
-  1. text colors
+  2. block colors - not a feature in show_colors2.bash
+  3. text colors - not a feature in show_colors2.bash
 """
 
 import os
