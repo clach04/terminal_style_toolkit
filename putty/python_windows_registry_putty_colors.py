@@ -95,6 +95,7 @@ for i in range(0, winreg.QueryInfoKey(key)[0]):
         skey.Close()
 
 output_dir = 'generated'
+output_dir = os.path.abspath(output_dir)
 safe_mkdir(output_dir)
 # show sessions that have identical color schemes
 print('-' * 65)
@@ -113,3 +114,4 @@ for x in colors_to_session_names:
     #print('%s' % reg_entries)  # TODO dump to disk
 # Showing similar would require diffing each scheme and having a thresh hold for differences in color / and/or levingstien distance (etc.) for fuzzy match
 print('-' * 65)
+print('Written to %s' % output_dir)
