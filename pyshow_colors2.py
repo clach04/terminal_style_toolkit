@@ -9,6 +9,14 @@ NOTE expects terminal to be 86 characters wide
 import os
 import sys
 
+try:
+    import colorama
+    colorama.just_fix_windows_console()
+except ImportError:
+    if sys.platform.startswith('win'):
+        print('Windows platform detected without colorama, refusing to run')
+        sys.exit(0)
+
 
 color_map_list_of_tuples_fg = [
     ('    m', 'normal'),
