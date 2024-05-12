@@ -6,6 +6,12 @@
 import struct
 import sys
 
+try:
+    import color_db
+except ImportError:
+    color_db = None
+
+
 def parse_adobe_act(filename):
     filesize = os.path.getsize(filename)
     with open(filename, 'rb') as file:
@@ -73,12 +79,20 @@ def open_parse_gimp_palette_gpl_file(filename):
     f.close()
     return color_names, color_names_list
 
+if color_db:
+    colordb = color_db.get_colordb('namedcolors.txt')
+
 argv = sys.argv
 filename = argv[1]
 color_names, color_names_list = open_parse_gimp_palette_gpl_file(filename)
 for color_name in color_names:
     (r, g, b) = color_names[color_name]
-    print('%02x%02x%02x\t%d,%d,%d\t%s' % (r, g, b, r, g, b, color_name, ))
+    if color_db:
+        nearest = colordb.nearest(r, g, b)
+        close_name = nearest + ' - ' + repr(colordb.find_byname(nearest))
+        print('%02x%02x%02x\t%d,%d,%d\t%s\t# %r' % (r, g, b, r, g, b, color_name, close_name))
+    else:
+        print('%02x%02x%02x\t%d,%d,%d\t%s' % (r, g, b, r, g, b, color_name, ))
     """
     print('%s' % color_name)
     print('%d,%d,%d' % (r, g, b))
