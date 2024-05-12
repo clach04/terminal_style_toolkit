@@ -13,6 +13,8 @@ Expects json file to contain same values as Putty registry, i.e.:
         ...
         "Colour21" : "238,238,236"
     }
+
+Use putty_tempate.json as a starting point.
 """
 
 import os
