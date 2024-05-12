@@ -71,10 +71,13 @@ In general avoid:
   * https://github.com/anonimoanemico/puttier
     * Supports previewing a theme
   * https://github.com/mvelikikh/putty-session-manager
+  * https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/tools
+  * https://github.com/Gogh-Co/Gogh/tree/master/tools
+  * Base-16 and derivatives
 
 #### Non-Terminal
 
-  * https://github.com/monolifed/scite_theme scite thems from base16 config
+  * https://github.com/monolifed/scite_theme scite themes from base16 config
 
 ### TODO Resources
 
@@ -89,3 +92,8 @@ Color schemes that pass eyeball test but I'd like to checkout:
 
   * https://github.com/mattly/iterm-colors-farmhouse - light and dark
   * https://github.com/mattly/iterm-colors-pencil - light and dark
+
+#### Color Scheme Collections
+
+  * https://github.com/mbadolato/iTerm2-Color-Schemes
+  * https://github.com/Gogh-Co/Gogh
