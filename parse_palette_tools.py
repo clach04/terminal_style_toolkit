@@ -82,22 +82,29 @@ def open_parse_gimp_palette_gpl_file(filename):
 if color_db:
     colordb = color_db.get_colordb('namedcolors.txt')
 
-argv = sys.argv
-filename = argv[1]
-color_names, color_names_list = open_parse_gimp_palette_gpl_file(filename)
-for color_name in color_names:
-    (r, g, b) = color_names[color_name]
-    if color_db:
-        nearest = colordb.nearest(r, g, b)
-        close_name = nearest + ' - ' + repr(colordb.find_byname(nearest))
-        print('%02x%02x%02x\t%d,%d,%d\t%s\t# %r' % (r, g, b, r, g, b, color_name, close_name))
-    else:
-        print('%02x%02x%02x\t%d,%d,%d\t%s' % (r, g, b, r, g, b, color_name, ))
-    """
-    print('%s' % color_name)
-    print('%d,%d,%d' % (r, g, b))
-    #print((r, g, b))
-    print('%02x%02x%02x' % (r, g, b))
-    print('')
-    """
+def main(argv=None):
+    argv = argv or sys.argv
+    print('Python %s on %s' % (sys.version, sys.platform))
 
+    filename = argv[1]
+    color_names, color_names_list = open_parse_gimp_palette_gpl_file(filename)
+    for color_name in color_names:
+        (r, g, b) = color_names[color_name]
+        if color_db:
+            nearest = colordb.nearest(r, g, b)
+            close_name = nearest + ' - ' + repr(colordb.find_byname(nearest))
+            print('%02x%02x%02x\t%d,%d,%d\t%s\t# %r' % (r, g, b, r, g, b, color_name, close_name))
+        else:
+            print('%02x%02x%02x\t%d,%d,%d\t%s' % (r, g, b, r, g, b, color_name, ))
+        """
+        print('%s' % color_name)
+        print('%d,%d,%d' % (r, g, b))
+        #print((r, g, b))
+        print('%02x%02x%02x' % (r, g, b))
+        print('')
+        """
+
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())
