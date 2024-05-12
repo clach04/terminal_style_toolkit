@@ -3,6 +3,7 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 
+import json
 import struct
 import sys
 
@@ -11,6 +12,48 @@ try:
 except ImportError:
     color_db = None
 
+
+## color routines
+
+def unhex(hex_str):
+    """dumb reverse of python builtin hex()
+    returns integer value of string hex
+    Examples:
+        '0x17' returns 23
+        '17' returns 23
+    """
+    return int(hex_str, 16)
+
+def hex2rgb_ints(hex_str):
+    """Given '#123456' return (18, 52, 86)
+    """
+    hex_str = hex_str.strip().replace('#', '')  # remove '#'
+    if len(hex_str) != len('123456'):
+        raise NotImplementedError('input strings of length %d %r' % (len(hex_str), hex_str))
+
+    return unhex(hex_str[0:2]), unhex(hex_str[2:4]), unhex(hex_str[4:6])
+
+def hex2rgb_string_decimal_ints_commas(hex_str):
+    """Given '#123456' return "18,52,86"
+    """
+    r, g, b = hex2rgb_ints(hex_str)
+    return '%d,%d,%d' % (r, g, b)
+
+
+## file routines
+
+def json_reader(in_filename):
+    f = open(in_filename, 'r')
+    x = f.read()
+    f.close()
+
+    result_dict = json.loads(x)
+    return result_dict
+
+def json_writer(out_filename, input_dict):
+    f = open(out_filename, 'w')
+    f.write(json.dumps(input_dict, indent=4))  # TODO sorted...
+    f.close()
 
 def parse_adobe_act(filename):
     filesize = os.path.getsize(filename)
