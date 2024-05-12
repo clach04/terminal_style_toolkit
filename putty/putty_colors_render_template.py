@@ -6,6 +6,7 @@
 # library for rendering base16 - tinted theming templates
 
 import json
+import os
 import re
 import shlex
 import sys
@@ -24,6 +25,8 @@ class UglyMustache:
         return template_str
 
 def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
+    if not os.path.exists(template_filename):
+        template_filename = os.path.join(os.path.dirname(__file__), template_filename)
     f = open(template_filename)  # just assume this will work, correct text mode and encoding - assume utf-8
     template_str = f.read()
     f.close()
