@@ -44,6 +44,8 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
         if not color_number.startswith('Col'):
             continue
         decimal_rgb = putty_color_dict[color_number]
+        if ',' not in decimal_rgb:
+            raise NotImplementedError('non decimal comma seperated value (could treat as hex...?)')
         r, g, b = map(int, decimal_rgb.split(','))
         color_dict[color_number] = '%d,%d,%d' % (r, g, b)  # Decimal RGB, as used by Putty
         #color_dict[color_number] = '%02x%02x%02x' % (r, g, b)  # Hex RGB
