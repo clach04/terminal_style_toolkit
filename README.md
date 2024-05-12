@@ -22,12 +22,12 @@ In general avoid:
   * Under Linux, Bitstream Vera Sans Mono is typically built-in and not bad
   * Under Windows, the built-in Consolas is not bad (better than Courier New,
     that Putty defaults to), available since Microsoft Windows Vista.
-    A similar (free) font is Inconsolata
+    A similar (free) font is [Inconsolata](https://en.m.wikipedia.org/wiki/Inconsolata) / InconsolataGo (Inconsolata with straight quotes)
   * Many fonts at https://www.nerdfonts.com/ - worth checking out:
       * EnvyCodeR
       * FiraMono
       * Go-Mono
-      * InconsolataGo
+      * InconsolataGo https://github.com/im-AMS/Inconsolata-Nerd-Font-with-ligatures
       * Overpass
       * UbuntuMono
 
