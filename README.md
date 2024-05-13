@@ -97,3 +97,4 @@ Color schemes that pass eyeball test but I'd like to checkout:
 
   * https://github.com/mbadolato/iTerm2-Color-Schemes
   * https://github.com/Gogh-Co/Gogh
+  * https://github.com/tinted-theming/home - technically tools and themes
