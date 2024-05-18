@@ -25,6 +25,14 @@ import putty_colors_render_template
 
 
 in_filename = sys.argv[1]
+try:
+    template_filename = sys.argv[2]
+except IndexError:
+    template_filename = None
+try:
+    out_filename = sys.argv[3]
+except IndexError:
+    out_filename = None
 f = open(in_filename, 'r')
 x = f.read()
 f.close()
@@ -33,10 +41,11 @@ putty_color_dict = json.loads(x)
 putty_color_dict['scheme-name'] = putty_color_dict.get('scheme-name', 'UNKNOWN')
 session_name = putty_color_dict['scheme-name']
 
-reg_entries = putty_colors_render_template.render_template(putty_color_dict)
-#filename = os.path.join(output_dir, session_name) + '_sorted.reg'
-filename = session_name + '_sorted.reg'
-f = open(filename, 'w')
+reg_entries = putty_colors_render_template.render_template(putty_color_dict, template_filename)
+if not out_filename:
+    #out_filename = os.path.join(output_dir, session_name) + '_sorted.reg'
+    out_filename = session_name + '_sorted.reg'
+f = open(out_filename, 'w')
 f.write(reg_entries)
 f.close()
 print('Wrote to %s' % filename)
