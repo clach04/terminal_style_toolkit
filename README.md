@@ -46,7 +46,12 @@ In general avoid:
   * color-test.bash - derived from https://gilesorr.com/bashprompt/howto/c333.html - shows all foreground colors as text with default background as a sanity check
   * pyshow_colors2.py in-progress Python version of show_colors2.bash
   * colors.py from https://gist.github.com/lilydjwg/fdeaf79e921c2f413f44b6f613f6ad53
+
+## Conversion tools
+
   * parse_palette_tools.py - tools for dumping palettes for easier read/conversion
+  * goghjson2puttyjson.py - tools for converting [Gogh JSON](https://github.com/Gogh-Co/Gogh/tree/master/json) from https://github.com/Gogh-Co/Gogh/ into json that Putty conversion tools can use
+  * putty/json2putty_reg.py - convert (Putty) json into Putty registry import and html preview
 
 ## Putty
 
