@@ -4,6 +4,7 @@
 #
 
 import json
+import os
 import struct
 import sys
 
@@ -123,7 +124,9 @@ def open_parse_gimp_palette_gpl_file(filename):
     return color_names, color_names_list
 
 if color_db:
-    colordb = color_db.get_colordb('namedcolors.txt')
+    colors_text_file = 'namedcolors.txt'
+    colors_text_file = os.path.join(os.path.dirname(__file__), colors_text_file)
+    colordb = color_db.get_colordb(colors_text_file)
 
 def main(argv=None):
     argv = argv or sys.argv
