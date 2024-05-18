@@ -32,20 +32,25 @@ except IndexError:
 try:
     out_filename = sys.argv[3]
 except IndexError:
+    if template_filename:
+        raise
     out_filename = None
 f = open(in_filename, 'r')
 x = f.read()
 f.close()
 
+template_filename = template_filename or 'putty_reg.mustache'  # default to Putty registry output
+
 putty_color_dict = json.loads(x)
 putty_color_dict['scheme-name'] = putty_color_dict.get('scheme-name', 'UNKNOWN')
 session_name = putty_color_dict['scheme-name']
 
-reg_entries = putty_colors_render_template.render_template(putty_color_dict, template_filename)
+# FIXME detect missing colors
+reg_entries = putty_colors_render_template.render_template(putty_color_dict, template_filename)  # TODO see comment above, add sanity check parameter
 if not out_filename:
     #out_filename = os.path.join(output_dir, session_name) + '_sorted.reg'
     out_filename = session_name + '_sorted.reg'
 f = open(out_filename, 'w')
 f.write(reg_entries)
 f.close()
-print('Wrote to %s' % filename)
+print('Wrote to %s' % out_filename)
