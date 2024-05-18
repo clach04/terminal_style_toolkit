@@ -51,7 +51,7 @@ In general avoid:
 
   * parse_palette_tools.py - tools for dumping palettes for easier read/conversion
   * goghjson2puttyjson.py - tools for converting [Gogh JSON](https://github.com/Gogh-Co/Gogh/tree/master/json) from https://github.com/Gogh-Co/Gogh/ into json that Putty conversion tools can use
-  * putty/json2putty_reg.py - convert (Putty) json into Putty registry import and html preview
+  * putty/json2putty_reg.py - convert (Putty) json into Putty registry import and html preview - Used to create https://github.com/clach04/putty_themes
 
 ## Putty
 
