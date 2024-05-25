@@ -66,10 +66,17 @@ In general avoid:
 
 ## Resources
 
+### Color Codes
+
   * https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit
   * https://github.com/termstandard/colors
   * https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences/75985833#75985833
     useful table of codes
+
+### Color Tools
+
+  * https://it-tools.tech/color-converter
+      * https://github.com/CorentinTh/it-tools
 
 ### Related projects
 
