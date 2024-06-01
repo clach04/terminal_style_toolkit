@@ -72,6 +72,7 @@ In general avoid:
   * https://github.com/termstandard/colors
   * https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences/75985833#75985833
     useful table of codes
+  * https://github.com/clach04/themer
 
 ### Color Tools
 
