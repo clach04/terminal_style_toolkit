@@ -2,7 +2,7 @@
 ## Tools
 
   * json2putty_reg.py - Render Putty registry file using a json file as input
-      * putty_tempate.json - tempalte json file ready to be filled in with decimal RGB values
+      * putty_template.json - template json file ready to be filled in with decimal RGB values
   * putty_colors_render_template.py - library for rendering base16 - tinted theming templates
   * putty_reg_file_json.py - Clone of putty_reg_file_to_sorted.py - todo refactor and share code
   * putty_reg_file_template.py - given a putty reg file, output a sorted, commented out reg file suitable for comparison/diff
