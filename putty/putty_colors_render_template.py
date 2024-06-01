@@ -3,7 +3,7 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 
-# library for rendering base16 - tinted theming templates
+# library for rendering Putty colornames config giles into templates
 
 import json
 import os
