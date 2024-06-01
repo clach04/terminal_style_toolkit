@@ -3,7 +3,7 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 
-# library for rendering Putty colornames config giles into templates
+# library for rendering Putty colornames (json) config files into templates
 
 import json
 import os
