@@ -55,6 +55,8 @@ strip_comments = True
 
 
 config_entry = []
+# Simplistic registry file reader, assumes single byte or utf8 (i.e. not UCS2/UTF-16)
+# Ignores key names, only looks at values
 for line in get_lines_from_file(filename, get_all_lines, mode='r'):
     if line.startswith('"'):
         config_entry.append(line)
@@ -92,6 +94,7 @@ for line in config_entry:
 
 #print(';' * 65)
 #print('')
+# Dump json to stdout
 print('%s' % json.dumps(color_dict, indent=4))
 
 # base16-like template (similar names for scheme, etc.)
@@ -206,6 +209,7 @@ template_str = """Windows Registry Editor Version 5.00
 "Colour21"="{{Colour21-rgb-r}},{{Colour21-rgb-g}},{{Colour21-rgb-b}}"
 """
 
+# Dumps sorted registry to stdout
 print('')
 print('')
 stache = UglyMustache()
