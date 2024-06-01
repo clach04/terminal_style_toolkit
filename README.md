@@ -70,6 +70,8 @@ In general avoid:
 
 ## Putty
 
+See [Putty tools readme](./putty/README.md)
+
   * python_windows_registry_putty_colors.py - dumps session names and colors (only)
     along with simple show sessions that use the exact same same-color scheme feature
   * Sane Putty settings https://web.archive.org/web/20191231204120/http://dag.wiee.rs/blog/content/improving-putty-settings-on-windows
