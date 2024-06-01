@@ -2,6 +2,21 @@
 
 Scripts / tools / config for terminal styling and colors / colours
 
+- [terminal_style_toolkit](#terminal_style_toolkit)
+   * [Notes](#notes)
+      + [Fonts Notes](#fonts-notes)
+   * [Sample files](#sample-files)
+   * [Scripts for running in terminal](#scripts-for-running-in-terminal)
+   * [Conversion tools](#conversion-tools)
+   * [Putty](#putty)
+   * [Resources](#resources)
+      + [Color Codes](#color-codes)
+      + [Color Tools](#color-tools)
+      + [Related projects](#related-projects)
+         - [Non-Terminal](#non-terminal)
+      + [TODO Resources](#todo-resources)
+         - [Color Scheme Collections](#color-scheme-collections)
+
 ## Notes
 
 When testing out a color scheme/theme consider different use cases:
