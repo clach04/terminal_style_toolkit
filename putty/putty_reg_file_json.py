@@ -62,10 +62,10 @@ template_dict = {
 include_optional_values = False
 for line in config_entry:
     if line.startswith('[HKEY_CURRENT_USER\\Software\\SimonTatham\\PuTTY\\Sessions\\'):
-        print('GOT %r' % line)
+        #print('GOT %r' % line)
         putty_session_name = line.rsplit('\\', 1)[-1]
         putty_session_name = putty_session_name[:-1]
-        print('GOT %r' % putty_session_name)
+        #print('GOT %r' % putty_session_name)
         template_dict['scheme-slug'] = template_dict['scheme-name'] = putty_session_name
         continue
     elif not line.startswith('"Colour'):
