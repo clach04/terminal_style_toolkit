@@ -46,21 +46,29 @@ config_entry = []
 # Simplistic registry file reader, assumes single byte or utf8 (i.e. not UCS2/UTF-16)
 # Ignores key names, only looks at values
 for line in get_lines_from_file(filename, get_all_lines, mode='r'):
-    if line.startswith('"'):
+    if line.startswith('"') or line.startswith('['):
         config_entry.append(line)
 
 #config_entry.sort()
 config_entry = natural_sort(config_entry)
 
-color_dict = {}
 template_dict = {}
 template_dict = {
     'scheme-name': 'NAME_HERE',
     'scheme-author': 'AUTHOR_HERE',
     'scheme-slug': 'SLUG_HERE',
 }
+#include_optional_values = True
+include_optional_values = False
 for line in config_entry:
-    if not line.startswith('"Colour'):
+    if line.startswith('[HKEY_CURRENT_USER\\Software\\SimonTatham\\PuTTY\\Sessions\\'):
+        print('GOT %r' % line)
+        putty_session_name = line.rsplit('\\', 1)[-1]
+        putty_session_name = putty_session_name[:-1]
+        print('GOT %r' % putty_session_name)
+        template_dict['scheme-slug'] = template_dict['scheme-name'] = putty_session_name
+        continue
+    elif not line.startswith('"Colour'):
         #print('; IGNORED: %s' % line)  # TODO make this configurable?
         continue
     # NOTE assumes Color.... - no filtering..
@@ -73,14 +81,15 @@ for line in config_entry:
     # print('%s %s %d,%d,%d #%02x %02x %02x ' % (color_number, decimal_rgb, r, g, b, r, g, b))
     #print('; #%02x%02x%02x ' % (r, g, b))
     #print(line)
-    color_dict[color_number] = '%d,%d,%d' % (r, g, b)  # Decimal RGB, as used by Putty
-    #color_dict[color_number] = '%02x%02x%02x' % (r, g, b)  # Hex RGB
-    template_dict['%s-hex' % color_number] = '%02x%02x%02x' % (r, g, b)  # Hex RGB
-    template_dict['%s-rgb-r' % color_number] = r
-    template_dict['%s-rgb-g' % color_number] = g
-    template_dict['%s-rgb-b' % color_number] = b
+    template_dict[color_number] = '%d,%d,%d' % (r, g, b)  # Decimal RGB, as used by Putty
+    # Optional
+    if include_optional_values:
+        template_dict['%s-hex' % color_number] = '%02x%02x%02x' % (r, g, b)  # Hex RGB
+        template_dict['%s-rgb-r' % color_number] = r
+        template_dict['%s-rgb-g' % color_number] = g
+        template_dict['%s-rgb-b' % color_number] = b
 
 #print(';' * 65)
 #print('')
 # Dump json to stdout
-print('%s' % json.dumps(color_dict, indent=4))
+print('%s' % json.dumps(template_dict, indent=4))
