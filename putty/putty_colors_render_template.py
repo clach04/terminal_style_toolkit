@@ -14,10 +14,11 @@ import sys
 
 class UglyMustache:
     """Do not use this, it is ugly and extremely limited (...but doesn't need an external lib)
+      * no comment support
       * no white space support
       * no array support
       * no html support
-      * no ... so much more stuff missing
+      * no ... so much more stuff missing! ;-)
     """
     def render(self, template_str, input_dict):
         for key in input_dict:
@@ -40,6 +41,7 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
         'scheme-slug': scheme_name,
     }
 
+    # Find all Colour0-Colour21 entries which are EXPECTED to contain a comma seperated string of decimal characters (from 0-255)
     for color_number in putty_color_dict:
         if not color_number.startswith('Col'):
             continue
