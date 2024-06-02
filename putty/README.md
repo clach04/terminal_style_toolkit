@@ -28,3 +28,39 @@ Using Windows registry tool.
     REM Export to current directory
     regedit /e %CD%\all_putty_sessions.reg HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\
 
+## Render tools
+
+Assuming there is a color scheme/theme file in json format with Putty colors in it, for example, ``
+
+
+## Demo
+
+### Export Putty all sessions into registry files
+
+    py -3 python_windows_registry_putty_colors.py
+
+### Convert a Putty registry files into json
+
+Picking default reg file exported above `generated\DefaultPuttySettings_sorted.reg`
+
+    py -3 putty_reg_file_json.py generated\DefaultPuttySettings_sorted.reg
+    py -3 putty_reg_file_json.py generated\DefaultPuttySettings_sorted.reg > myfile.json
+
+JSON file is all colors in decimal RGB format (just like Putty Registry settings).
+
+### Convert a json (putty) file into Putty Windows Registry file
+
+Assuming file from above:
+
+    py -3 json2putty_reg.py myfile.json
+
+Will generate UNKNOWN_sorted.reg with an unknown session name.
+
+Passing in additional parameters, template and output filename will allow alternative output.
+For example.
+
+    py -3 json2putty_reg.py myfile.json colortable_html.mustache out.html
+
+Will generate a html preview of the color theme.
+
+THis can be used to preview what existing Putty sessions look like OR preview converted Gogh themes (see parent directory tool goghjson2puttyjson.py).
