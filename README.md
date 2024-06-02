@@ -95,6 +95,7 @@ See [Putty tools readme](./putty/README.md)
 
   * https://it-tools.tech/color-converter
       * https://github.com/CorentinTh/it-tools
+  * https://iconscout.com/blog/best-color-palette-generators-for-any-design-project
   * https://github.com/clach04/themer
 
 ### Related projects
