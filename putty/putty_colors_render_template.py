@@ -46,7 +46,7 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
 
     scheme_name = putty_color_dict.get('scheme-name', 'unnamed')  # pretty name
     scheme_author = putty_color_dict.get('scheme-author', 'unnamed')
-    scheme_slug = putty_color_dict.get('scheme-slug', 'unnamed')  # short name
+    scheme_slug = putty_color_dict.get('scheme-slug', scheme_name)  # short name - TODO slugify if scheme_name used
     color_dict = {}  # NOTE unused
     template_dict = {}
     template_dict = {
