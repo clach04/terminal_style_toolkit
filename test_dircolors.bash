@@ -34,6 +34,8 @@ report
 Makefile
 makefile
 README
+README.md
+README.markdown
 INSTALL
 LICENSE
 .DS_Store
@@ -150,7 +152,9 @@ ext_files="
 .ogg
 .eo
 .tmp
+.swp
 "
+# TODO vim backup, *~
 
 tmpdir=${TMPDIR:=.}/test-dircolors
 
