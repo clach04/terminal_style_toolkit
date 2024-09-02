@@ -30,7 +30,7 @@ Using Windows registry tool.
 
 ## Render tools
 
-Assuming there is a color scheme/theme file in json format with Putty colors in it, for example, ``
+Assuming there is a color scheme/theme file in json format with Putty colors in it, for example, TODO...
 
 
 ## Demo
