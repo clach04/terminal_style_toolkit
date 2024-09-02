@@ -164,7 +164,8 @@ cd $tmpdir
 
 # Extension files
 for e in $ext_files; do
-    touch "The quick brown fox jumps over the lazy dog"$e
+    #touch "The quick brown fox jumps over the lazy dog"$e
+    touch "some_file"$e
 done
 
 # Files with no extension/suffix
