@@ -179,6 +179,7 @@ chmod +x executable_demo test.dll test.exe test.so
 
 
 # setuid
+touch executable_demo_setuid_a executable_demo_setuid_u executable_demo_setuid_g
 chmod +x executable_demo_setuid_a
 chmod a+s executable_demo_setuid_a
 chmod +x executable_demo_setuid_u
