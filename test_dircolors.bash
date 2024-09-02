@@ -128,6 +128,7 @@ ext_files="
 .html
 .xml
 .txt
+.md
 .mkd
 .rst
 .moin
@@ -158,8 +159,8 @@ for b in $base_files; do
 done
 
 # An executable
-touch a
-chmod +x a
+touch executable_demo
+chmod +x executable_demo
 
 # TODO more special file types/permissions
 # from https://github.com/dracula/putty/issues/3
