@@ -24,6 +24,7 @@ When testing out a color scheme/theme consider different use cases:
   * `pyshow_colors2.py`
   * ls colors (LSCOLORS, LS_COLORS, `dircolors` and .dir_colors)
       * https://github.com/dracula/putty/issues/3
+      * https://github.com/joshjon/bliss-dircolors - good starting point
   * neofetch
   * `vim` colorscheme
 
