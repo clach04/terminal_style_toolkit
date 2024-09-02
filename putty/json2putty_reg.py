@@ -24,7 +24,7 @@ import json
 import putty_colors_render_template
 
 
-in_filename = sys.argv[1]
+in_filename = sys.argv[1]  # json filename
 try:
     template_filename = sys.argv[2]
 except IndexError:

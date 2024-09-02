@@ -62,8 +62,10 @@ template_dict = {
     'scheme-author': 'AUTHOR_HERE',
     'scheme-slug': 'SLUG_HERE',
 }
-#include_optional_values = True
+
 include_optional_values = False
+include_optional_values = True
+
 for line in config_entry:
     if line.startswith('[HKEY_CURRENT_USER\\Software\\SimonTatham\\PuTTY\\Sessions\\'):
         #print('GOT %r' % line)
