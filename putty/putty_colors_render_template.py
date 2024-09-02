@@ -26,6 +26,18 @@ class UglyMustache:
         return template_str
 
 def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
+    """rendering Putty colornames (json) config files using Mustache template
+
+    @putty_color_dict should contain Colour0-Colour21 entries which are EXPECTED to contain a comma seperated string of decimal characters (from 0-255) (just like Windows Putty registry entries)
+
+    @template_filename - filename of template, support variables:
+        Colour0-hex - hex RGB
+        Colour0-rgb-r Colour0-rgb-g Colour0-rgb-b  - decimals for each channel ONLY
+        ...
+        Colour21-hex - hex RGB
+        Colour21-rgb-r Colour21-rgb-g Colour21-rgb-b  - decimals for each channel ONLY
+
+    """
     if not os.path.exists(template_filename):
         template_filename = os.path.join(os.path.dirname(__file__), template_filename)
     f = open(template_filename)  # just assume this will work, correct text mode and encoding - assume utf-8
