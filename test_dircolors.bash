@@ -141,7 +141,7 @@ ext_files="
 .eo
 "
 
-tmpdir=$TMPDIR/test-dircolors
+tmpdir=${TMPDIR:=.}/test-dircolors
 
 echo "Now creating a bunch of temp files for you to look at."
 mkdir -p $tmpdir
@@ -161,6 +161,15 @@ done
 touch a
 chmod +x a
 
+# TODO more special file types/permissions
+# from https://github.com/dracula/putty/issues/3
+rmdir dracula_putty_issue_3
+mkdir dracula_putty_issue_3
+ls -altrhd dracula_putty_issue_3
+chmod a+rwx dracula_putty_issue_3
+ls -altrhd dracula_putty_issue_3
+# TODO more special file types/permissions
+
 eval $(dircolors -b $DIR_COLORS)
 
 #ls --color=always -lBX $tmpdir
@@ -171,8 +180,8 @@ echo "Here's the test cycle:"
 echo
 echo ' 1. Edit your $DIR_COLORS file, or ~/.dircolors.'
 echo ' 2. Run this to update visible colors: eval $(dircolors -b $DIR_COLORS)'
-echo " 3. Do a colored ls on $tmpdir"
+echo " 3. Do a colored ls on $tmpdir ; ls --color=always $tmpdir"
 echo " 4. Rinse and repeat until you're happy with scheme."
 echo
-echo "Do this when you're done: rm -rf $tmpdir."
+echo "Do this when you're done: rm -rf $tmpdir"
 
