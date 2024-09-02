@@ -36,6 +36,7 @@ makefile
 README
 INSTALL
 LICENSE
+.DS_Store
 "
 
 ext_files="
@@ -168,8 +169,17 @@ for b in $base_files; do
 done
 
 # An executable
-touch executable_demo
+touch executable_demo executable_demo_setuid
 chmod +x executable_demo
+
+# setuid
+chmod +x executable_demo_setuid_a
+chmod a+s executable_demo_setuid_a
+chmod +x executable_demo_setuid_u
+chmod u+s executable_demo_setuid_u
+chmod +x executable_demo_setuid_g
+chmod g+s executable_demo_setuid_g
+
 
 # TODO more special file types/permissions
 # from https://github.com/dracula/putty/issues/3
@@ -178,6 +188,23 @@ mkdir dracula_putty_issue_3
 ls -altrhd dracula_putty_issue_3
 chmod a+rwx dracula_putty_issue_3
 ls -altrhd dracula_putty_issue_3
+
+# Directories
+mkdir directory-standard dir-sticky "directory_o+w" "directory_+t_o+w" "directory_g+w"
+chmod +s dir-sticky
+chmod g+w "directory_g+w"
+chmod o+w "directory_o+w" "directory_+t_o+w"
+chmod +t "directory_+t_o+w"
+
+touch file-normal
+
+ln -s file-normal link_to_normal
+ln -s /dev/null link_to_device
+
+ln -s file_does_not_exist link_to_missing_file
+ln -s /dev/doesnotexist link_to_missing_device
+
+
 # TODO more special file types/permissions
 
 eval $(dircolors -b $DIR_COLORS)
