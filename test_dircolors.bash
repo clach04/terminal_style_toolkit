@@ -39,14 +39,18 @@ LICENSE
 "
 
 ext_files="
+.tar
+.tar.gzog
 .tgz
 .lzh
 .zip
 .bz2
+.gz
 .deb
 .rpm
 .jar
 .jpg
+.jpeg
 .png
 .gif
 .bmp
@@ -128,6 +132,8 @@ ext_files="
 .html
 .xml
 .txt
+.text
+.log
 .md
 .mkd
 .rst
@@ -137,9 +143,12 @@ ext_files="
 .cfg
 .mp3
 .mp4
+.mov
+.mkv
 .ogv
 .ogg
 .eo
+.tmp
 "
 
 tmpdir=${TMPDIR:=.}/test-dircolors
