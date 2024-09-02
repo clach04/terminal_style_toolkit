@@ -44,13 +44,15 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
     template_str = f.read()
     f.close()
 
-    scheme_name = putty_color_dict.get('scheme-name', 'unnamed')
+    scheme_name = putty_color_dict.get('scheme-name', 'unnamed')  # pretty name
+    scheme_author = putty_color_dict.get('scheme-author', 'unnamed')
+    scheme_slug = putty_color_dict.get('scheme-slug', 'unnamed')  # short name
     color_dict = {}  # NOTE unused
     template_dict = {}
     template_dict = {
         'scheme-name': scheme_name,
-        'scheme-author': 'AUTHOR_HERE',
-        'scheme-slug': scheme_name,
+        'scheme-author': scheme_author,
+        'scheme-slug': scheme_slug,
     }
 
     # Find all Colour0-Colour21 entries which are EXPECTED to contain a comma seperated string of decimal characters (from 0-255)
