@@ -2,6 +2,10 @@
 # -*- coding: us-ascii -*-
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
+"""Convert a Windows registry export of a single Putty session into a json (theme) file
+
+Expects single byte or utf-8 encoded file, for example, UCS2/UTF-16 is NOT supported
+"""
 
 # Clone of putty_reg_file_to_sorted.py - todo refactor and share code
 import json
@@ -55,22 +59,34 @@ strip_comments = True
 
 
 config_entry = []
+# Simplistic registry file reader, assumes single byte or utf8 (i.e. not UCS2/UTF-16)
+# Ignores key names, only looks at values
 for line in get_lines_from_file(filename, get_all_lines, mode='r'):
-    if line.startswith('"'):
+    if line.startswith('"') or line.startswith('['):
         config_entry.append(line)
 
 #config_entry.sort()
 config_entry = natural_sort(config_entry)
 
-color_dict = {}
 template_dict = {}
 template_dict = {
     'scheme-name': 'NAME_HERE',
     'scheme-author': 'AUTHOR_HERE',
     'scheme-slug': 'SLUG_HERE',
 }
+
+include_optional_values = False
+include_optional_values = True
+
 for line in config_entry:
-    if not line.startswith('"Colour'):
+    if line.startswith('[HKEY_CURRENT_USER\\Software\\SimonTatham\\PuTTY\\Sessions\\'):
+        #print('GOT %r' % line)
+        putty_session_name = line.rsplit('\\', 1)[-1]
+        putty_session_name = putty_session_name[:-1]
+        #print('GOT %r' % putty_session_name)
+        template_dict['scheme-slug'] = template_dict['scheme-name'] = putty_session_name
+        continue
+    elif not line.startswith('"Colour'):
         #print('; IGNORED: %s' % line)  # TODO make this configurable?
         continue
     # NOTE assumes Color.... - no filtering..
@@ -83,131 +99,42 @@ for line in config_entry:
     # print('%s %s %d,%d,%d #%02x %02x %02x ' % (color_number, decimal_rgb, r, g, b, r, g, b))
     #print('; #%02x%02x%02x ' % (r, g, b))
     #print(line)
-    color_dict[color_number] = '%d,%d,%d' % (r, g, b)  # Decimal RGB, as used by Putty
-    #color_dict[color_number] = '%02x%02x%02x' % (r, g, b)  # Hex RGB
-    template_dict['%s-hex' % color_number] = '%02x%02x%02x' % (r, g, b)  # Hex RGB
-    template_dict['%s-rgb-r' % color_number] = r
-    template_dict['%s-rgb-g' % color_number] = g
-    template_dict['%s-rgb-b' % color_number] = b
+    template_dict[color_number] = '%d,%d,%d' % (r, g, b)  # Decimal RGB, as used by Putty
+    # Optional
+    if include_optional_values:
+        template_dict['%s-hex' % color_number] = '%02x%02x%02x' % (r, g, b)  # Hex RGB
+        template_dict['%s-rgb-r' % color_number] = r
+        template_dict['%s-rgb-g' % color_number] = g
+        template_dict['%s-rgb-b' % color_number] = b
 
+if include_optional_values:
+    template_dict.update({
+        "Colour0-comment": "Default Foreground",
+        "Colour1-comment": "Default Bold Foreground  -- equals to non-bold",
+        "Colour2-comment": "Default Background",
+        "Colour3-comment": "Default Bold Background  -- equals to non-bold",
+        "Colour4-comment": "Cursor Text -- equals to default background",
+        "Colour5-comment": "Cursor Colour -- equals to default foreground",
+        "Colour6-comment": "ANSI Black - 30m / 40m",
+        "Colour7-comment": "ANSI Black Bright - 1;30m",
+        "Colour8-comment": "ANSI Red - 31m / 41m",
+        "Colour9-comment": "ANSI Red Bright - 1;31m",
+        "Colour10-comment": "ANSI Green - 32m / 42m",
+        "Colour11-comment": "ANSI Green Bright - 1;32m",
+        "Colour12-comment": "ANSI Yellow - 33m / 43m",
+        "Colour13-comment": "ANSI Yellow Bright - 1;33m",
+        "Colour14-comment": "ANSI Blue - 34m / 44m",
+        "Colour15-comment": "ANSI Blue Bright - 1;34m",
+        "Colour16-comment": "ANSI Magenta - 35m / 45m",
+        "Colour17-comment": "ANSI Magenta Bright - 1;35m",
+        "Colour18-comment": "ANSI Cyan - 36m / 46m",
+        "Colour19-comment": "ANSI Cyan Bright - 1;36m",
+        "Colour20-comment": "ANSI White - 37m / 47m",
+        "Colour21-comment": "ANSI White Bright - 1;37m",
+    })
 #print(';' * 65)
 #print('')
-print('%s' % json.dumps(color_dict, indent=4))
+# Dump json to stdout
+print('%s' % json.dumps(template_dict, indent=4))
+#print('%s' % json.dumps(template_dict, indent=4, sort_keys=True))  # sorting order is no natural :-(
 
-# base16-like template (similar names for scheme, etc.)
-template_str = """Windows Registry Editor Version 5.00
-
-; Putty Theme {{scheme-name}}
-; Scheme author: {{scheme-author}}
-[HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\{{scheme-slug}}]
-
-; Default Foreground
-; Colour0 #{{Colour0-hex}}
-"Colour0"="{{Colour0-rgb-r}},{{Colour0-rgb-g}},{{Colour0-rgb-b}}"
-
-; Default Bold Foreground  -- equals to non-bold
-; Colour1 #{{Colour1-hex}}
-"Colour1"="{{Colour1-rgb-r}},{{Colour1-rgb-g}},{{Colour1-rgb-b}}"
-
-; Default Background
-; Colour2 #{{Colour2-hex}}
-"Colour2"="{{Colour2-rgb-r}},{{Colour2-rgb-g}},{{Colour2-rgb-b}}"
-
-; Default Bold Background  -- equals to non-bold
-; Colour3 #{{Colour3-hex}}
-"Colour3"="{{Colour3-rgb-r}},{{Colour3-rgb-g}},{{Colour3-rgb-b}}"
-
-; Cursor Text -- equals to default background
-; Colour4 #{{Colour4-hex}}
-"Colour4"="{{Colour4-rgb-r}},{{Colour4-rgb-g}},{{Colour4-rgb-b}}"
-
-; Cursor Colour -- equals to default foreground
-; Colour5 #{{Colour5-hex}}
-"Colour5"="{{Colour5-rgb-r}},{{Colour5-rgb-g}},{{Colour5-rgb-b}}"
-
-; ANSI Black
-; 30m
-; Colour6 #{{Colour6-hex}}
-"Colour6"="{{Colour6-rgb-r}},{{Colour6-rgb-g}},{{Colour6-rgb-b}}"
-
-; ANSI Black Bright
-; 1;30m
-; Colour7 #{{Colour7-hex}}
-"Colour7"="{{Colour7-rgb-r}},{{Colour7-rgb-g}},{{Colour7-rgb-b}}"
-
-; ANSI Red
-; 31m
-; Colour8 #{{Colour8-hex}}
-"Colour8"="{{Colour8-rgb-r}},{{Colour8-rgb-g}},{{Colour8-rgb-b}}"
-
-; ANSI Red Bright
-; 1;31m
-; Colour9 #{{Colour9-hex}}
-"Colour9"="{{Colour9-rgb-r}},{{Colour9-rgb-g}},{{Colour9-rgb-b}}"
-
-; ANSI Green
-; 32m
-; Colour10 #{{Colour10-hex}}
-"Colour10"="{{Colour10-rgb-r}},{{Colour10-rgb-g}},{{Colour10-rgb-b}}"
-
-; ANSI Green Bright
-; 1;32m
-; Colour11 #{{Colour11-hex}}
-"Colour11"="{{Colour11-rgb-r}},{{Colour11-rgb-g}},{{Colour11-rgb-b}}"
-
-; ANSI Yellow
-; 33m
-; Colour12 #{{Colour12-hex}}
-"Colour12"="{{Colour12-rgb-r}},{{Colour12-rgb-g}},{{Colour12-rgb-b}}"
-
-; ANSI Yellow Bright
-; 1;33m
-; Colour13 #{{Colour13-hex}}
-"Colour13"="{{Colour13-rgb-r}},{{Colour13-rgb-g}},{{Colour13-rgb-b}}"
-
-; ANSI Blue
-; 34m
-; Colour14 #{{Colour14-hex}}
-"Colour14"="{{Colour14-rgb-r}},{{Colour14-rgb-g}},{{Colour14-rgb-b}}"
-
-; ANSI Blue Bright
-; 1;34m
-; Colour15 #{{Colour15-hex}}
-"Colour15"="{{Colour15-rgb-r}},{{Colour15-rgb-g}},{{Colour15-rgb-b}}"
-
-; ANSI Magenta
-; 35m
-; Colour16 #{{Colour16-hex}}
-"Colour16"="{{Colour16-rgb-r}},{{Colour16-rgb-g}},{{Colour16-rgb-b}}"
-
-; ANSI Magenta Bright
-; 1;35m
-; Colour17 #{{Colour17-hex}}
-"Colour17"="{{Colour17-rgb-r}},{{Colour17-rgb-g}},{{Colour17-rgb-b}}"
-
-; ANSI Cyan
-; 36m
-; Colour18 #{{Colour18-hex}}
-"Colour18"="{{Colour18-rgb-r}},{{Colour18-rgb-g}},{{Colour18-rgb-b}}"
-
-; ANSI Cyan Bright
-; 1;36m
-; Colour19 #{{Colour19-hex}}
-"Colour19"="{{Colour19-rgb-r}},{{Colour19-rgb-g}},{{Colour19-rgb-b}}"
-
-; ANSI White
-; 37m
-; Colour20 #{{Colour20-hex}}
-"Colour20"="{{Colour20-rgb-r}},{{Colour20-rgb-g}},{{Colour20-rgb-b}}"
-
-; ANSI White Bright
-; 1;37m
-; Colour21 {{Colour21-hex}}
-"Colour21"="{{Colour21-rgb-r}},{{Colour21-rgb-g}},{{Colour21-rgb-b}}"
-"""
-
-print('')
-print('')
-stache = UglyMustache()
-#print('%s' % UglyMustache.render(template_str, template_dict))  # classmethod
-print('%s' % stache.render(template_str, template_dict))

@@ -95,12 +95,18 @@ for i in range(0, winreg.QueryInfoKey(key)[0]):
         skey.Close()
 
 output_dir = 'generated'
+output_dir = os.path.abspath(output_dir)
 safe_mkdir(output_dir)
 # show sessions that have identical color schemes
 print('-' * 65)
 print('sessions that have identical color schemes')
+index_filename = os.path.join(output_dir, 'aliases.txt')
+index_f = open(index_filename, 'w')
+index_f.write('sessions that have identical color schemes' + '\n')
+
 for x in colors_to_session_names:
     print(colors_to_session_names[x])
+    index_f.write(repr(colors_to_session_names[x]) + '\n')
     session_name = colors_to_session_names[x][0]  # pick the first one
     #print('\t%s' % x)
     putty_color_dict = json.loads(x)
@@ -112,4 +118,6 @@ for x in colors_to_session_names:
     f.close()
     #print('%s' % reg_entries)  # TODO dump to disk
 # Showing similar would require diffing each scheme and having a thresh hold for differences in color / and/or levingstien distance (etc.) for fuzzy match
+index_f.close()
 print('-' * 65)
+print('Written to %s' % output_dir)
