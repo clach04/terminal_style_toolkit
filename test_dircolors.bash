@@ -169,8 +169,10 @@ for b in $base_files; do
 done
 
 # An executable
-touch executable_demo executable_demo_setuid
-chmod +x executable_demo
+touch executable_demo test.dll test.exe test.so
+chmod +x executable_demo test.dll test.exe test.so
+
+
 
 # setuid
 chmod +x executable_demo_setuid_a
