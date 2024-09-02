@@ -95,7 +95,34 @@ for line in config_entry:
         template_dict['%s-rgb-g' % color_number] = g
         template_dict['%s-rgb-b' % color_number] = b
 
+if include_optional_values:
+    template_dict.update({
+        "Colour0-comment": "Default Foreground",
+        "Colour1-comment": "Default Bold Foreground  -- equals to non-bold",
+        "Colour2-comment": "Default Background",
+        "Colour3-comment": "Default Bold Background  -- equals to non-bold",
+        "Colour4-comment": "Cursor Text -- equals to default background",
+        "Colour5-comment": "Cursor Colour -- equals to default foreground",
+        "Colour6-comment": "ANSI Black - 30m / 40m",
+        "Colour7-comment": "ANSI Black Bright - 1;30m",
+        "Colour8-comment": "ANSI Red - 31m / 41m",
+        "Colour9-comment": "ANSI Red Bright - 1;31m",
+        "Colour10-comment": "ANSI Green - 32m / 42m",
+        "Colour11-comment": "ANSI Green Bright - 1;32m",
+        "Colour12-comment": "ANSI Yellow - 33m / 43m",
+        "Colour13-comment": "ANSI Yellow Bright - 1;33m",
+        "Colour14-comment": "ANSI Blue - 34m / 44m",
+        "Colour15-comment": "ANSI Blue Bright - 1;34m",
+        "Colour16-comment": "ANSI Magenta - 35m / 45m",
+        "Colour17-comment": "ANSI Magenta Bright - 1;35m",
+        "Colour18-comment": "ANSI Cyan - 36m / 46m",
+        "Colour19-comment": "ANSI Cyan Bright - 1;36m",
+        "Colour20-comment": "ANSI White - 37m / 47m",
+        "Colour21-comment": "ANSI White Bright - 1;37m",
+    })
 #print(';' * 65)
 #print('')
 # Dump json to stdout
 print('%s' % json.dumps(template_dict, indent=4))
+#print('%s' % json.dumps(template_dict, indent=4, sort_keys=True))  # sorting order is no natural :-(
+
