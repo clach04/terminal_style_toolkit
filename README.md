@@ -100,6 +100,13 @@ See [Putty tools readme](./putty/README.md)
   * https://iconscout.com/blog/best-color-palette-generators-for-any-design-project
   * https://github.com/clach04/themer
 
+### ls colors / dir_colors
+
+  * https://www.systutorials.com/docs/linux/man/5-dir_colors/
+  * https://github.com/joshjon/bliss-dircolors
+  * https://github.com/seebi/dircolors-solarized
+  * https://github.com/nordtheme/dircolors
+  * https://github.com/clach04?submit=Search&q=dircolors&tab=stars&type=&sort=&direction=&submit=Search
 
 ### Related projects
 
