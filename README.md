@@ -107,6 +107,7 @@ See [Putty tools readme](./putty/README.md)
   * https://github.com/seebi/dircolors-solarized
   * https://github.com/nordtheme/dircolors
   * https://github.com/clach04?submit=Search&q=dircolors&tab=stars&type=&sort=&direction=&submit=Search
+  * https://github.com/dracula/putty/issues/3 - Unreadable colors/colors with a=rwx permission directory and ls in color mode - default dircolors conflicts with terminal colors
 
 ### Related projects
 
