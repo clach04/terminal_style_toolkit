@@ -98,6 +98,7 @@ See [Putty tools readme](./putty/README.md)
   * https://it-tools.tech/color-converter
       * https://github.com/CorentinTh/it-tools
   * https://iconscout.com/blog/best-color-palette-generators-for-any-design-project
+  * https://colorffy.com/color-scheme-generator?color=257abb
   * https://github.com/clach04/themer
 
 ### ls colors / dir_colors
