@@ -16,6 +16,7 @@ Sample usage:
     py -3 putty/json2putty_reg.py everblush_putty.json
         # goes to Everblush_sorted.reg
     py -3 putty/json2putty_reg.py everblush_putty.json  putty/colortable_html.mustache  everblush_preview.html
+    py -3 putty/json2putty_reg.py everblush_putty.json  putty/pywal16_json.mustache  everblush_pywal16.json
 
 """
 
