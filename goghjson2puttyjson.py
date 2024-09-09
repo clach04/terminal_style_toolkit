@@ -4,8 +4,10 @@
 #
 """Import single theme json color scheme from https://github.com/Gogh-Co/Gogh/blob/master/json/
 
-For example try with https://github.com/Gogh-Co/Gogh/blob/master/json/3024-day.json as input file
-Or https://github.com/Gogh-Co/Gogh/blob/master/json/everblush.json - full 16-color theme.
+For example try with input files:
+  * https://github.com/Gogh-Co/Gogh/blob/master/json/espresso-libre.json - full 16-color theme.
+  * https://github.com/Gogh-Co/Gogh/blob/master/json/everblush.json - full 16-color theme, subtle bright/bold color difference
+  * https://github.com/Gogh-Co/Gogh/blob/master/json/3024-day.json
 
 Sample usage:
 
