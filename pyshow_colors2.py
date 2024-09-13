@@ -17,8 +17,9 @@ try:
     import colorama
     colorama.just_fix_windows_console()
 except ImportError:
-    if sys.platform.startswith('win'):
-        print('Windows platform detected without colorama, refusing to run')
+    if sys.platform.startswith('win') and not os.environ.get('SKIP_WIN_CHECK'):  # TODO add an override option...
+        print('Windows platform detected without Colorama installed, refusing to run')
+        print('    python -m pip install colorama')
         sys.exit(0)
 
 
