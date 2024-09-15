@@ -2,7 +2,7 @@
 # -*- coding: us-ascii -*-
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
-"""Convert a Windows registry export of a single Putty session into a json (theme) file
+"""Convert a Windows registry export of a single Putty session into a json (theme) file to stdout
 
 Expects single byte or utf-8 encoded file, for example, UCS2/UTF-16 is NOT supported
 """
