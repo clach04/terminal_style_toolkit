@@ -145,6 +145,7 @@ Color schemes that pass eyeball test but I'd like to checkout:
 
   * https://github.com/mbadolato/iTerm2-Color-Schemes
   * https://github.com/Gogh-Co/Gogh
+  * https://github.com/dylanaraps/paleta/tree/master/palettes
   * https://github.com/tinted-theming/home - technically tools and themes
       * https://github.com/tinted-theming/base16-putty
       * https://github.com/iamthad/base16-windows-command-prompt
