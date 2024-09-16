@@ -67,6 +67,7 @@ In general avoid:
 ## Conversion tools
 
   * parse_palette_tools.py - tools for dumping palettes for easier read/conversion
+  * alacritty_toml2tstk_json.py - convert alacritty TOML Color Schemes
   * goghjson2puttyjson.py - tools for converting [Gogh JSON](https://github.com/Gogh-Co/Gogh/tree/master/json) Color Schemes from https://github.com/Gogh-Co/Gogh/ into json that Putty conversion tools (json2putty_reg.py) can use
   * iterm2_theme2tstk_json.py - convert iTerm2 Color Schemes
   * pywaltemplate2puttymustache.py - convert pywal16 template
