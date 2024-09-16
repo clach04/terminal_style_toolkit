@@ -2,7 +2,7 @@
 # -*- coding: us-ascii -*-
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
-"""Partially convert a pywal color them into one that can be used with tstk
+r"""Partially convert a pywal color them into one that can be used with tstk
 
 Result will need editing to be complete. For example;
   * name
@@ -16,6 +16,14 @@ Also review:
     "Colour4-hex" Cursor Text -- equals to default background
 
 Consider running through terminal_style_toolkit_json.mustache
+
+Sample Usage:
+
+    py -3 pywaltheme2tstk_json.py %USERPROFILE%\.config\wal\colorschemes\dark\sunset_dream.json > sunset_dream_tstk.json
+    py -3 putty/json2putty_reg.py sunset_dream_tstk.json putty/terminal_style_toolkit_json.mustache sunset_dream.tstk
+    echo edit sunset_dream.tstk - see above notes
+    py -3 putty/json2putty_reg.py sunset_dream.tstk
+    py -3 putty/json2putty_reg.py sunset_dream.tstk putty/colortable_html.mustache sunset_dream.html
 
 pywal16 - https://github.com/eylles/pywal16.git
 tstk - terminal_style_toolkit
