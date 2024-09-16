@@ -131,6 +131,7 @@ See [Putty tools readme](./putty/README.md)
 
 ### TODO Resources
 
+  * https://blog.codinghorror.com/code-colorizing-and-readability/ note, vites studies with CRTs, pre lcd.
 To checkout:
 
   * https://github.com/fikovnik/bin-scripts/blob/master/color-test.sh
