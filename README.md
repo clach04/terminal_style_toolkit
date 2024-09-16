@@ -141,11 +141,60 @@ Color schemes that pass eyeball test but I'd like to checkout:
 
   * https://github.com/mattly/iterm-colors-farmhouse - light and dark
   * https://github.com/mattly/iterm-colors-pencil - light and dark
+  * https://github.com/kepano/flexoki - light and dark
 
 #### Color Scheme Collections
 
-  * https://github.com/mbadolato/iTerm2-Color-Schemes
-  * https://github.com/Gogh-Co/Gogh
+  * https://github.com/mbadolato/iTerm2-Color-Schemes - preview limited
+  * https://github.com/Gogh-Co/Gogh - OK preview, can at least see palette block to easily compare colors
+      * 16 color themes that have bright/bold versions of base colors
+          * Aci
+          * Argonaut
+          * Azu
+          * Bim
+          * Birds Of Paradise
+          * Blazer
+          * Blue Dolphin
+          * ...
+  * https://github.com/alacritty/alacritty-theme - preview limited
+      * citylights
+      * Cobalt2
+      * dark_pastels
+      * dark_plus
+      * doom_one
+      * dracula
+      * dracula_plus
+      * enfocado_dark
+      * enfocado_light
+      * flexoki
+      * github_dark_high_contrast
+      * github_light
+      * google
+      * gnome_terminal
+      * gruvbox_dark
+      * gruvbox_light
+      * kanagawa_dragon
+      * kanagawa_wave
+      * midnight-haze
+      * monokai
+      * monokai_charcoal
+      * monokai_pro
+      * moonlight_ii_vscode
+      * nord
+      * oceanic_next
+      * palenight
+      * pencil_dark
+      * pencil_light
+      * remedy_dark
+      * rose-pine
+      * rose-pine-moon
+      * smoooooth
+      * synthwave_84
+      * tango_dark
+      * tomorrow_night_bright
+      * wombat
+      * zenburn
+  * https://github.com/rajasegar/alacritty-themes - no preview
   * https://github.com/dylanaraps/paleta/tree/master/palettes
   * https://github.com/tinted-theming/home - technically tools and themes
       * https://github.com/tinted-theming/base16-putty
