@@ -18,9 +18,9 @@ tstk - terminal_style_toolkit
 Sample:
 
     py -2 iterm2_theme2tstk_json.py "3024 Day.itermcolors" > 3024_Day_iterm_tstk.json
-    py -3 putty\json2putty_reg.py 3024_Day_iterm_tstk.json putty\terminal_style_toolkit_json.mustache 3024_Day_iterm.tstk
-    py -3 putty\json2putty_reg.py 3024_Day_iterm.tstk
-    
+    py -3 putty/json2putty_reg.py 3024_Day_iterm_tstk.json putty/terminal_style_toolkit_json.mustache 3024_Day_iterm.tstk
+    py -3 putty/json2putty_reg.py 3024_Day_iterm.tstk
+
 """
 
 import os
