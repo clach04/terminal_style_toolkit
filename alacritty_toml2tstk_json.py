@@ -90,6 +90,7 @@ def main(argv=None):
                 #print('%s\t%s' % (alacritty_color_name, config.get(config_section_name, alacritty_color_name)))
                 rgb_hex = config.get(config_section_name, alacritty_color_name)
                 rgb_hex = rgb_hex.replace('#', '')  # remove leading '#'
+                rgb_hex = rgb_hex.replace('0x', '')  # remove leading '0x'
                 rgb_hex = rgb_hex.replace('"', '')  # remove double quotes
                 rgb_hex = rgb_hex.replace("'", '')  # remove single quotes
                 #mapping[config_section_name][alacritty_color_name] = 'FIXME'
@@ -109,6 +110,8 @@ def main(argv=None):
     color_theme["Colour3-hex"] = color_theme.get("Colour3-hex", color_theme["Colour2-hex"])  # Default Bold Background  -- equals to non-bold
     color_theme["Colour4-hex"] = color_theme.get("Colour4-hex", color_theme["Colour2-hex"])  # Cursor Text -- equals to default background
     color_theme["Colour5-hex"] = color_theme.get("Colour5-hex", color_theme["Colour0-hex"])  # Cursor Colour -- equals to default foreground
+
+    color_theme["scheme-name"] = os.path.basename(theme_filename)  ## filename as a starting point, will need manually editing later
 
     print('%s' % json.dumps(color_theme, indent=4))  # TODO sort, also consider using render
     #print('%s' % json.dumps(mapping, indent=4))  # TODO sort, also consider using render
