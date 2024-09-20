@@ -4,7 +4,20 @@
 #
 """Import single theme json color scheme from https://github.com/Gogh-Co/Gogh/blob/master/json/
 
-For example try with https://github.com/Gogh-Co/Gogh/blob/master/json/3024-day.json as input file
+For example try with input files:
+  * https://github.com/Gogh-Co/Gogh/blob/master/json/espresso-libre.json - full 16-color theme.
+  * https://github.com/Gogh-Co/Gogh/blob/master/json/everblush.json - full 16-color theme, subtle bright/bold color difference
+  * https://github.com/Gogh-Co/Gogh/blob/master/json/3024-day.json
+
+Sample usage:
+
+    py -3 goghjson2puttyjson.py gogh_everblush.json
+    py -3 putty/json2putty_reg.py gogh_everblush.json_putty.json putty/terminal_style_toolkit_json.mustache everblush_putty.json
+    py -3 putty/json2putty_reg.py everblush_putty.json
+        # goes to Everblush_sorted.reg
+    py -3 putty/json2putty_reg.py everblush_putty.json  putty/colortable_html.mustache  everblush_preview.html
+    py -3 putty/json2putty_reg.py everblush_putty.json  putty/pywal16_json.mustache  everblush_pywal16.json
+
 """
 
 import os

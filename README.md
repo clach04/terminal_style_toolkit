@@ -2,6 +2,21 @@
 
 Scripts / tools / config for terminal styling and colors / colours
 
+- [terminal_style_toolkit](#terminal_style_toolkit)
+   * [Notes](#notes)
+      + [Fonts Notes](#fonts-notes)
+   * [Sample files](#sample-files)
+   * [Scripts for running in terminal](#scripts-for-running-in-terminal)
+   * [Conversion tools](#conversion-tools)
+   * [Putty](#putty)
+   * [Resources](#resources)
+      + [Color Codes](#color-codes)
+      + [Color Tools](#color-tools)
+      + [Related projects](#related-projects)
+         - [Non-Terminal](#non-terminal)
+      + [TODO Resources](#todo-resources)
+         - [Color Scheme Collections](#color-scheme-collections)
+
 ## Notes
 
 When testing out a color scheme/theme consider different use cases:
@@ -9,6 +24,7 @@ When testing out a color scheme/theme consider different use cases:
   * `pyshow_colors2.py`
   * ls colors (LSCOLORS, LS_COLORS, `dircolors` and .dir_colors)
       * https://github.com/dracula/putty/issues/3
+      * https://github.com/joshjon/bliss-dircolors - good starting point
   * neofetch
   * `vim` colorscheme
 
@@ -51,10 +67,17 @@ In general avoid:
 ## Conversion tools
 
   * parse_palette_tools.py - tools for dumping palettes for easier read/conversion
-  * goghjson2puttyjson.py - tools for converting [Gogh JSON](https://github.com/Gogh-Co/Gogh/tree/master/json) from https://github.com/Gogh-Co/Gogh/ into json that Putty conversion tools can use
+  * alacritty_toml2tstk_json.py - convert alacritty TOML Color Schemes
+  * goghjson2puttyjson.py - tools for converting [Gogh JSON](https://github.com/Gogh-Co/Gogh/tree/master/json) Color Schemes from https://github.com/Gogh-Co/Gogh/ into json that Putty conversion tools (json2putty_reg.py) can use
+  * iterm2_theme2tstk_json.py - convert iTerm2 Color Schemes
+  * pywaltemplate2puttymustache.py - convert pywal16 template
+  * pywaltheme2tstk_json.py - convert pywal16 color theme
   * putty/json2putty_reg.py - convert (Putty) json into Putty registry import and html preview - Used to create https://github.com/clach04/putty_themes
+  * Also see https://github.com/clach04/themer
 
 ## Putty
+
+See [Putty tools readme](./putty/README.md)
 
   * python_windows_registry_putty_colors.py - dumps session names and colors (only)
     along with simple show sessions that use the exact same same-color scheme feature
@@ -67,10 +90,30 @@ In general avoid:
 
 ## Resources
 
+### Color Codes
+
   * https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit
   * https://github.com/termstandard/colors
   * https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences/75985833#75985833
     useful table of codes
+
+### Color Tools
+
+  * https://terminal.sexy/
+  * https://it-tools.tech/color-converter
+      * https://github.com/CorentinTh/it-tools
+  * https://iconscout.com/blog/best-color-palette-generators-for-any-design-project
+  * https://colorffy.com/color-scheme-generator?color=257abb
+  * https://github.com/clach04/themer
+
+### ls colors / dir_colors
+
+  * https://www.systutorials.com/docs/linux/man/5-dir_colors/
+  * https://github.com/joshjon/bliss-dircolors
+  * https://github.com/seebi/dircolors-solarized
+  * https://github.com/nordtheme/dircolors
+  * https://github.com/clach04?submit=Search&q=dircolors&tab=stars&type=&sort=&direction=&submit=Search
+  * https://github.com/dracula/putty/issues/3 - Unreadable colors/colors with a=rwx permission directory and ls in color mode - default dircolors conflicts with terminal colors
 
 ### Related projects
 
@@ -87,6 +130,7 @@ In general avoid:
 
 ### TODO Resources
 
+  * https://blog.codinghorror.com/code-colorizing-and-readability/ note, vites studies with CRTs, pre lcd.
 To checkout:
 
   * https://github.com/fikovnik/bin-scripts/blob/master/color-test.sh
@@ -98,11 +142,61 @@ Color schemes that pass eyeball test but I'd like to checkout:
 
   * https://github.com/mattly/iterm-colors-farmhouse - light and dark
   * https://github.com/mattly/iterm-colors-pencil - light and dark
+  * https://github.com/kepano/flexoki - light and dark
 
 #### Color Scheme Collections
 
-  * https://github.com/mbadolato/iTerm2-Color-Schemes
-  * https://github.com/Gogh-Co/Gogh
+  * https://github.com/mbadolato/iTerm2-Color-Schemes - preview limited
+  * https://github.com/Gogh-Co/Gogh - OK preview, can at least see palette block to easily compare colors
+      * 16 color themes that have bright/bold versions of base colors
+          * Aci
+          * Argonaut
+          * Azu
+          * Bim
+          * Birds Of Paradise
+          * Blazer
+          * Blue Dolphin
+          * ...
+  * https://github.com/alacritty/alacritty-theme - preview limited
+      * citylights
+      * Cobalt2
+      * dark_pastels
+      * dark_plus
+      * doom_one
+      * dracula
+      * dracula_plus
+      * enfocado_dark
+      * enfocado_light
+      * flexoki
+      * github_dark_high_contrast
+      * github_light
+      * google
+      * gnome_terminal
+      * gruvbox_dark
+      * gruvbox_light
+      * kanagawa_dragon
+      * kanagawa_wave
+      * midnight-haze
+      * monokai
+      * monokai_charcoal
+      * monokai_pro
+      * moonlight_ii_vscode
+      * nord
+      * oceanic_next
+      * palenight
+      * pencil_dark
+      * pencil_light
+      * remedy_dark
+      * rose-pine
+      * rose-pine-moon
+      * smoooooth
+      * synthwave_84
+      * tango_dark
+      * tomorrow_night_bright
+      * wombat
+      * zenburn
+  * https://github.com/rajasegar/alacritty-themes - no preview
+  * https://github.com/dylanaraps/paleta/tree/master/palettes
   * https://github.com/tinted-theming/home - technically tools and themes
       * https://github.com/tinted-theming/base16-putty
       * https://github.com/iamthad/base16-windows-command-prompt

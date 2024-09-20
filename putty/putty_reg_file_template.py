@@ -5,7 +5,7 @@
 
 # given a putty reg file, output a sorted, commented out reg file suitable for comparison/diff
 
-# Clone of putty_reg_file_json.py / putty_reg_file_to_sorted.py - todo refactor and share code
+# Clone of putty_reg2json.py / putty_reg_file_to_sorted.py - todo refactor and share code
 import json
 import os
 import re

@@ -92,7 +92,9 @@ def open_parse_gimp_palette_gpl_file(filename):
             continue
         if not found_colors and line.startswith('Columns:'):
             expected_column_count = int(line.split(':')[1])  # expecting 3....
-            if expected_column_count == 3:
+            if expected_column_count == 1:
+                color_entry_style = 'DECIMAL_RBG+HEX'  # appears to be similar to named but tabs instead of spaces and names not hex?
+            elif expected_column_count == 3:
                 color_entry_style = 'NAMED'  # 3 for RGB and + 1 for name
             else:
                 raise NotImplementedError('%d columns for colors' % expected_column_count)
@@ -110,6 +112,7 @@ def open_parse_gimp_palette_gpl_file(filename):
             elif color_entry_style == 'DECIMAL_RBG+HEX':
                 color_name = 'blank'
                 r, g, b, hex_rgb = line.split('\t')
+                color_name = hex_rgb
                 colors = (r, g, b)
                 r, g, b = map(int, colors)
                 #print(color_name, r, g, b)
