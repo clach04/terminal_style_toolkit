@@ -27,6 +27,7 @@ def hex2rgb_ints(hex_str):
     """Given '#123456' return (18, 52, 86)
     """
     hex_str = hex_str.strip().replace('#', '')  # remove '#'
+    hex_str = hex_str.strip().replace('0x', '')  # remove '0x'
     if len(hex_str) != len('123456'):
         raise NotImplementedError('input strings of length %d %r' % (len(hex_str), hex_str))
 
