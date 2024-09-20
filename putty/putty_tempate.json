@@ -1,0 +1,73 @@
+{
+    "scheme-name" : "Name_goes_here",
+    "#comment" : "Comment_goes_here",
+
+    "#CommentColor" : "Decimal r,g,b - with no spaces",
+
+    "Colour0" : "Color_goes_here",
+    "#" : "Default Foreground",
+
+    "Colour1" : "Color_goes_here",
+    "#" : "Default Bold Foreground",
+
+    "Colour2" : "Color_goes_here",
+    "#" : "Default Background",
+
+    "Colour3" : "Color_goes_here",
+    "#" : "Default Bold Background",
+
+    "Colour4" : "Color_goes_here",
+    "#" : "Cursor Text",
+
+    "Colour5" : "Color_goes_here",
+    "#" : "Cursor Colour",
+
+    "Colour6" : "Color_goes_here",
+    "#" : "ANSI Black - 30m / 40m",
+
+    "Colour7" : "Color_goes_here",
+    "#" : "ANSI Black Bright- 1;30m",
+
+    "Colour8" : "Color_goes_here",
+    "#" : "ANSI Red - 31m / 41m",
+
+    "Colour9" :  "Color_goes_here",
+    "#" : "ANSI Red Bright - 1;31m",
+
+    "Colour10" : "Color_goes_here",
+    "#" : "ANSI Green - 32m / 42m",
+
+    "Colour11" : "Color_goes_here",
+    "#" : "ANSI Green Bright - 1;32m",
+
+    "Colour12" : "Color_goes_here",
+    "#" : "ANSI Yellow - 33m / 43m",
+
+    "Colour13" : "Color_goes_here",
+    "#" : "ANSI Yellow Bright - 1;33m",
+
+    "Colour14" : "Color_goes_here",
+    "#" : "ANSI Blue - 34m / 44m",
+
+    "Colour15" : "Color_goes_here",
+    "#" : "ANSI Blue Bright - 1;34m",
+
+    "Colour16" : "Color_goes_here",
+    "#" : "ANSI Magenta - 35m / 45m",
+
+    "Colour17" : "Color_goes_here",
+    "#" : "ANSI Magenta Bright - 1;35m",
+
+    "Colour18" : "Color_goes_here",
+    "#" : "ANSI Cyan - 36m / 46m",
+
+    "Colour19" : "Color_goes_here",
+    "#" : "ANSI Cyan Bright - 1;36m",
+
+    "Colour20" : "Color_goes_here",
+    "#" : "ANSI White - 37m / 47m",
+
+    "Colour21" : "Color_goes_here",
+    "#" : "ANSI White Bright - 1;37m"
+
+}

@@ -22,12 +22,12 @@ In general avoid:
   * Under Linux, Bitstream Vera Sans Mono is typically built-in and not bad
   * Under Windows, the built-in Consolas is not bad (better than Courier New,
     that Putty defaults to), available since Microsoft Windows Vista.
-    A similar (free) font is Inconsolata
+    A similar (free) font is [Inconsolata](https://en.m.wikipedia.org/wiki/Inconsolata) / InconsolataGo (Inconsolata with straight quotes)
   * Many fonts at https://www.nerdfonts.com/ - worth checking out:
       * EnvyCodeR
       * FiraMono
       * Go-Mono
-      * InconsolataGo
+      * InconsolataGo https://github.com/im-AMS/Inconsolata-Nerd-Font-with-ligatures
       * Overpass
       * UbuntuMono
 
@@ -43,9 +43,16 @@ In general avoid:
   * show_colors.bash from https://bbs.archlinux.org/viewtopic.php?id=51818&p=1%29
       * Unknown license, many different versions of this script online
   * show_colors2.bash my version derived from show_colors.bash
+  * color-test.bash - derived from https://gilesorr.com/bashprompt/howto/c333.html - shows all foreground colors as text with default background as a sanity check
   * pyshow_colors2.py in-progress Python version of show_colors2.bash
   * colors.py from https://gist.github.com/lilydjwg/fdeaf79e921c2f413f44b6f613f6ad53
   * parse_palette_tools.py - tools for dumping palettes for easier read/conversion
+
+## Conversion tools
+
+  * parse_palette_tools.py - tools for dumping palettes for easier read/conversion
+  * goghjson2puttyjson.py - tools for converting [Gogh JSON](https://github.com/Gogh-Co/Gogh/tree/master/json) from https://github.com/Gogh-Co/Gogh/ into json that Putty conversion tools can use
+  * putty/json2putty_reg.py - convert (Putty) json into Putty registry import and html preview - Used to create https://github.com/clach04/putty_themes
 
 ## Putty
 
@@ -73,7 +80,10 @@ In general avoid:
 
 #### Non-Terminal
 
-  * https://github.com/monolifed/scite_theme scite thems from base16 config
+  * https://github.com/monolifed/scite_theme scite themes from base16 config
+  * https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/tools
+  * https://github.com/Gogh-Co/Gogh/tree/master/tools
+  * Base-16 and derivatives
 
 ### TODO Resources
 
@@ -88,3 +98,12 @@ Color schemes that pass eyeball test but I'd like to checkout:
 
   * https://github.com/mattly/iterm-colors-farmhouse - light and dark
   * https://github.com/mattly/iterm-colors-pencil - light and dark
+
+#### Color Scheme Collections
+
+  * https://github.com/mbadolato/iTerm2-Color-Schemes
+  * https://github.com/Gogh-Co/Gogh
+  * https://github.com/tinted-theming/home - technically tools and themes
+      * https://github.com/tinted-theming/base16-putty
+      * https://github.com/iamthad/base16-windows-command-prompt
+      * https://github.com/InspectorMustache/base16-builder-python. - Todo my older version
