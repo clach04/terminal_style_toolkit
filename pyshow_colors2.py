@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: us-ascii -*-
+# -*- coding: utf-8 -*-
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 """Python version of show_colors2.bash - missing detected terminal features
@@ -125,6 +125,10 @@ color_map_list_of_tuples_bg_rest = [
     ('107m', 'whiteH'),
     ('109m', 'DefaultH'),
 ]
+
+reset = '\033[0m'
+bold = '\033[1m'
+
 demo_text = '   '
 f.write('\n')
 for bg_escape, bgcolor_name in color_map_list_of_tuples_bg:
@@ -135,6 +139,17 @@ for bg_escape, bgcolor_name in color_map_list_of_tuples_bg_rest:
     f.write('\033[%s%s' % (bg_escape, demo_text))
     f.write('\033[0m')  # reset - not needed but send just-in-case
 f.write('\n')
+
+panels = """
+ ${f0}████${b}▄${r}  ${f1}████${b}▄${r}  ${f2}████${b}▄${r}  ${f3}████${b}▄${r}  ${f4}████${b}▄${r}  ${f5}████${b}▄${r}  ${f6}████${b}▄${r}  ${f7}████${b}▄${r}
+ ${f0}████${b}█${r}  ${f1}████${b}█${r}  ${f2}████${b}█${r}  ${f3}████${b}█${r}  ${f4}████${b}█${r}  ${f5}████${b}█${r}  ${f6}████${b}█${r}  ${f7}████${b}█${r}
+ ${f0}████${b}█${r}  ${f1}████${b}█${r}  ${f2}████${b}█${r}  ${f3}████${b}█${r}  ${f4}████${b}█${r}  ${f5}████${b}█${r}  ${f6}████${b}█${r}  ${f7}████${b}█${r}
+ ${b}${f0} ▀▀▀▀  ${b}${f1} ▀▀▀▀   ${f2}▀▀▀▀   ${f3}▀▀▀▀   ${f4}▀▀▀▀   ${f5}▀▀▀▀   ${f6}▀▀▀▀   ${f7}▀▀▀▀${r}
+
+""".replace('${b}', bold).replace('${r}', reset)
+for x in range(8):
+    panels = panels.replace('${f%d}' % x, '\033[3%dm' % x)
+f.write(panels)
 
 f.write("\033[0mCOLOR_NC (No color)\n")
 f.write("\033[1;37mCOLOR_WHITE\t\033[0;30mCOLOR_BLACK\n")
