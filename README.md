@@ -121,6 +121,7 @@ vim themes that only use ANSI (16) colors - https://jeffkreeftmeijer.com/vim-16-
   * https://github.com/noahfrederick/vim-noctu
   * https://github.com/jeffkreeftmeijer/vim-dim/
   * https://github.com/dylanaraps/wal.vim - actually 8 colors
+  * https://github.com/chriskempson/base16-vim/
   * NeoVim
       * https://github.com/uZer/pywal16.nvim
       * https://github.com/AlphaTechnolog/pywal.nvim
