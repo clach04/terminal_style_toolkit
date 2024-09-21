@@ -155,6 +155,7 @@ def show_color_block_table(f=sys.stdout, demo_text='   '):
 def show_panels(f=sys.stdout):
     "foreground"
     # TODO background example as well, some modern terminals use different actual colors for fg/bg for same name/escape
+    # TODO have one panel and generate on the fly, looping through colors. Be easier to have both fg and bg versions
 
     """
     for bg in background_colors:
@@ -171,9 +172,13 @@ def show_panels(f=sys.stdout):
  ${f0}████${b}█${r}  ${f1}████${b}█${r}  ${f2}████${b}█${r}  ${f3}████${b}█${r}  ${f4}████${b}█${r}  ${f5}████${b}█${r}  ${f6}████${b}█${r}  ${f7}████${b}█${r}
  ${b}${f0} ▀▀▀▀  ${b}${f1} ▀▀▀▀   ${f2}▀▀▀▀   ${f3}▀▀▀▀   ${f4}▀▀▀▀   ${f5}▀▀▀▀   ${f6}▀▀▀▀   ${f7}▀▀▀▀${r}
 """.replace('${b}', bold).replace('${r}', reset)
+    bg_panels = panels
+    fg_panels = panels
     for x in range(8):
-        panels = panels.replace('${f%d}' % x, '\033[3%dm' % x)
-    f.write(panels)
+        bg_panels = bg_panels.replace('${f%d}' % x, '\033[4%dm' % x)  # FIXME "bold" optimization does NOT work fo bg_bold, need entire escape sequence for each color in bold
+        fg_panels = fg_panels.replace('${f%d}' % x, '\033[3%dm' % x)
+    f.write(fg_panels)
+    #f.write(bg_panels)  # TODO, see FIXME above and TODO at start of function
 
 
 
