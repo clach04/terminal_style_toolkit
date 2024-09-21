@@ -18,14 +18,17 @@ Sample usage with mintty under Windows:
 import os
 import sys
 
+is_win = sys.platform.startswith('win')
+
 try:
     import colorama
     colorama.just_fix_windows_console()
 except ImportError:
-    if sys.platform.startswith('win') and not os.environ.get('SKIP_WIN_CHECK'):  # TODO add an override option...
-        print('Windows platform detected without Colorama installed, refusing to run; SET SKIP_WIN_CHECK=true')
-        print('    python -m pip install colorama')
-        sys.exit(0)
+    if not os.environ.get('SKIP_WIN_CHECK'):
+        if is_win and not ('TERM' in os.environ or 'TERM_PROGRAM' in os.environ):
+            print('Windows platform detected without Colorama installed, refusing to run; SET SKIP_WIN_CHECK=true')
+            print('    python -m pip install colorama')
+            sys.exit(0)
 
 
 color_map_list_of_tuples_fg = [
