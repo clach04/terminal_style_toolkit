@@ -155,12 +155,21 @@ def show_color_block_table(f=sys.stdout, demo_text='   '):
 def show_panels(f=sys.stdout):
     "foreground"
     # TODO background example as well, some modern terminals use different actual colors for fg/bg for same name/escape
+
+    """
+    for bg in background_colors:
+        #f.write('%-7s' %  color_map[bg])
+        f.write('%7s' %  color_map[bg])
+    """
+    #f.write(' black  red    green  yellow blue  magenta cyan   white')
+    #f.write(' black    red  green yellow  blue magenta   cyan  white')
+    f.write(' black    red  green yellow  blue  magenta  cyan  white')
+
     panels = """
  ${f0}████${b}▄${r}  ${f1}████${b}▄${r}  ${f2}████${b}▄${r}  ${f3}████${b}▄${r}  ${f4}████${b}▄${r}  ${f5}████${b}▄${r}  ${f6}████${b}▄${r}  ${f7}████${b}▄${r}
  ${f0}████${b}█${r}  ${f1}████${b}█${r}  ${f2}████${b}█${r}  ${f3}████${b}█${r}  ${f4}████${b}█${r}  ${f5}████${b}█${r}  ${f6}████${b}█${r}  ${f7}████${b}█${r}
  ${f0}████${b}█${r}  ${f1}████${b}█${r}  ${f2}████${b}█${r}  ${f3}████${b}█${r}  ${f4}████${b}█${r}  ${f5}████${b}█${r}  ${f6}████${b}█${r}  ${f7}████${b}█${r}
  ${b}${f0} ▀▀▀▀  ${b}${f1} ▀▀▀▀   ${f2}▀▀▀▀   ${f3}▀▀▀▀   ${f4}▀▀▀▀   ${f5}▀▀▀▀   ${f6}▀▀▀▀   ${f7}▀▀▀▀${r}
-
 """.replace('${b}', bold).replace('${r}', reset)
     for x in range(8):
         panels = panels.replace('${f%d}' % x, '\033[3%dm' % x)
@@ -190,8 +199,13 @@ def main(argv=None):
 
     # TODO add options to skip (via environment variables) some output
     show_color_table_grid(f)
+
     show_color_block_table(f)
+    f.write('\n')
+
     show_panels(f)
+    f.write('\n')
+
     show_descriptive_text_example(f)
 
 
