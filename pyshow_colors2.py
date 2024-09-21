@@ -88,6 +88,20 @@ color_map = dict(color_map_list_of_tuples)
 foreground_colors = [x[0] for x in color_map_list_of_tuples_fg]
 background_colors = [x[0] for x in color_map_list_of_tuples_bg]
 
+color_map_list_of_tuples_bg_rest = [
+    ('100m', 'blackH'),
+    ('101m', 'redH'),
+    ('102m', 'greenH'),
+    ('103m', 'yellowH'),
+    ('104m', 'blueH'),
+    ('105m', 'magentaH'),
+    ('106m', 'cyanH'),
+    ('107m', 'whiteH'),
+    ('109m', 'DefaultH'),
+]
+
+reset = '\033[0m'
+bold = '\033[1m'
 
 
 def show_color_table_grid(f=sys.stdout):
@@ -117,42 +131,30 @@ def show_color_table_grid(f=sys.stdout):
         f.write('  ')
         for bg in background_colors:
             f.write(' \033[%s\033[%s  %s  \033[0m' % (fg, bg, demo_text))
-        f.write('\033[0m')  # reset - not needed but send just-in-case
+        f.write(reset)  # reset - not needed but send just-in-case
         f.write('\n')
 
 
 ############
-color_map_list_of_tuples_bg_rest = [
-    ('100m', 'blackH'),
-    ('101m', 'redH'),
-    ('102m', 'greenH'),
-    ('103m', 'yellowH'),
-    ('104m', 'blueH'),
-    ('105m', 'magentaH'),
-    ('106m', 'cyanH'),
-    ('107m', 'whiteH'),
-    ('109m', 'DefaultH'),
-]
 
-reset = '\033[0m'
-bold = '\033[1m'
 
-def show_color_block_table(f=sys.stdout):
-    demo_text = '   '
+def show_color_block_table(f=sys.stdout, demo_text='   '):
+    # TODO more options about table dimensions
     f.write('\n')
     for bg_escape, bgcolor_name in color_map_list_of_tuples_bg:
         f.write('\033[%s%s' % (bg_escape, demo_text))
-        f.write('\033[0m')  # reset - not needed but send just-in-case
+        f.write(reset)  # reset - not needed but send just-in-case
     f.write('\n')
     for bg_escape, bgcolor_name in color_map_list_of_tuples_bg_rest:
         f.write('\033[%s%s' % (bg_escape, demo_text))
-        f.write('\033[0m')  # reset - not needed but send just-in-case
+        f.write(reset)  # reset - not needed but send just-in-case
     f.write('\n')
 
 
 
 def show_panels(f=sys.stdout):
     "foreground"
+    # TODO background example as well, some modern terminals use different actual colors for fg/bg for same name/escape
     panels = """
  ${f0}████${b}▄${r}  ${f1}████${b}▄${r}  ${f2}████${b}▄${r}  ${f3}████${b}▄${r}  ${f4}████${b}▄${r}  ${f5}████${b}▄${r}  ${f6}████${b}▄${r}  ${f7}████${b}▄${r}
  ${f0}████${b}█${r}  ${f1}████${b}█${r}  ${f2}████${b}█${r}  ${f3}████${b}█${r}  ${f4}████${b}█${r}  ${f5}████${b}█${r}  ${f6}████${b}█${r}  ${f7}████${b}█${r}
@@ -176,14 +178,24 @@ def show_descriptive_text_example(f=sys.stdout):
     f.write("\033[0;35mCOLOR_PURPLE\t\033[1;35mCOLOR_LIGHT_PURPLE\n")
     f.write("\033[0;33mCOLOR_YELLOW\t\033[1;33mCOLOR_LIGHT_YELLOW\n")
     f.write("\033[1;30mCOLOR_GRAY\t\033[0;37mCOLOR_LIGHT_GRAY\n")
-    # reset
-    f.write("\033[0m")
+    f.write(reset)
+    # TODO newline?
 
 
+def main(argv=None):
+    argv = argv or sys.argv
+    #print('Python %s on %s' % (sys.version, sys.platform))
 
-f = sys.stdout
+    f = sys.stdout
 
-show_color_table_grid(f)
-show_color_block_table(f)
-show_panels(f)
-show_descriptive_text_example(f)
+    # TODO add options to skip (via environment variables) some output
+    show_color_table_grid(f)
+    show_color_block_table(f)
+    show_panels(f)
+    show_descriptive_text_example(f)
+
+
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())
