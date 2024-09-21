@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
-"""Python version of show_colors2.bash - missing detected terminal features
+r"""Python version of show_colors2.bash - missing detected terminal features
 NOTE expects terminal to be 86 characters wide
 Shows:
   1. table of combinations of foreground and background colors
