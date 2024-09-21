@@ -8,6 +8,11 @@ Shows:
   1. table of combinations of foreground and background colors
   2. block colors - not a feature in show_colors2.bash
   3. text colors - not a feature in show_colors2.bash
+
+Sample usage with mintty under Windows:
+
+    "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,40 py -3 pyshow_colors2.py
+
 """
 
 import os
