@@ -37,11 +37,17 @@ import sys
 
 
 
-
+# https://alacritty.org/config-alacritty.html#colors
 mapping = {
     "colors.primary": {
         "background": "Colour2-hex",  # Default Background
         "foreground": "Colour0-hex"   # Default Foreground
+        # TODO dim_foreground
+        # TODO bright_foreground
+    },
+    "colors.cursor": {
+        'text': 'Colour4-hex',
+        'cursor': 'Colour5-hex',
     },
     "colors.normal": {
         "black":    "Colour6-hex",
