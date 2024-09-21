@@ -117,8 +117,13 @@ See [Putty tools readme](./putty/README.md)
 
   * https://bytefluent.com/vivify/
 
-vim themes that only use ANSI (16) colors
+vim themes that only use ANSI (16) colors - https://jeffkreeftmeijer.com/vim-16-color/
+  * https://github.com/noahfrederick/vim-noctu
   * https://github.com/jeffkreeftmeijer/vim-dim/
+  * https://github.com/dylanaraps/wal.vim - actually 8 colors
+  * NeoVim
+      * https://github.com/uZer/pywal16.nvim
+      * https://github.com/AlphaTechnolog/pywal.nvim
 
 ### ls colors / dir_colors
 
