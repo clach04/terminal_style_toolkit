@@ -154,16 +154,21 @@ def show_color_block_table(f=sys.stdout):
 show_color_block_table(f)
 
 
-panels = """
+def show_panels(f=sys.stdout):
+    "foreground"
+    panels = """
  ${f0}████${b}▄${r}  ${f1}████${b}▄${r}  ${f2}████${b}▄${r}  ${f3}████${b}▄${r}  ${f4}████${b}▄${r}  ${f5}████${b}▄${r}  ${f6}████${b}▄${r}  ${f7}████${b}▄${r}
  ${f0}████${b}█${r}  ${f1}████${b}█${r}  ${f2}████${b}█${r}  ${f3}████${b}█${r}  ${f4}████${b}█${r}  ${f5}████${b}█${r}  ${f6}████${b}█${r}  ${f7}████${b}█${r}
  ${f0}████${b}█${r}  ${f1}████${b}█${r}  ${f2}████${b}█${r}  ${f3}████${b}█${r}  ${f4}████${b}█${r}  ${f5}████${b}█${r}  ${f6}████${b}█${r}  ${f7}████${b}█${r}
  ${b}${f0} ▀▀▀▀  ${b}${f1} ▀▀▀▀   ${f2}▀▀▀▀   ${f3}▀▀▀▀   ${f4}▀▀▀▀   ${f5}▀▀▀▀   ${f6}▀▀▀▀   ${f7}▀▀▀▀${r}
 
 """.replace('${b}', bold).replace('${r}', reset)
-for x in range(8):
-    panels = panels.replace('${f%d}' % x, '\033[3%dm' % x)
-f.write(panels)
+    for x in range(8):
+        panels = panels.replace('${f%d}' % x, '\033[3%dm' % x)
+    f.write(panels)
+
+show_panels(f)
+
 
 f.write("\033[0mCOLOR_NC (No color)\n")
 f.write("\033[1;37mCOLOR_WHITE\t\033[0;30mCOLOR_BLACK\n")
