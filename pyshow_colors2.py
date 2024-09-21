@@ -139,16 +139,20 @@ color_map_list_of_tuples_bg_rest = [
 reset = '\033[0m'
 bold = '\033[1m'
 
-demo_text = '   '
-f.write('\n')
-for bg_escape, bgcolor_name in color_map_list_of_tuples_bg:
-    f.write('\033[%s%s' % (bg_escape, demo_text))
-    f.write('\033[0m')  # reset - not needed but send just-in-case
-f.write('\n')
-for bg_escape, bgcolor_name in color_map_list_of_tuples_bg_rest:
-    f.write('\033[%s%s' % (bg_escape, demo_text))
-    f.write('\033[0m')  # reset - not needed but send just-in-case
-f.write('\n')
+def show_color_block_table(f=sys.stdout):
+    demo_text = '   '
+    f.write('\n')
+    for bg_escape, bgcolor_name in color_map_list_of_tuples_bg:
+        f.write('\033[%s%s' % (bg_escape, demo_text))
+        f.write('\033[0m')  # reset - not needed but send just-in-case
+    f.write('\n')
+    for bg_escape, bgcolor_name in color_map_list_of_tuples_bg_rest:
+        f.write('\033[%s%s' % (bg_escape, demo_text))
+        f.write('\033[0m')  # reset - not needed but send just-in-case
+    f.write('\n')
+
+show_color_block_table(f)
+
 
 panels = """
  ${f0}████${b}▄${r}  ${f1}████${b}▄${r}  ${f2}████${b}▄${r}  ${f3}████${b}▄${r}  ${f4}████${b}▄${r}  ${f5}████${b}▄${r}  ${f6}████${b}▄${r}  ${f7}████${b}▄${r}
