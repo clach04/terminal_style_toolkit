@@ -90,36 +90,38 @@ background_colors = [x[0] for x in color_map_list_of_tuples_bg]
 
 
 f = sys.stdout
-# heaeder
 
-f.write('                      ')  # TODO replace with count
-for bg in background_colors:
-    f.write('%8s' %  color_map[bg])
-f.write('\n')
-
-"""
-f.write('                         ')  # TODO replace with count
-#f.write('                      ')  # TODO replace with count
-for bg in background_colors:
-    f.write('%-8s' %  bg)
-f.write('\n')
-"""
-f.write('                         40m     41m     42m     43m     44m     45m     46m     47m\n')
-
-# table
-
-demo_text = 'gYw'   # The test text
-for fg in foreground_colors:
-    fgcolor_name = color_map[fg]
-    f.write('%8s' %  fgcolor_name)  # 8 is the max string length of color_map values
-    f.write(' %s' %  fg)  # already spaced/indented/justified
-    fg = fg.strip()
-    f.write('   \033[%s%s' % (fg, demo_text))  # already spaced/indented/justified
-    f.write('  ')
+def show_color_table_grid(f=sys.stdout):
+    # header
+    f.write('                      ')  # TODO replace with count
     for bg in background_colors:
-        f.write(' \033[%s\033[%s  %s  \033[0m' % (fg, bg, demo_text))
-    f.write('\033[0m')  # reset - not needed but send just-in-case
+        f.write('%8s' %  color_map[bg])
     f.write('\n')
+
+    """
+    f.write('                         ')  # TODO replace with count
+    #f.write('                      ')  # TODO replace with count
+    for bg in background_colors:
+        f.write('%-8s' %  bg)
+    f.write('\n')
+    """
+    f.write('                         40m     41m     42m     43m     44m     45m     46m     47m\n')
+
+    # table
+    demo_text = 'gYw'   # The test text
+    for fg in foreground_colors:
+        fgcolor_name = color_map[fg]
+        f.write('%8s' %  fgcolor_name)  # 8 is the max string length of color_map values
+        f.write(' %s' %  fg)  # already spaced/indented/justified
+        fg = fg.strip()
+        f.write('   \033[%s%s' % (fg, demo_text))  # already spaced/indented/justified
+        f.write('  ')
+        for bg in background_colors:
+            f.write(' \033[%s\033[%s  %s  \033[0m' % (fg, bg, demo_text))
+        f.write('\033[0m')  # reset - not needed but send just-in-case
+        f.write('\n')
+
+show_color_table_grid(f)
 
 ############
 color_map_list_of_tuples_bg_rest = [
