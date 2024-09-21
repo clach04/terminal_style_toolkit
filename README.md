@@ -62,6 +62,7 @@ In general avoid:
 
 ## Scripts for running in terminal
 
+  * truecolor.awk modified from https://github.com/sonph/dotfiles/blob/master/bin/truecolor.sh - truecolor test
   * invaders.bash from https://paste.xinu.at/m-dAiJ/
   * show_colors.bash from https://bbs.archlinux.org/viewtopic.php?id=51818&p=1%29
       * Unknown license, many different versions of this script online
