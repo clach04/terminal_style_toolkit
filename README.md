@@ -41,11 +41,17 @@ In general avoid:
     A similar (free) font is [Inconsolata](https://en.m.wikipedia.org/wiki/Inconsolata) / InconsolataGo (Inconsolata with straight quotes)
   * Many fonts at https://www.nerdfonts.com/ - worth checking out:
       * EnvyCodeR
-      * FiraMono
+      * FiraMono - https://mozilla.github.io/Fira/
       * Go-Mono
       * InconsolataGo https://github.com/im-AMS/Inconsolata-Nerd-Font-with-ligatures
       * Overpass
       * UbuntuMono
+  * Fantasque Sans Mono - https://github.com/belluzj/fantasque-sans
+  * Iosevka
+      * http://be5invis.github.io/Iosevka
+      * https://github.com/be5invis/Iosevka
+      * https://typeof.net/Iosevka/
+
 
 ## Sample files
 
