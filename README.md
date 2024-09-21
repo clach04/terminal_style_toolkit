@@ -113,6 +113,13 @@ See [Putty tools readme](./putty/README.md)
   * https://colorffy.com/color-scheme-generator?color=257abb
   * https://github.com/clach04/themer
 
+### vim
+
+  * https://bytefluent.com/vivify/
+
+vim themes that only use ANSI (16) colors
+  * https://github.com/jeffkreeftmeijer/vim-dim/
+
 ### ls colors / dir_colors
 
   * https://www.systutorials.com/docs/linux/man/5-dir_colors/
@@ -137,7 +144,8 @@ See [Putty tools readme](./putty/README.md)
 
 ### TODO Resources
 
-  * https://blog.codinghorror.com/code-colorizing-and-readability/ note, vites studies with CRTs, pre lcd.
+  * https://blog.codinghorror.com/code-colorizing-and-readability/ note, cites studies with CRTs, pre lcd.
+
 To checkout:
 
   * https://github.com/fikovnik/bin-scripts/blob/master/color-test.sh
