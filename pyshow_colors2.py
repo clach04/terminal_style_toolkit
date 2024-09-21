@@ -89,7 +89,6 @@ foreground_colors = [x[0] for x in color_map_list_of_tuples_fg]
 background_colors = [x[0] for x in color_map_list_of_tuples_bg]
 
 
-f = sys.stdout
 
 def show_color_table_grid(f=sys.stdout):
     # header
@@ -121,7 +120,6 @@ def show_color_table_grid(f=sys.stdout):
         f.write('\033[0m')  # reset - not needed but send just-in-case
         f.write('\n')
 
-show_color_table_grid(f)
 
 ############
 color_map_list_of_tuples_bg_rest = [
@@ -151,7 +149,6 @@ def show_color_block_table(f=sys.stdout):
         f.write('\033[0m')  # reset - not needed but send just-in-case
     f.write('\n')
 
-show_color_block_table(f)
 
 
 def show_panels(f=sys.stdout):
@@ -167,7 +164,6 @@ def show_panels(f=sys.stdout):
         panels = panels.replace('${f%d}' % x, '\033[3%dm' % x)
     f.write(panels)
 
-show_panels(f)
 
 
 def show_descriptive_text_example(f=sys.stdout):
@@ -183,4 +179,11 @@ def show_descriptive_text_example(f=sys.stdout):
     # reset
     f.write("\033[0m")
 
+
+
+f = sys.stdout
+
+show_color_table_grid(f)
+show_color_block_table(f)
+show_panels(f)
 show_descriptive_text_example(f)
