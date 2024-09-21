@@ -125,6 +125,7 @@ vim themes that only use ANSI (16) colors - https://jeffkreeftmeijer.com/vim-16-
   * NeoVim
       * https://github.com/uZer/pywal16.nvim
       * https://github.com/AlphaTechnolog/pywal.nvim
+      * https://github.com/sonjiku/yawnc.nvim
 
 ### ls colors / dir_colors
 
@@ -147,6 +148,7 @@ vim themes that only use ANSI (16) colors - https://jeffkreeftmeijer.com/vim-16-
   * https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/tools
   * https://github.com/Gogh-Co/Gogh/tree/master/tools
   * Base-16 and derivatives
+  * https://github.com/worron/ACYLS - Any Color You Like Simple icon pack
 
 ### TODO Resources
 
@@ -222,3 +224,6 @@ Color schemes that pass eyeball test but I'd like to checkout:
       * https://github.com/tinted-theming/base16-putty
       * https://github.com/iamthad/base16-windows-command-prompt
       * https://github.com/InspectorMustache/base16-builder-python. - Todo my older version
+  * Adwaita
+      * https://en.wikipedia.org/wiki/Adwaita_(design_language)#Color
+      * https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.5/named-colors.html
