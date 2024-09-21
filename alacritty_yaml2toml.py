@@ -3,9 +3,10 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 """Dirty, minimal hack to convert alacritty yaml into toml (like) good enough to be readable
-No actual yaml processing
-Attempt to preserve comments
-Ignore sections tstk has no suport for
+No actual yaml processing.
+Attempt to preserve comments.
+Ignore sections tstk has no suport for.
+Recommend `alacritty migrate` or real yaml to toml tool.
 """
 
 import glob
