@@ -39,7 +39,7 @@ mappings = {
 
 def main(argv=None):
     argv = argv or sys.argv
-    print('Python %s on %s' % (sys.version, sys.platform))
+    #print('Python %s on %s' % (sys.version, sys.platform))
 
     template_filename = argv[1]
 
