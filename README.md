@@ -187,44 +187,47 @@ Color schemes that pass eyeball test but I'd like to checkout:
           * Blazer
           * Blue Dolphin
           * ...
-  * https://github.com/alacritty/alacritty-theme - preview limited
-      * citylights
-      * Cobalt2
-      * dark_pastels
-      * dark_plus
-      * doom_one
-      * dracula
-      * dracula_plus
-      * enfocado_dark
-      * enfocado_light
-      * flexoki
-      * github_dark_high_contrast
-      * github_light
-      * google
-      * gnome_terminal
-      * gruvbox_dark
-      * gruvbox_light
-      * kanagawa_dragon
-      * kanagawa_wave
-      * midnight-haze
-      * monokai
-      * monokai_charcoal
-      * monokai_pro
-      * moonlight_ii_vscode
-      * nord
-      * oceanic_next
-      * palenight
-      * pencil_dark
-      * pencil_light
-      * remedy_dark
-      * rose-pine
-      * rose-pine-moon
-      * smoooooth
-      * synthwave_84
-      * tango_dark
-      * tomorrow_night_bright
-      * wombat
-      * zenburn
+  * Alacritty
+    * https://github.com/rajasegar/alacritty-themes/ - no previews
+      * https://github.com/rajasegar/alacritty-themes/blob/master/themes/IR-Black.toml
+    * https://github.com/alacritty/alacritty-theme - preview limited
+        * citylights
+        * Cobalt2 - https://github.com/alacritty/alacritty-theme/blob/master/themes/Cobalt2.toml
+        * dark_pastels
+        * dark_plus
+        * doom_one
+        * dracula
+        * dracula_plus
+        * enfocado_dark
+        * enfocado_light
+        * flexoki
+        * github_dark_high_contrast
+        * github_light
+        * google
+        * gnome_terminal
+        * gruvbox_dark
+        * gruvbox_light
+        * kanagawa_dragon
+        * kanagawa_wave
+        * midnight-haze
+        * monokai
+        * monokai_charcoal
+        * monokai_pro
+        * moonlight_ii_vscode
+        * nord
+        * oceanic_next
+        * palenight
+        * pencil_dark
+        * pencil_light
+        * remedy_dark
+        * rose-pine
+        * rose-pine-moon
+        * smoooooth
+        * synthwave_84
+        * tango_dark
+        * tomorrow_night_bright
+        * wombat
+        * zenburn
   * https://github.com/rajasegar/alacritty-themes - no preview
   * https://github.com/dylanaraps/paleta/tree/master/palettes
   * https://github.com/tinted-theming/home - technically tools and themes
@@ -234,3 +237,5 @@ Color schemes that pass eyeball test but I'd like to checkout:
   * Adwaita
       * https://en.wikipedia.org/wiki/Adwaita_(design_language)#Color
       * https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.5/named-colors.html
+  * vim
+      * https://github.com/twerth/ir_black/
