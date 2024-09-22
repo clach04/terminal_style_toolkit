@@ -150,6 +150,12 @@ vim themes that only use ANSI (16) colors - https://jeffkreeftmeijer.com/vim-16-
   * https://github.com/Gogh-Co/Gogh/tree/master/tools
   * Base-16 and derivatives
   * https://github.com/worron/ACYLS - Any Color You Like Simple icon pack
+  * Windows Color Pickers
+      * http://instant-eyedropper.com/
+          * https://github.com/miaupaw/instant-eyedropper
+      * http://www.nattyware.com/pixie.php
+      * https://colorcop.net/
+          * https://github.com/ColorCop/ColorCop
 
 ### TODO Resources
 
