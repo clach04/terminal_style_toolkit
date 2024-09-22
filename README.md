@@ -239,3 +239,4 @@ Color schemes that pass eyeball test but I'd like to checkout:
       * https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.5/named-colors.html
   * vim
       * https://github.com/twerth/ir_black/
+      * https://github.com/lifepillar/vim-wwdc16-theme/blob/master/colors/wwdc16.vim - note in Putty seems to work best when `:set t_Co=16`
