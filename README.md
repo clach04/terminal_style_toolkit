@@ -176,7 +176,9 @@ Color schemes that pass eyeball test but I'd like to checkout:
 
 #### Color Scheme Collections
 
-  * https://github.com/mbadolato/iTerm2-Color-Schemes - preview limited
+  * iTerm2
+      * https://github.com/mbadolato/iTerm2-Color-Schemes - preview limited
+      * https://github.com/wozozo/Hemisu-Light-iTerm2
   * https://github.com/Gogh-Co/Gogh - OK preview, can at least see palette block to easily compare colors
       * 16 color themes that have bright/bold versions of base colors
           * Aci
@@ -188,6 +190,7 @@ Color schemes that pass eyeball test but I'd like to checkout:
           * Blue Dolphin
           * ...
   * Alacritty
+    * https://github.com/embark-theme/alacritty
     * https://github.com/rajasegar/alacritty-themes/ - no previews
       * https://github.com/rajasegar/alacritty-themes/blob/master/themes/IR-Black.toml
     * https://github.com/alacritty/alacritty-theme - preview limited
@@ -228,7 +231,6 @@ Color schemes that pass eyeball test but I'd like to checkout:
         * tomorrow_night_bright
         * wombat
         * zenburn
-  * https://github.com/rajasegar/alacritty-themes - no preview
   * https://github.com/dylanaraps/paleta/tree/master/palettes
   * https://github.com/tinted-theming/home - technically tools and themes
       * https://github.com/tinted-theming/base16-putty
@@ -237,6 +239,9 @@ Color schemes that pass eyeball test but I'd like to checkout:
   * Adwaita
       * https://en.wikipedia.org/wiki/Adwaita_(design_language)#Color
       * https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.5/named-colors.html
+  * pywal
+      * https://github.com/embark-theme/pywal
+          * https://embark-theme.github.io/#palette
   * vim
       * https://github.com/twerth/ir_black/
       * https://github.com/lifepillar/vim-wwdc16-theme/blob/master/colors/wwdc16.vim - note in Putty seems to work best when `:set t_Co=16`
