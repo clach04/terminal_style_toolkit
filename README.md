@@ -100,6 +100,26 @@ See [Putty tools readme](./putty/README.md)
 
 ### Color Codes
 
+ANSI colors are often named:
+
+    0    black
+    1    dark red
+    2    dark green
+    3    brown
+    4    dark blue
+    5    dark magenta
+    6    dark cyan
+
+    7    light grey
+    8    dark grey
+    9    red
+    10   green
+    11   yellow
+    12   blue
+    13   magenta
+    14   cyan
+    15   white
+
   * https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit
   * https://github.com/termstandard/colors
   * https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences/75985833#75985833
