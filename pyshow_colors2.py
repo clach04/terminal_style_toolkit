@@ -12,6 +12,7 @@ Shows:
 Sample usage with mintty under Windows:
 
     "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,40 py -3 pyshow_colors2.py
+    "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,50 py -3 pyshow_colors2.py
 
 """
 
@@ -196,6 +197,26 @@ def show_descriptive_text_example(f=sys.stdout):
     # TODO newline?
 
 
+def show_raw_ansi_file(f=sys.stdout, num_cols=3, raw_ansi_filename='ls_colors_test.txt', description='$ ls --color=always test-dircolors/\n'):
+    if not os.path.exists(raw_ansi_filename):
+        f.write('Missing %s ansi raw file' % raw_ansi_filename)
+        return
+    f_in = open(raw_ansi_filename)
+    f.write(description)
+    line_counter = 0
+    for line in f_in:
+        line_counter += 1
+        if line_counter % num_cols:
+            #line = line.replace('\n', '')
+            line = line.strip()
+            # TODO column line up...
+            #line = line.replace('\n', '    ')  # TODO column line up...
+            line = '%s  ' % line
+            #line = '%-30s ' % line  # length specifier includes the ANSI escape sequence so alignment will be off :-(
+            ##line = '%-30s \n%r\n' % (line, line)  # length specifier includes the ANSI escape sequence so alignment will be off :-(
+        f.write(line)
+
+
 def main(argv=None):
     argv = argv or sys.argv
     #print('Python %s on %s' % (sys.version, sys.platform))
@@ -212,7 +233,9 @@ def main(argv=None):
     f.write('\n')
 
     show_descriptive_text_example(f)
+    f.write('\n')
 
+    show_raw_ansi_file(f)
 
     return 0
 
