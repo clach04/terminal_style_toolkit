@@ -13,6 +13,7 @@ Sample usage with mintty under Windows:
 
     "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,40 py -3 pyshow_colors2.py
     "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,50 py -3 pyshow_colors2.py
+    "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,65 py -3 pyshow_colors2.py
 
 """
 
@@ -176,7 +177,7 @@ def show_panels(f=sys.stdout):
     bg_panels = panels
     fg_panels = panels
     for x in range(8):
-        bg_panels = bg_panels.replace('${f%d}' % x, '\033[4%dm' % x)  # FIXME "bold" optimization does NOT work fo bg_bold, need entire escape sequence for each color in bold
+        bg_panels = bg_panels.replace('${f%d}' % x, '\033[4%dm' % x)  # FIXME "bold" optimization does NOT work for bg_bold, need entire escape sequence for each color in bold
         fg_panels = fg_panels.replace('${f%d}' % x, '\033[3%dm' % x)
     f.write(fg_panels)
     #f.write(bg_panels)  # TODO, see FIXME above and TODO at start of function
@@ -197,7 +198,14 @@ def show_descriptive_text_example(f=sys.stdout):
     # TODO newline?
 
 
-def show_raw_ansi_file(f=sys.stdout, num_cols=3, raw_ansi_filename='ls_colors_test.txt', description='$ ls --color=always test-dircolors/\n'):
+def show_raw_ansi_file(f=sys.stdout, num_cols=1, raw_ansi_filename='ls_colors_test.txt', description='$ ls --color=always test-dircolors/\n'):
+    """
+    Example:
+        script ls_colors_test.txt
+        ls --color=always test-dircolors/
+        exit
+        # then edit ls_colors_test.txt, top and tail it
+    """
     if not os.path.exists(raw_ansi_filename):
         f.write('Missing %s ansi raw file' % raw_ansi_filename)
         return
