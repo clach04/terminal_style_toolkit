@@ -103,7 +103,11 @@ See [Putty tools readme](./putty/README.md)
 ## Microsoft Windows CMD.exe
 
 See Color Tool (ColorTool) https://github.com/microsoft/terminal/releases/tag/1904.29002
-The `campbell.ini` color scheme is the Windows 10 CMD out-of-box colors if need to restore to original colors.
+The `campbell.ini` color scheme is the Windows 10 Fall Creator's Update CMD out-of-box colors if need to restore to original colors.
+
+From https://github.com/microsoft/terminal/tree/1904.29002/tools/ColorTool readme:
+  * cmd-legacy is the legacy color scheme of the Windows Console, before July 2017
+  * campbell is the new default scheme used by the Windows Console Host, as of the Fall Creator's Update.
 
 ## Resources
 
