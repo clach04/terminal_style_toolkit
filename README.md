@@ -109,6 +109,8 @@ From https://github.com/microsoft/terminal/tree/1904.29002/tools/ColorTool readm
   * cmd-legacy is the legacy color scheme of the Windows Console, before July 2017
   * campbell is the new default scheme used by the Windows Console Host, as of the Fall Creator's Update.
 
+NOTE latest ColorTool source is located in https://github.com/microsoft/terminal/tree/main/src/tools/ColorTool
+
 ## Resources
 
 ### Color Codes
