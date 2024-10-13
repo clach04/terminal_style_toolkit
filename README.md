@@ -111,6 +111,12 @@ From https://github.com/microsoft/terminal/tree/1904.29002/tools/ColorTool readm
 
 NOTE latest ColorTool source is located in https://github.com/microsoft/terminal/tree/main/src/tools/ColorTool
 
+ColorTool can use:
+
+1. json format as used by concfg https://github.com/lukesampson/concfg
+2. XML format as used by iTerm2-Color-Schemes - https://github.com/mbadolato/iTerm2-Color-Schemes/
+3. INI format, as provided in samples for ColorTool https://github.com/microsoft/terminal/tree/main/src/tools/ColorTool
+
 ## Resources
 
 ### Color Codes
