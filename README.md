@@ -95,6 +95,9 @@ See [Putty tools readme](./putty/README.md)
     * ANSI Blue Bold;   Red:140 Green:140   Blue:255
   * https://www.thegeekstuff.com/2009/07/10-practical-putty-tips-and-tricks-you-probably-didnt-know/
 
+## Microsoft Windows CMD.exe
+
+See Color Tool (ColorTool) https://github.com/microsoft/terminal/releases/tag/1904.29002
 
 ## Resources
 
