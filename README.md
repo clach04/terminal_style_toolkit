@@ -2,20 +2,25 @@
 
 Scripts / tools / config for terminal styling and colors / colours
 
-- [terminal_style_toolkit](#terminal_style_toolkit)
-   * [Notes](#notes)
-      + [Fonts Notes](#fonts-notes)
-   * [Sample files](#sample-files)
-   * [Scripts for running in terminal](#scripts-for-running-in-terminal)
-   * [Conversion tools](#conversion-tools)
-   * [Putty](#putty)
-   * [Resources](#resources)
-      + [Color Codes](#color-codes)
-      + [Color Tools](#color-tools)
-      + [Related projects](#related-projects)
-         - [Non-Terminal](#non-terminal)
-      + [TODO Resources](#todo-resources)
-         - [Color Scheme Collections](#color-scheme-collections)
+- [terminal_style_toolkit](#terminal-style-toolkit)
+  * [Notes](#notes)
+    + [Fonts Notes](#fonts-notes)
+  * [Sample files](#sample-files)
+  * [Scripts for running in terminal](#scripts-for-running-in-terminal)
+  * [Conversion tools](#conversion-tools)
+  * [Putty](#putty)
+  * [Microsoft Windows CMD.exe](#microsoft-windows-cmdexe)
+  * [Resources](#resources)
+    + [Color Codes](#color-codes)
+    + [Color Tools](#color-tools)
+    + [vim](#vim)
+    + [ls colors / dir_colors](#ls-colors---dir-colors)
+    + [Related projects](#related-projects)
+      - [Non-Terminal](#non-terminal)
+    + [TODO Resources](#todo-resources)
+      - [Color Scheme Collections](#color-scheme-collections)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## Notes
 
@@ -98,6 +103,7 @@ See [Putty tools readme](./putty/README.md)
 ## Microsoft Windows CMD.exe
 
 See Color Tool (ColorTool) https://github.com/microsoft/terminal/releases/tag/1904.29002
+The `campbell.ini` color scheme is the Windows 10 CMD out-of-box colors if need to restore to original colors.
 
 ## Resources
 
