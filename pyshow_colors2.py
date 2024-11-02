@@ -224,6 +224,10 @@ def show_raw_ansi_file(f=sys.stdout, num_cols=1, raw_ansi_filename='ls_colors_te
             ##line = '%-30s \n%r\n' % (line, line)  # length specifier includes the ANSI escape sequence so alignment will be off :-(
         f.write(line)
 
+def show_cursor(f=sys.stdout):
+    f.write("$ ")
+    _ = input('')
+
 
 def main(argv=None):
     argv = argv or sys.argv
@@ -244,6 +248,8 @@ def main(argv=None):
     f.write('\n')
 
     show_raw_ansi_file(f)
+
+    show_cursor(f)  # TODO command line flag/argument or environment variable to control this - mostly useful for mintty
 
     return 0
 
