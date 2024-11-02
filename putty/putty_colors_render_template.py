@@ -80,6 +80,9 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
         'scheme-name': scheme_name,
         'scheme-author': scheme_author,
         'scheme-slug': scheme_slug,
+        # TODO scheme-comment, scheme-comment2....
+        # TODO Colour0-comment, Colour1-comment, ...Colour21-comment
+        # TODO Colour0-note, Colour1-note, ...Colour21-note
     }
 
     """Old  code
