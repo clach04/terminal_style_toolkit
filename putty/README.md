@@ -1,6 +1,7 @@
 
 ## Tools
 
+  * batch_build.py - Batch render themes with any template
   * json2putty_reg.py - Render Putty registry file using a json file as input
       * putty_template.json - template json file ready to be filled in with decimal RGB values
   * putty_reg2json.py - Convert a Windows registry export of a single Putty session into a json (theme) to stdout - Clone of putty_reg_file_to_sorted.py (sans reg output) - todo refactor and share code
