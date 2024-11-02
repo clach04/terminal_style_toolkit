@@ -80,10 +80,11 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
         'scheme-name': scheme_name,
         'scheme-author': scheme_author,
         'scheme-slug': scheme_slug,
-        # TODO scheme-comment, scheme-comment2....
-        # TODO Colour0-comment, Colour1-comment, ...Colour21-comment
-        # TODO Colour0-note, Colour1-note, ...Colour21-note
+        'scheme-comment': putty_color_dict.get('scheme-comment', '')
     }
+    for comment_number in range(1, 9 + 1):
+        temp_template_key = 'scheme-comment%d' % comment_number
+        template_dict[temp_template_key] = putty_color_dict.get(temp_template_key, '')
 
     """Old  code
     # Find all Colour0-Colour21 entries which are EXPECTED to contain a comma seperated string of decimal characters (from 0-255)
@@ -121,6 +122,9 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
         template_dict['%s-rgb-r' % color_string_prefix] = r
         template_dict['%s-rgb-g' % color_string_prefix] = g
         template_dict['%s-rgb-b' % color_string_prefix] = b
+        # comments and notes
+        template_dict['%s-comment' % color_string_prefix] = putty_color_dict.get('%s-comment' % color_string_prefix, '')
+        template_dict['%s-note' % color_string_prefix] = putty_color_dict.get('%s-note' % color_string_prefix, '')
 
     for entry in list(template_dict.keys()):
         template_dict[entry.replace('-', '_')] = template_dict[entry]
