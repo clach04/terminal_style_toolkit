@@ -6,10 +6,17 @@
 # library for rendering Putty colornames (json) config files into templates
 
 import json
+import logging
 import os
 import re
 import shlex
 import sys
+
+
+log = logging.getLogger(__name__)
+logging.basicConfig()
+log.setLevel(level=logging.INFO)
+log.setLevel(level=logging.DEBUG)
 
 
 ### start copy from parse pallete tools ###
@@ -119,6 +126,9 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
                 raise NotImplementedError('non decimal comma seperated value (could treat as hex...?)')
             r, g, b = map(int, decimal_rgb.split(','))
             template_dict[hex_lookup_name] = '%02x%02x%02x' % (r, g, b)  # Hex RGB
+        except:
+            log.error('when processing %r', hex_lookup_name)
+            raise  # re-reraise
         template_dict['%s-rgb-r' % color_string_prefix] = r
         template_dict['%s-rgb-g' % color_string_prefix] = g
         template_dict['%s-rgb-b' % color_string_prefix] = b
