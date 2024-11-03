@@ -13,7 +13,8 @@ Sample usage with mintty under Windows:
 
     "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,40 py -3 pyshow_colors2.py
     "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,50 py -3 pyshow_colors2.py
-    "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,65 py -3 pyshow_colors2.py
+    "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,65 python pyshow_colors2.py show_cursor
+    "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,65 py -3 pyshow_colors2.py show_cursor
 
 """
 
@@ -249,7 +250,8 @@ def main(argv=None):
 
     show_raw_ansi_file(f)
 
-    show_cursor(f)  # TODO command line flag/argument or environment variable to control this - mostly useful for mintty
+    if 'show_cursor' in argv:
+        show_cursor(f)  # TODO command line flag/argument or environment variable to control this - mostly useful for mintty
 
     return 0
 
