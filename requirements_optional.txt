@@ -1,0 +1,3 @@
+# pip install -r requirements_optional.txt
+colorama  # only needed for Microsoft Windows CMD
+pywin32  # only needed for taking screenshots under Microsoft Windows

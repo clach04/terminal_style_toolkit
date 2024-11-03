@@ -8,6 +8,7 @@ Scripts / tools / config for terminal styling and colors / colours
   * [Sample files](#sample-files)
   * [Scripts for running in terminal](#scripts-for-running-in-terminal)
   * [Conversion tools](#conversion-tools)
+  * [Misc tools](#misc-tools)
   * [Putty](#putty)
   * [Microsoft Windows CMD.exe](#microsoft-windows-cmdexe)
   * [Resources](#resources)
@@ -87,6 +88,12 @@ In general avoid:
   * pywaltheme2tstk_json.py - convert pywal16 color theme
   * putty/json2putty_reg.py - convert (Putty) json into Putty registry import and html preview - Used to create https://github.com/clach04/putty_themes
   * Also see https://github.com/clach04/themer
+
+## Misc tools
+
+  * mintty_screenshot.py - launch mintty with specific theme and run pyshow_colors2 and then take a screenshot
+    To setup: `pip install -r requirements_optional.txt`
+    Screenshots are in BMP format, strongly recommend converting to PNG for size/space reasons.
 
 ## Putty
 
