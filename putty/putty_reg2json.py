@@ -108,6 +108,7 @@ for line in config_entry:
         template_dict['%s-rgb-b' % color_number] = b
 
 if include_optional_values:
+    # TODO review this, potentially rename to -putty (see mustache template for tstk)
     template_dict.update({
         "Colour0-comment": "Default Foreground",
         "Colour1-comment": "Default Bold Foreground  -- equals to non-bold",
