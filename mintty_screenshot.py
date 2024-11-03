@@ -33,6 +33,7 @@ I've successfully used https://github.com/asweigart/pyautogui in the past for in
 see https://github.com/clach04/skipstone_server/blob/master/wdtv_sim.py
 """
 
+import glob
 import os
 import subprocess
 import sys
@@ -130,7 +131,18 @@ def main(argv=None):
     print('Python %s on %s\n\n' % (sys.version.replace('\n', ' - '), sys.platform))
 
     theme_name = "rosipov"
-    launch_mintty_and_screenshot(theme_name)
+    themes_list = argv[1:]
+    if not themes_list:
+        themes_list = ["rosipov"]  # one of the defaults included/shipped with mintty
+    if themes_list == ["all_user_themes"]:
+        #themes_list = list(glob.glob(os.path.join(os.path.expanduser("~/mintty/themes"), '*')))
+        themes_list = [os.path.basename(x) for x in
+            glob.glob(os.path.join(os.environ["APPDATA"], "mintty", "themes", '*'))
+        ]
+    print(themes_list)
+    for theme_name in themes_list:
+        print(theme_name)
+        launch_mintty_and_screenshot(theme_name)
     return 0
 
 
