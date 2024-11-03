@@ -29,6 +29,8 @@ What this tool does:
  4. Sends quit/exit event
 
 Uses win32 API for grabbing bitmap, consider sending Alt+PrintScreen and grabbing from clipboard instead.
+I've successfully used https://github.com/asweigart/pyautogui in the past for injecting key presses, not tried printscreen
+see https://github.com/clach04/skipstone_server/blob/master/wdtv_sim.py
 """
 
 import os
@@ -77,6 +79,12 @@ def take_screenshot(window_classname=None, window_title="mintty show colors", w=
     print("across:", w)
     print("down:", h)
     """
+
+    move_to_left = 0
+    move_to_top = 0
+    move_to_left = 800  # FIXME hard coded coordinates for my desktop so as to get white border around window..
+    move_to_top = 90
+    win32gui.SetWindowPos(hwnd, win32con.HWND_TOP, move_to_left, move_to_top, w, h, 0)
 
     wDC = win32gui.GetWindowDC(hwnd)
     dcObj = win32ui.CreateDCFromHandle(wDC)
