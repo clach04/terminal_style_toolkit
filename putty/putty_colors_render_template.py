@@ -69,7 +69,9 @@ class UglyMustache:
       * no ... so much more stuff missing! ;-)
     """
     def render(self, template_str, input_dict):
+        #import pdb; pdb.set_trace()
         for key in input_dict:
+            log.debug('rendering %r', key)
             template_str = template_str.replace('{{%s}}' % key, str(input_dict[key]))
         return template_str
 
@@ -167,6 +169,7 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
         template_dict['%s-note' % color_string_prefix] = putty_color_dict.get('%s-note' % color_string_prefix, '')
 
     for entry in list(template_dict.keys()):
+        log.debug('processing %r', entry)
         template_dict[entry.replace('-', '_')] = template_dict[entry]
 
     stache = UglyMustache()
