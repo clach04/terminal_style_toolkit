@@ -16,8 +16,26 @@ import sys
 log = logging.getLogger(__name__)
 logging.basicConfig()
 log.setLevel(level=logging.INFO)
-log.setLevel(level=logging.DEBUG)
+#log.setLevel(level=logging.DEBUG)
 
+
+default_mapping_if_missing = {
+    'Colour0-hex': 'Colour20-hex',  # Default Foreground - default to ANSI White
+    'Colour1-hex': 'Colour0-hex',  # Default Bold Foreground  -- equals to non-bold - default to Default Foreground
+    "Colour2-hex": "Colour6-hex",  # Default Background - default to ANSI Black
+    "Colour3-hex": "Colour2-hex",  # Default Bold Background  -- equals to non-bold - default to Default Background
+    "Colour4-hex": "Colour2-hex",  # Cursor Text -- equals to default background - default to Default Background
+    "Colour5-hex": 'Colour0-hex',  # Cursor Colour -- equals to default foreground - default to Default Foreground
+
+    "Colour7-hex": "Colour6-hex",  # ANSI Black Bright
+    "Colour9-hex": "Colour8-hex",  # ANSI Red Bright
+    "Colour11-hex": "Colour10-hex",  # ANSI Green Bright
+    "Colour13-hex": "Colour12-hex",  # ANSI Yellow Bright
+    "Colour15-hex": "Colour14-hex",  # ANSI Blue Bright
+    "Colour17-hex": "Colour16-hex",  # ANSI Magenta Bright
+    "Colour19-hex": "Colour18-hex",  # ANSI Cyan Bright
+    "Colour21-hex": "Colour20-hex",  # ANSI White Bright
+}
 
 ### start copy from parse pallete tools ###
 
@@ -78,10 +96,15 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
     template_str = f.read()
     f.close()
 
-    scheme_name = putty_color_dict.get('scheme-name', 'unnamed')  # pretty name
-    scheme_author = putty_color_dict.get('scheme-author', 'unnamed')
-    scheme_slug = putty_color_dict.get('scheme-slug', scheme_name)  # short name - TODO slugify if scheme_name used
+    scheme_name = putty_color_dict.get('scheme-name') or 'unnamed'  # pretty name
+    putty_color_dict['scheme-name'] = scheme_name
+    scheme_author = putty_color_dict.get('scheme-author') or 'unnamed'
+    putty_color_dict['scheme-author'] = scheme_author
+    #scheme_slug = putty_color_dict.get('scheme-slug', scheme_name.replace(' ', '_'))  # short name - TODO slugify if scheme_name used
+    scheme_slug = putty_color_dict.get('scheme-slug') or scheme_name  # short name - TODO slugify if scheme_name used
     scheme_slug = scheme_slug.replace(' ', '%20')  # Putty has major issues if a real space is used, recommend using underscore instead but handle this edge case.
+    putty_color_dict['scheme-slug'] = scheme_slug
+    print('%s' % scheme_slug)
     template_dict = {}
     template_dict = {
         'scheme-name': scheme_name,
@@ -117,6 +140,13 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
         hex_lookup_name = '%s-hex' % color_string_prefix
         try:
             hex_rgb = putty_color_dict[hex_lookup_name]  # example; ffffff
+            log.debug('hex_lookup_name=%r , hex_rgb %r', hex_lookup_name, hex_rgb)
+            if hex_rgb == '':
+                copy_color = default_mapping_if_missing[hex_lookup_name]
+                hex_rgb = putty_color_dict[copy_color]
+                log.debug('copy_color=%r , hex_rgb %r', copy_color, hex_rgb)
+                putty_color_dict[hex_lookup_name] = hex_rgb
+                #raise KeyError
             template_dict[hex_lookup_name] = hex_rgb  # use as-is, no validation
             r, g, b = hex2rgb_ints(hex_rgb)
         except KeyError:
