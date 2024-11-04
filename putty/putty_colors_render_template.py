@@ -149,6 +149,14 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
                 log.debug('copy_color=%r , hex_rgb %r', copy_color, hex_rgb)
                 putty_color_dict[hex_lookup_name] = hex_rgb
                 # TODO if no comment or note present, update with a note that this is cloned/copied from another color
+                comment_str = 'SAME-AS %s' % copy_color
+                comment_lookup_name = '%s-comment' % color_string_prefix
+                if putty_color_dict.get(comment_lookup_name):
+                    comment_lookup_name = '%s-note' % color_string_prefix
+                    if not putty_color_dict.get(comment_lookup_name):
+                        putty_color_dict[comment_lookup_name] = comment_str
+                else:
+                    putty_color_dict[comment_lookup_name] = comment_str
                 #raise KeyError
             template_dict[hex_lookup_name] = hex_rgb  # use as-is, no validation
             r, g, b = hex2rgb_ints(hex_rgb)
