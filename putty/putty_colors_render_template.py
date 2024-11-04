@@ -186,7 +186,10 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache', pr
     template_str = f.read()
     f.close()
 
-    template_dict = process_theme(putty_color_dict)
+    if process_dict:
+        template_dict = process_theme(putty_color_dict)
+    else:
+        template_dict = putty_color_dict.copy()
 
     stache = UglyMustache()
     #print('%s' % UglyMustache.render(template_str, template_dict))  # classmethod
