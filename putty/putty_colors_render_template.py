@@ -148,6 +148,7 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
                 hex_rgb = putty_color_dict[copy_color]
                 log.debug('copy_color=%r , hex_rgb %r', copy_color, hex_rgb)
                 putty_color_dict[hex_lookup_name] = hex_rgb
+                # TODO if no comment or note present, update with a note that this is cloned/copied from another color
                 #raise KeyError
             template_dict[hex_lookup_name] = hex_rgb  # use as-is, no validation
             r, g, b = hex2rgb_ints(hex_rgb)

@@ -35,13 +35,15 @@ for filename in glob.glob(os.path.join(directory_name, '*.tstk')):
 
 
     theme_dict = json.loads(x)
-    theme_dict['scheme-name'] = theme_dict.get('scheme-name', 'UNKNOWN')
+    theme_dict['scheme-name'] = theme_dict.get('scheme-name') or 'UNKNOWN'
     session_name = theme_dict['scheme-name']
+    file_name = theme_dict['scheme-slug'].replace('%20', ' ').replace(' ', '_')
 
     # FIXME detect missing colors
     reg_entries = putty_colors_render_template.render_template(theme_dict, template_filename)  # TODO see comment above, add sanity check parameter
     #out_filename = os.path.join(output_dir, session_name) + '_sorted.reg'
-    out_filename = session_name + result_file_extension
+    #out_filename = session_name + result_file_extension
+    out_filename = file_name + result_file_extension
     f = open(out_filename, 'w')
     f.write(reg_entries)
     f.close()
