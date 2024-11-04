@@ -41,12 +41,19 @@ f.close()
 template_filename = template_filename or 'putty_reg.mustache'  # default to Putty registry output
 
 putty_color_dict = json.loads(x)
+template_dict = putty_colors_render_template.process_theme(putty_color_dict)
+"""
 putty_color_dict['scheme-name'] = putty_color_dict.get('scheme-name') or 'UNKNOWN'
 session_name = putty_color_dict['scheme-name']
 file_name = putty_color_dict['scheme-slug'].replace('%20', ' ').replace(' ', '_')
+"""
+template_dict['scheme-name'] = template_dict.get('scheme-name') or 'UNKNOWN'
+session_name = template_dict['scheme-name']
+file_name = template_dict['scheme-slug'].replace('%20', ' ').replace(' ', '_')
 
 # FIXME detect missing colors
-reg_entries = putty_colors_render_template.render_template(putty_color_dict, template_filename)  # TODO see comment above, add sanity check parameter
+#reg_entries = putty_colors_render_template.render_template(putty_color_dict, template_filename)  # TODO see comment above, add sanity check parameter
+reg_entries = putty_colors_render_template.render_template(template_dict, template_filename, process_dict=False)  # TODO see comment above, add sanity check parameter
 if not out_filename:
     #out_filename = os.path.join(output_dir, session_name) + '_sorted.reg'
     out_filename = file_name + '_sorted.reg'  # TODO slug or name?

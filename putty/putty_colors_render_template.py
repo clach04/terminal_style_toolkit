@@ -75,29 +75,9 @@ class UglyMustache:
             template_str = template_str.replace('{{%s}}' % key, str(input_dict[key]))
         return template_str
 
-def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
-    """rendering Putty colornames (json) config files using Mustache template
-
-    @putty_color_dict should contain Colour0-Colour21 entries
-    which are EXPECTED to contain;
-        either
-        hex "Colour0-hex"
-        or decimal "Colour0" a comma seperated string of decimal characters (from 0-255) (just like Windows Putty registry entries)
-
-    @template_filename - filename of template, support variables:
-        Colour0-hex - hex RGB
-        Colour0-rgb-r Colour0-rgb-g Colour0-rgb-b  - decimals for each channel ONLY
-        ...
-        Colour21-hex - hex RGB
-        Colour21-rgb-r Colour21-rgb-g Colour21-rgb-b  - decimals for each channel ONLY
-
+def process_theme(putty_color_dict):
+    """Returns processed theme dict
     """
-    if not os.path.exists(template_filename):
-        template_filename = os.path.join(os.path.dirname(__file__), template_filename)
-    f = open(template_filename)  # just assume this will work, correct text mode and encoding - assume utf-8
-    template_str = f.read()
-    f.close()
-
     scheme_name = putty_color_dict.get('scheme-name') or 'unnamed'  # pretty name
     putty_color_dict['scheme-name'] = scheme_name
     scheme_author = putty_color_dict.get('scheme-author') or 'unnamed'
@@ -180,6 +160,33 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache'):
     for entry in list(template_dict.keys()):
         log.debug('processing %r', entry)
         template_dict[entry.replace('-', '_')] = template_dict[entry]
+
+    return template_dict
+
+def render_template(putty_color_dict, template_filename='putty_reg.mustache', process_dict=True):
+    """rendering Putty colornames (json) config files using Mustache template
+
+    @putty_color_dict should contain Colour0-Colour21 entries
+    which are EXPECTED to contain;
+        either
+        hex "Colour0-hex"
+        or decimal "Colour0" a comma seperated string of decimal characters (from 0-255) (just like Windows Putty registry entries)
+
+    @template_filename - filename of template, support variables:
+        Colour0-hex - hex RGB
+        Colour0-rgb-r Colour0-rgb-g Colour0-rgb-b  - decimals for each channel ONLY
+        ...
+        Colour21-hex - hex RGB
+        Colour21-rgb-r Colour21-rgb-g Colour21-rgb-b  - decimals for each channel ONLY
+
+    """
+    if not os.path.exists(template_filename):
+        template_filename = os.path.join(os.path.dirname(__file__), template_filename)
+    f = open(template_filename)  # just assume this will work, correct text mode and encoding - assume utf-8
+    template_str = f.read()
+    f.close()
+
+    template_dict = process_theme(putty_color_dict)
 
     stache = UglyMustache()
     #print('%s' % UglyMustache.render(template_str, template_dict))  # classmethod
