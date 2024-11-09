@@ -4,6 +4,20 @@
 #
 
 # library for rendering Putty colornames (json) config files into templates
+"""TODO more manual replacements for Putty session names
+consider using web/cgi/html escape libray?
+Not tested non-ascii characters
+
+;                                                      z_`1234567890-=qwertyuiop[]\asdfghjkl;'zxcvbnm,./~!@#$%^&*()_+{}|:"<>?
+;                                                      z_`1234567890-=qwertyuiop[]\  asdfghjkl;'zxcvbnm,./~!@#$%  ^&*  ()_+{}|:"<>?
+[HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY\Sessions\z_`1234567890-=qwertyuiop[]%5Casdfghjkl;'zxcvbnm,./~!@#$%25^&%2A()_+{}|:"<>%3F]
+
+%5C == \
+%20 == ' '
+%2A == *
+%3F == ?
+%25 == %
+"""
 
 import json
 import logging
