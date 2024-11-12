@@ -2,6 +2,7 @@
 ## Tools
 
   * batch_build.py - Batch render themes with any template
+  * any2theme.py - Convert any input theme format and render with any template (or output raw tstk json)
   * json2putty_reg.py - Render Putty registry file using a json file as input
       * putty_template.json - template json file ready to be filled in with decimal RGB values
   * putty_reg2json.py - Convert a Windows registry export of a single Putty session into a json (theme) to stdout - Clone of putty_reg_file_to_sorted.py (sans reg output) - todo refactor and share code
@@ -46,6 +47,11 @@ Assuming there is a color scheme/theme file in json format with Putty colors in 
 
 Picking default reg file exported above `generated\DefaultPuttySettings_sorted.reg`
 
+    py -3 any2theme.py generated\DefaultPuttySettings_sorted.reg -r
+    py -3 any2theme.py generated\DefaultPuttySettings_sorted.reg -t terminal_style_toolkit_json.mustache
+
+or
+
     py -3 putty_reg2json.py generated\DefaultPuttySettings_sorted.reg
     py -3 putty_reg2json.py generated\DefaultPuttySettings_sorted.reg > myfile.json
 
@@ -55,6 +61,12 @@ JSON file is all colors in decimal RGB format (just like Putty Registry settings
 
 Assuming file from above:
 
+    py -3 any2theme.py myfile.json
+    py -3 any2theme.py myfile.json -t putty_reg.mustache
+
+    py -3 any2theme.py generated\DefaultPuttySettings_sorted.reg
+    py -3 any2theme.py generated\DefaultPuttySettings_sorted.reg -t putty_reg.mustache
+
     py -3 json2putty_reg.py myfile.json
 
 Will generate UNKNOWN_sorted.reg with an unknown session name.
@@ -62,8 +74,9 @@ Will generate UNKNOWN_sorted.reg with an unknown session name.
 Passing in additional parameters, template and output filename will allow alternative output.
 For example.
 
+    py -3 any2theme.py myfile.json -t colortable_html.mustache -o out.html
     py -3 json2putty_reg.py myfile.json colortable_html.mustache out.html
 
 Will generate a html preview of the color theme.
 
-THis can be used to preview what existing Putty sessions look like OR preview converted Gogh themes (see parent directory tool goghjson2puttyjson.py).
+This can be used to preview what existing Putty sessions look like OR preview converted Gogh themes (see parent directory tool goghjson2puttyjson.py).
