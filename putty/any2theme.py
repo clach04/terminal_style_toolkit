@@ -41,7 +41,7 @@ def main(argv=None):
     parser = MyParser(
         usage="usage: %prog [options] input_file_name",
         version="%%prog %s" % __version__,
-        description="Process theme colors into a theme for a specific tool/forma",
+        description="Process theme colors into a theme for a specific tool/format",
         epilog="""
 Examples:
 
