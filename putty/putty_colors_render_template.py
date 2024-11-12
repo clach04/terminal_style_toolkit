@@ -209,3 +209,21 @@ def render_template(putty_color_dict, template_filename='putty_reg.mustache', pr
     stache = UglyMustache()
     #print('%s' % UglyMustache.render(template_str, template_dict))  # classmethod
     return stache.render(template_str, template_dict)
+
+def clean_filename(in_slug_name):
+    """Where in_slug_name could be a Putty session name
+    """
+    # TODO generic URL conversion, not just plain us-ascii
+    dumb_mapping = {
+        '%5C': '_',  # == \
+        '%20': '_',  # == ' '
+        '%2A': '_',  # == *
+        '%3F': '_',  # == ?
+        '%25': '_',  # == %
+    }
+
+    out_filename = in_slug_name
+    for thing_to_map in dumb_mapping:
+        out_filename = out_filename.replace(thing_to_map, dumb_mapping[thing_to_map])
+
+    return out_filename

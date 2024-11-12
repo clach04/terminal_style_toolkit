@@ -141,12 +141,9 @@ Examples:
                 color_dict['%s-rgb-g' % color_number] = g
                 color_dict['%s-rgb-b' % color_number] = b
 
-
         f = open(in_filename, 'r')
         x = f.read()
         f.close()
-
-        putty_reg2json
     else:
         raise NotImplementedError('TODO unknown input format %r' % (in_filename_exten,))
 
@@ -156,6 +153,7 @@ Examples:
         if not options.output:
             # default filename to something based on name in the theme and requested file extension
             options.output = template_dict['scheme-slug'] + options.output_extension  # or 'scheme-name'
+            options.output = putty_colors_render_template.clean_filename(options.output)
     if not options.output:
         options.output = '-'  # default to stdout if no output specified
     if options.output != '-':
