@@ -45,10 +45,33 @@ def main(argv=None):
         epilog="""
 Examples:
 
-    any2theme.py...
+
+    # generate Putty registry export
+    py -3 any2theme.py some_theme.tstk --output_extension .reg
+
+    # generate Terminal Style Toolkit json tstk file
+    py -3 any2theme.py some_theme.tstk --output_extension .tstk -t terminal_style_toolkit_json.mustache
+
+    # generate mintty theme file
+    py -3 any2theme.py some_theme.tstk --output_extension "" -t mintty_theme.mustache
+
+    py -3 any2theme.py DefaultPuttySettings_sorted.reg -r
+    py -3 any2theme.py DefaultPuttySettings_sorted.reg -t terminal_style_toolkit_json.mustache
+
+    py -3 any2theme.py myfile.json
+    py -3 any2theme.py myfile.json -t putty_reg.mustache
+
+    py -3 any2theme.py DefaultPuttySettings_sorted.reg
+    py -3 any2theme.py DefaultPuttySettings_sorted.reg -t putty_reg.mustache
+
+    py -3 any2theme.py myfile.json -t colortable_html.mustache -o out.html
+
+    py -3 any2theme.py myfile.json -t mintty_theme.mustache -o myfile
+
 """
     )
-    parser.add_option("-o", "--output", help="Filename to output to (if not set use slug name. TODO what about extension?), use '-' for stdout", default="-")
+    parser.add_option("-o", "--output", help="Filename to output to (if not set use slug name. TODO what about extension?), use '-' for stdout")
+    parser.add_option("--output-extension", "--output_extension", help="Output filename extension, including '.', e.g. .tstk")
     parser.add_option("-r", "--raw", help="Output raw tstk json, unprocess. Ignore template", action="store_true")
     parser.add_option("-t", "--template", help="Filename of template to use")  # default to tstk or putty?
     parser.add_option("-v", "--verbose", help='Verbose output', action="store_true")
@@ -127,6 +150,14 @@ Examples:
     else:
         raise NotImplementedError('TODO unknown input format %r' % (in_filename_exten,))
 
+    template_dict = putty_colors_render_template.process_theme(color_dict, guess_theme_name=os.path.basename(in_filename))  # means sanity check will take place, before raw dump
+    # TODO / FIXME slug-name URI escape processing
+    if options.output_extension is not None:
+        if not options.output:
+            # default filename to something based on name in the theme and requested file extension
+            options.output = template_dict['scheme-slug'] + options.output_extension  # or 'scheme-name'
+    if not options.output:
+        options.output = '-'  # default to stdout if no output specified
     if options.output != '-':
         #raise NotImplementedError('TODO non-stdout')
         f_out = open(options.output, 'w')
@@ -137,8 +168,6 @@ Examples:
         f_out.write('%s' % json.dumps(color_dict, indent=4))  # , sort_keys=True))  # sorting order is not natural :-(
         return 0
 
-    template_dict = putty_colors_render_template.process_theme(color_dict, guess_theme_name=os.path.basename(in_filename))
-    # TODO / FIXME slug-name URI escape processing
 
     if options.raw:
         f_out.write('%s' % json.dumps(template_dict, indent=4))  # NOT sure about this...
@@ -153,6 +182,8 @@ Examples:
     if options.output != '-':
         f_out.close()
 
+    if options.output != '-':
+        print('Wrote to %s' % options.output)
 
     return 0
 
