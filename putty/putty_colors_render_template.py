@@ -4,7 +4,7 @@
 #
 
 # library for rendering Putty colornames (json) config files into templates
-"""TODO more manual replacements for Putty session names
+r"""TODO more manual replacements for Putty session names
 consider using web/cgi/html escape libray?
 Not tested non-ascii characters
 
@@ -89,10 +89,11 @@ class UglyMustache:
             template_str = template_str.replace('{{%s}}' % key, str(input_dict[key]))
         return template_str
 
-def process_theme(putty_color_dict):
+def process_theme(putty_color_dict, guess_theme_name=None):
     """Returns processed theme dict
     """
-    scheme_name = putty_color_dict.get('scheme-name') or 'unnamed'  # pretty name
+    guess_theme_name = guess_theme_name or 'unnamed'
+    scheme_name = putty_color_dict.get('scheme-name') or guess_theme_name  # pretty name
     putty_color_dict['scheme-name'] = scheme_name
     scheme_author = putty_color_dict.get('scheme-author') or 'unnamed'
     putty_color_dict['scheme-author'] = scheme_author
@@ -100,7 +101,7 @@ def process_theme(putty_color_dict):
     scheme_slug = putty_color_dict.get('scheme-slug') or scheme_name  # short name - TODO slugify if scheme_name used
     scheme_slug = scheme_slug.replace(' ', '%20')  # Putty has major issues if a real space is used, recommend using underscore instead but handle this edge case.
     putty_color_dict['scheme-slug'] = scheme_slug
-    print('%s' % scheme_slug)
+    #print('%s' % scheme_slug)  # TODO replace with logging.info(), debug...
     template_dict = {}
     template_dict = {
         'scheme-name': scheme_name,
