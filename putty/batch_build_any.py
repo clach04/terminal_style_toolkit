@@ -46,7 +46,11 @@ Examples:
     template_filename = options.template or 'putty_reg.mustache'  # TODO review default to Putty registry output
     for pattern in args:
         for in_filename in glob.glob(pattern):
-            any2theme.main(['batch_build_any', "--template", template_filename, "--output_extension", options.output_extension, in_filename])
+            try:
+                any2theme.main(['batch_build_any', "--template", template_filename, "--output_extension", options.output_extension, in_filename])
+            except Exception as info:
+                print('Error with %s, %r' % (in_filename, info))
+                raise
 
     return 0
 
