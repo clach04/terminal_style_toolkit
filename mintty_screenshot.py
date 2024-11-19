@@ -4,7 +4,9 @@
 #
 """Windows specific mintty launcher and screenshot taker
 
-Usage note, move mouse pointer out of hte way (e.g. bottom right, left, etc.) this script will not move the mouse.
+Usage note, move mouse pointer out of the way (e.g. bottom right, left, etc.) this script will not move the mouse.
+
+TODO warn if mintty_screenshot.minttyrc missing
 
     (py3venv) C:\code\terminal\terminal_style_toolkit>type mintty_screenshot.minttyrc
     Font=Consolas
@@ -45,6 +47,8 @@ import win32ui
 import win32con
 
 
+pyscript_to_run = os.environ.get('PYSCRIPT_TO_RUN_IN_MINTTY', 'pyshow_colors2.py')
+
 def take_screenshot(window_classname=None, window_title="mintty show colors", w=0, h=0, pause_time_in_seconds=0.5, bmp_filename_name="out.bmp"):
     """
     NOTE if window_classname / window_title are not set (and no window found, get black/empty bmp) so function will pause for pause_time_in_seconds and then try again
@@ -58,34 +62,46 @@ def take_screenshot(window_classname=None, window_title="mintty show colors", w=
 
     time.sleep(pause_time_in_seconds)  # now sleep what we hope is long enough for window to be visible and updated with content
 
+    #import pdb; pdb.set_trace()
+
     win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)
     win32gui.SetForegroundWindow(hwnd)
 
     # Get the window rectangle
+    # does not seem to work correctly on screens with a zoom, e.g. 4K displays
     left, top, right, bottom = win32gui.GetWindowRect(hwnd)
-    """
+    #"""
     print("Left:", left)
     print("Top:", top)
     print("Right:", right)
     print("Bottom:", bottom)
     print("across:", right - left)
     print("down:", bottom - top)
-    """
+    #"""
     # NOTE the below ends up with a border (from desktop/windows underneath the window) :-(
     if not w:
         w = right - left
     if not h:
         h = bottom - top
+
+    # 4k hack test, seems to fix the height and almost the width
+    w = int(w * 1.5)
+    h = int(h * 1.5)
     """
     print("across:", w)
     print("down:", h)
     """
 
+    """
     move_to_left = 0
     move_to_top = 0
     move_to_left = 800  # FIXME hard coded coordinates for my desktop so as to get white border around window..
     move_to_top = 90
+    move_to_left = 400  # FIXME hard coded coordinates for my desktop so as to get white border around window..
+    move_to_top = 20
     win32gui.SetWindowPos(hwnd, win32con.HWND_TOP, move_to_left, move_to_top, w, h, 0)
+    time.sleep(pause_time_in_seconds)  # now sleep what we hope is long enough for window to be visible and updated with content
+    """
 
     wDC = win32gui.GetWindowDC(hwnd)
     dcObj = win32ui.CreateDCFromHandle(wDC)
@@ -101,28 +117,38 @@ def take_screenshot(window_classname=None, window_title="mintty show colors", w=
     cDC.DeleteDC()
     win32gui.DeleteObject(dataBitMap.GetHandle())
     win32gui.ReleaseDC(hwnd, wDC)
+
     win32api.SendMessage(hwnd, win32con.WM_CLOSE, 0, 0)
 
 
 def launch_mintty_and_screenshot(theme_name):
     # Currently theme_name is required, could be optional...
 
+    theme_name_fullpath = theme_name
+    theme_name = os.path.basename(theme_name_fullpath)
     mintty_title_text = "mintty show colors"
     mintty_title_text = "mintty theme: %s" % theme_name
 
-    result = subprocess.run([
+    command_line = [
         r"C:\Program Files\Git\usr\bin\mintty.exe",
         "-c", "mintty_screenshot.minttyrc",
+        "-o", "Font=Consolas",
+        "-o", "FontHeight=10",
+        "-o", "CursorType=block",
+        "-o", "CursorBlinks=no",
         "-o", "ThemeFile=%s" % theme_name,
         "--title", mintty_title_text,
         "--hold", "always",
         "--size", "90,65",  # number characters high, across
-        "py", "-3", "pyshow_colors2.py", "show_cursor"  # command to run
-    ])
+        "py", "-3", pyscript_to_run, "show_cursor"  # command to run
+    ]
+    print('CMD:  %s' % (' '.join(command_line),))
+    result = subprocess.run(command_line)
     print('result %r' % result)  # can detect failure to launch mintty (catch FileNotFoundError:) BUT not python (at least with "--hold", "always")
 
     #take_screenshot(window_title=mintty_title_text)  # TODO slug filename, based on title/theme
-    take_screenshot(window_title=mintty_title_text, bmp_filename_name=theme_name + '.bmp')
+    #take_screenshot(window_title=mintty_title_text, bmp_filename_name=theme_name + '.bmp')
+    take_screenshot(window_title=mintty_title_text, pause_time_in_seconds=1, bmp_filename_name=theme_name + '.bmp')
 
 def main(argv=None):
     if argv is None:
