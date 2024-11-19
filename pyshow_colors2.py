@@ -199,7 +199,7 @@ def show_descriptive_text_example(f=sys.stdout):
     # TODO newline?
 
 
-def show_raw_ansi_file(f=sys.stdout, num_cols=1, raw_ansi_filename='ls_colors_test.txt', description='$ ls --color=always test-dircolors/\n'):
+def show_raw_ansi_file(f=sys.stdout, num_cols=1, raw_ansi_filename=os.path.join(os.path.dirname(__file__), 'ls_colors_test.txt'), description='$ ls --color=always test-dircolors/\n'):
     """
     Example:
         script ls_colors_test.txt
