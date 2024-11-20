@@ -47,7 +47,7 @@ import win32ui
 import win32con
 
 
-pyscript_to_run = os.environ.get('PYSCRIPT_TO_RUN_IN_MINTTY', 'pyshow_colors2.py')
+pyscript_to_run = os.environ.get('PYSCRIPT_TO_RUN_IN_MINTTY', os.path.join(os.path.dirname(__file__), 'pyshow_colors2.py'))
 
 def take_screenshot(window_classname=None, window_title="mintty show colors", w=0, h=0, pause_time_in_seconds=0.5, bmp_filename_name="out.bmp"):
     """
@@ -85,23 +85,26 @@ def take_screenshot(window_classname=None, window_title="mintty show colors", w=
         h = bottom - top
 
     # 4k hack test, seems to fix the height and almost the width
+    """
     w = int(w * 1.5)
     h = int(h * 1.5)
+    """
+
     """
     print("across:", w)
     print("down:", h)
     """
 
-    """
+    #"""
     move_to_left = 0
     move_to_top = 0
     move_to_left = 800  # FIXME hard coded coordinates for my desktop so as to get white border around window..
     move_to_top = 90
-    move_to_left = 400  # FIXME hard coded coordinates for my desktop so as to get white border around window..
-    move_to_top = 20
+    #move_to_left = 400  # FIXME hard coded coordinates for my desktop so as to get white border around window..
+    #move_to_top = 20
     win32gui.SetWindowPos(hwnd, win32con.HWND_TOP, move_to_left, move_to_top, w, h, 0)
-    time.sleep(pause_time_in_seconds)  # now sleep what we hope is long enough for window to be visible and updated with content
-    """
+    #time.sleep(pause_time_in_seconds)  # now sleep what we hope is long enough for window to be visible and updated with content
+    #"""
 
     wDC = win32gui.GetWindowDC(hwnd)
     dcObj = win32ui.CreateDCFromHandle(wDC)
@@ -136,7 +139,7 @@ def launch_mintty_and_screenshot(theme_name):
         "-o", "FontHeight=10",
         "-o", "CursorType=block",
         "-o", "CursorBlinks=no",
-        "-o", "ThemeFile=%s" % theme_name,
+        "-o", "ThemeFile=%s" % theme_name_fullpath,  # might be relative to mintty theme path, or explict full pathname
         "--title", mintty_title_text,
         "--hold", "always",
         "--size", "90,65",  # number characters high, across
@@ -164,10 +167,11 @@ def main(argv=None):
         #themes_list = list(glob.glob(os.path.join(os.path.expanduser("~/mintty/themes"), '*')))
         themes_list = [os.path.basename(x) for x in
             glob.glob(os.path.join(os.environ["APPDATA"], "mintty", "themes", '*'))
-        ]
+        ]  # TODO absolute, full path here for clarity?
     print(themes_list)
     for theme_name in themes_list:
         print(theme_name)
+        # Potentially validate path actually exists, and stop/warn
         launch_mintty_and_screenshot(theme_name)
     return 0
 
