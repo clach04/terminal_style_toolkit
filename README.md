@@ -164,7 +164,8 @@ ANSI colors are often named:
 
 ### vim
 
-  * https://bytefluent.com/vivify/
+  * https://bytefluent.com/vivify/ A ColorScheme Editor for Vim
+  * https://github.com/chrisbra/Colorizer vim plugin to visualize hex color codes
 
 vim themes that only use ANSI (16) colors - https://jeffkreeftmeijer.com/vim-16-color/
   * https://github.com/noahfrederick/vim-noctu
