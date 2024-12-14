@@ -80,10 +80,11 @@ In general avoid:
 
 ## Conversion tools
 
+  * putty/any2theme.py - Convert many input theme formats and render with any template (or output raw tstk json). Input files supported; tstk json, Putty reg files
+  * putty/iterm2_theme2tstk_json.py - convert [iTerm2](https://github.com/gnachman/iTerm2) Color Schemes
   * parse_palette_tools.py - tools for dumping palettes for easier read/conversion
   * alacritty_toml2tstk_json.py - convert alacritty TOML Color Schemes
   * goghjson2puttyjson.py - tools for converting [Gogh JSON](https://github.com/Gogh-Co/Gogh/tree/master/json) Color Schemes from https://github.com/Gogh-Co/Gogh/ into json that Putty conversion tools (json2putty_reg.py) can use
-  * iterm2_theme2tstk_json.py - convert iTerm2 Color Schemes
   * pywaltemplate2puttymustache.py - convert pywal16 template
   * pywaltheme2tstk_json.py - convert pywal16 color theme
   * putty/json2putty_reg.py - convert (Putty) json into Putty registry import and html preview - Used to create https://github.com/clach04/putty_themes
