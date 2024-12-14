@@ -39,7 +39,7 @@ FORMAT_PYWAL = 'pywal'  # pywal16 json - https://github.com/clach04/terminal_sty
 ALL_FORMATS = []
 for name in dir():
     if name.startswith('FORMAT_'):
-        ALL_FORMATS.append(name)
+        ALL_FORMATS.append(locals()[name])
 
 class MyParser(optparse.OptionParser):
     def format_epilog(self, formatter):
@@ -98,6 +98,7 @@ Available Output Templates:
     parser.add_option("-o", "--output", help="Filename to output to (if not set use slug name. TODO what about extension?), use '-' for stdout")
     parser.add_option("--output-extension", "--output_extension", help="Output filename extension, including '.', e.g. .tstk")
     parser.add_option("-i", "--input-format", "--input_format", help="Which format the input file is in (if not set, guess based on file extension)")
+    parser.add_option("-l", "--list-input-formats", "--list_input_formats", help="List which input formats are supported", action="store_true")
     parser.add_option("-r", "--raw", help="Output raw tstk json, unprocess. Ignore template", action="store_true")
     parser.add_option("-t", "--template", help="Filename of template to use")  # default to tstk or putty?
     parser.add_option("-v", "--verbose", help='Verbose output', action="store_true")
@@ -108,6 +109,10 @@ Available Output Templates:
     verbose = options.verbose
     if verbose:
         print('Python %s on %s' % (sys.version.replace('\n', ' - '), sys.platform))
+    if options.list_input_formats:
+        for x in ALL_FORMATS:
+            print('\t%s' % (x,))
+        return 0
     if not args:
         parser.print_usage()
         return 1
