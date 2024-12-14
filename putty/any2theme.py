@@ -10,7 +10,6 @@ TODO
     pywal16 json
     gogh json
     alacritty yaml/yml
-    alacritty toml
 
 """
 
