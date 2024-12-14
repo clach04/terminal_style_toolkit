@@ -177,6 +177,13 @@ vim themes that only use ANSI (16) colors - https://jeffkreeftmeijer.com/vim-16-
       * https://github.com/AlphaTechnolog/pywal.nvim
       * https://github.com/sonjiku/yawnc.nvim
 
+### Midnight Commander
+
+See https://github.com/jan-warchol/selenized/tree/putty/mc
+and https://github.com/jan-warchol/selenized/issues/7
+
+> MC's default color settings assume that terminal's blue will be very dark and suitable for use as background.
+
 ### ls colors / dir_colors
 
   * https://www.systutorials.com/docs/linux/man/5-dir_colors/
@@ -185,6 +192,11 @@ vim themes that only use ANSI (16) colors - https://jeffkreeftmeijer.com/vim-16-
   * https://github.com/nordtheme/dircolors
   * https://github.com/clach04?submit=Search&q=dircolors&tab=stars&type=&sort=&direction=&submit=Search
   * https://github.com/dracula/putty/issues/3 - Unreadable colors/colors with a=rwx permission directory and ls in color mode - default dircolors conflicts with terminal colors
+  * Suggestion from https://github.com/jan-warchol/selenized/tree/putty/dircolors
+    related to https://github.com/jan-warchol/selenized/issues/1
+
+        # fix dircolors for Selenized
+        export LS_COLORS="$LS_COLORS:ow=1;7;34:st=30;44:su=30;41"
 
 ### Related projects
 
