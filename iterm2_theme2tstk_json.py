@@ -74,12 +74,7 @@ mappings = {
 DUMP_UNMAPPED = False
 IGNORE_UNKNOWN_KEYS = True
 
-def main(argv=None):
-    argv = argv or sys.argv
-    #print('Python %s on %s' % (sys.version, sys.platform))
-
-    theme_filename = argv[1]
-
+def read_and_convert_iterm(theme_filename):
     f = open(theme_filename, 'rb')
     iterm_theme = plist_load(f)
     f.close()
@@ -117,6 +112,15 @@ def main(argv=None):
 
     # TODO idea loop through and default missing items?
     color_theme["Colour3-hex"] = color_theme.get("Colour3-hex", color_theme["Colour2-hex"])  # Default Bold Background  -- equals to non-bold
+
+    return color_theme
+
+def main(argv=None):
+    argv = argv or sys.argv
+    #print('Python %s on %s' % (sys.version, sys.platform))
+
+    theme_filename = argv[1]
+    color_theme = read_and_convert_iterm(theme_filename)
 
     #print('%s' % json.dumps(iterm2hex, indent=4, sort_keys=True))  # sorting order is not in natural order :-(
     #print('-'*65)
