@@ -59,13 +59,8 @@ mappings = {
 }
 
 
-def main(argv=None):
-    argv = argv or sys.argv
-    #print('Python %s on %s' % (sys.version, sys.platform))
-
-    theme_filename = argv[1]
-
-    f = open(theme_filename)  # just assume this will work, correct text mode and encoding - assume utf-8
+def read_and_convert_pywal(in_filename):
+    f = open(in_filename)  # just assume this will work, correct text mode and encoding - assume utf-8
     template_str = f.read()
     f.close()
 
@@ -81,6 +76,15 @@ def main(argv=None):
     color_theme["Colour1-hex"] = color_theme.get("Colour1-hex", color_theme["Colour0-hex"])  # Default Bold Foreground  -- equals to non-bold
     color_theme["Colour3-hex"] = color_theme.get("Colour3-hex", color_theme["Colour2-hex"])  # Default Bold Background  -- equals to non-bold
     color_theme["Colour4-hex"] = color_theme.get("Colour4-hex", color_theme["Colour2-hex"])  # Cursor Text -- equals to default background
+
+    return color_theme
+
+def main(argv=None):
+    argv = argv or sys.argv
+    #print('Python %s on %s' % (sys.version, sys.platform))
+
+    theme_filename = argv[1]
+    color_theme = read_and_convert_pywal(theme_filename)
 
     print('%s' % json.dumps(color_theme, indent=4))  # TODO sort, also consider using render
 
