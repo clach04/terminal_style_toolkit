@@ -50,6 +50,13 @@ def main(argv=None):
 Examples:
 
 
+    # generate Putty registry export theme to stdout
+    py -3 any2theme.py some_theme.tstk
+
+    # generate tstk theme to stdout
+    py -3 any2theme.py -t terminal_style_toolkit_json.mustache some_theme.tstk
+    py -3 any2theme.py -t terminal_style_toolkit_json.mustache some_theme.reg
+
     # generate Putty registry export
     py -3 any2theme.py some_theme.tstk --output_extension .reg
 
