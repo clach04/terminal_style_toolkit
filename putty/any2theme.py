@@ -8,11 +8,10 @@
 
 TODO
     pywal16 json
-    iterm2 xml
     gogh json
     alacritty yaml/yml
     alacritty toml
-    
+
 """
 
 import json
