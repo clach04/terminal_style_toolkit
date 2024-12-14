@@ -7,7 +7,6 @@
     tstk
 
 TODO
-    pywal16 json - https://github.com/clach04/terminal_style_toolkit/issues/11
     gogh json
     alacritty yaml/yml
     foot - https://codeberg.org/dnkl/foot/src/branch/master/themes - https://github.com/clach04/terminal_style_toolkit/issues/24
@@ -23,6 +22,7 @@ import alacritty_reader
 import iterm2_reader
 import putty_colors_render_template
 import putty_reg2json
+import pywal_reader
 
 
 version_tuple = __version_info__ = (0, 0, 1, 'dev1')  # pep-440
@@ -33,7 +33,12 @@ FORMAT_TSTK = 'tstk'  # terminal tool kit json
 FORMAT_PUTTY = 'putty'  # Windows registry content as used by PuTTY https://www.chiark.greenend.org.uk/~sgtatham/putty/
 FORMAT_ITERM2 = 'iterm2'  # iTerm2 is a terminal emulator for Mac OS X https://github.com/gnachman/iTerm2
 FORMAT_ALACRITTY_TOML = 'alacritty_toml'  # Alacritty toml  # TODO old YAML
+FORMAT_PYWAL = 'pywal'  # pywal16 json - https://github.com/clach04/terminal_style_toolkit/issues/11
 
+ALL_FORMATS = []
+for name in dir():
+    if name.startswith('FORMAT_'):
+        ALL_FORMATS.append(name)
 
 class MyParser(optparse.OptionParser):
     def format_epilog(self, formatter):
@@ -86,6 +91,7 @@ Examples:
     )
     parser.add_option("-o", "--output", help="Filename to output to (if not set use slug name. TODO what about extension?), use '-' for stdout")
     parser.add_option("--output-extension", "--output_extension", help="Output filename extension, including '.', e.g. .tstk")
+    parser.add_option("-i", "--input-format", "--input_format", help="Which format the input file is in (if not set, guess based on file extension)")
     parser.add_option("-r", "--raw", help="Output raw tstk json, unprocess. Ignore template", action="store_true")
     parser.add_option("-t", "--template", help="Filename of template to use")  # default to tstk or putty?
     parser.add_option("-v", "--verbose", help='Verbose output', action="store_true")
@@ -105,16 +111,17 @@ Examples:
     in_filename_lower = in_filename.lower()
     in_filename_exten = os.path.splitext(in_filename_lower)[-1]
 
-    input_format = None  # TODO override input format on command line
-    if in_filename_lower.endswith('.tstk'):
-        input_format = FORMAT_TSTK
-    elif in_filename_lower.endswith('.reg'):
-        input_format = FORMAT_PUTTY
-    elif in_filename_lower.endswith('.itermcolors'):
-        input_format = FORMAT_ITERM2
-    elif in_filename_lower.endswith('.toml'):
-        input_format = FORMAT_ALACRITTY_TOML
-    # TODO determine format file contents (magic)
+    input_format = options.input_format
+    if not input_format:  # for now use as-is without validation
+        if in_filename_lower.endswith('.tstk'):
+            input_format = FORMAT_TSTK
+        elif in_filename_lower.endswith('.reg'):
+            input_format = FORMAT_PUTTY
+        elif in_filename_lower.endswith('.itermcolors'):
+            input_format = FORMAT_ITERM2
+        elif in_filename_lower.endswith('.toml'):
+            input_format = FORMAT_ALACRITTY_TOML
+        # TODO determine format file contents (magic)
 
     if input_format == FORMAT_TSTK:
         f = open(in_filename, 'r')
@@ -171,8 +178,10 @@ Examples:
         f = open(in_filename, 'r')
         x = f.read()
         f.close()
+    elif input_format == FORMAT_PYWAL:
+        color_dict = pywal_reader.read_and_convert_pywal(in_filename)
     else:
-        raise NotImplementedError('TODO unknown input format %r' % (in_filename_exten,))
+        raise NotImplementedError('Unknown input format %r (%r). Available %r' % (input_format or 'UKNOWN', in_filename_exten, ALL_FORMATS))
 
     template_dict = putty_colors_render_template.process_theme(color_dict, guess_theme_name=os.path.basename(in_filename))  # means sanity check will take place, before raw dump
     # TODO / FIXME slug-name URI escape processing

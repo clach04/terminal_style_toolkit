@@ -80,8 +80,7 @@ In general avoid:
 
 ## Conversion tools
 
-  * putty/any2theme.py - Convert many input theme formats and render with any template (or output raw tstk json). Input files supported; tstk json, Alacritty TOML, iTerm2, Putty reg
-  * putty/pywaltheme2tstk_json.py - convert pywal16 color theme
+  * putty/any2theme.py - Convert many input theme formats and render with any template (or output raw tstk json). Input files supported; tstk json, Alacritty TOML, iTerm2, Putty reg, pywal16
   * parse_palette_tools.py - tools for dumping palettes for easier read/conversion
   * alacritty_yaml2toml.py - rough convert alacritty YAML into alacritty TOML
   * goghjson2puttyjson.py - tools for converting [Gogh JSON](https://github.com/Gogh-Co/Gogh/tree/master/json) Color Schemes from https://github.com/Gogh-Co/Gogh/ into json that Putty conversion tools (json2putty_reg.py) can use
