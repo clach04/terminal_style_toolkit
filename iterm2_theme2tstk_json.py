@@ -107,6 +107,10 @@ def main(argv=None):
                 raise
             print('DEBUG unknown/mapped key %r' % (iterm_color_name,))
             print('DEBUG "%s": "FIXME",' % (iterm_color_name,))
+            continue
+        if tstk_color_name == 'FIXME' and IGNORE_UNKNOWN_KEYS:
+            continue
+            #raise NotImplementedError('unknown/mapped key %r' % (iterm_color_name,))
         if tstk_color_name == 'FIXME' and DUMP_UNMAPPED:
             print('%s\t%s' % (iterm_color_name, tstk_color_name))
         color_theme[tstk_color_name] = rgb_hex
