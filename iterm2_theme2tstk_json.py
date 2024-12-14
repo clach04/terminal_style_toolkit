@@ -68,6 +68,7 @@ mappings = {
     "Ansi 15 Color": "Colour21-hex",
 }
 DUMP_UNMAPPED = False
+IGNORE_UNKNOWN_KEYS = False
 
 def main(argv=None):
     argv = argv or sys.argv
@@ -95,7 +96,11 @@ def main(argv=None):
         #print('%s\t#%02x%02x%02x' % (iterm_color_name, r, g, b))
         iterm2hex[iterm_color_name] = rgb_hex
         #iterm2hex[iterm_color_name] = "FIXME"
-        tstk_color_name = mappings[iterm_color_name]
+        try:
+            tstk_color_name = mappings[iterm_color_name]
+        except KeyError:
+            if not IGNORE_UNKNOWN_KEYS:
+                raise
         if tstk_color_name == 'FIXME' and DUMP_UNMAPPED:
             print('%s\t%s' % (iterm_color_name, tstk_color_name))
         color_theme[tstk_color_name] = rgb_hex
