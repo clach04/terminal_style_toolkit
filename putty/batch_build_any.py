@@ -30,6 +30,7 @@ Examples:
 """
     )
     parser.add_option("--output-extension", "--output_extension", help="Output filename extension")
+    parser.add_option("-i", "--input-format", "--input_format", help="Which format the input file is in (if not set, guess based on file extension)")
     parser.add_option("-t", "--template", help="Filename of template to use")  # default to tstk or putty?
     parser.add_option("-v", "--verbose", help='Verbose output', action="store_true")
     # TODO add force input format option
@@ -46,8 +47,15 @@ Examples:
     template_filename = options.template or 'putty_reg.mustache'  # TODO review default to Putty registry output
     for pattern in args:
         for in_filename in glob.glob(pattern):
+            print('Processing %s ... ' % (in_filename,))
             try:
-                any2theme.main(['batch_build_any', "--template", template_filename, "--output_extension", options.output_extension, in_filename])
+                params = ['batch_build_any', "--template", template_filename, "--output_extension", options.output_extension, ]
+                if options.input_format:
+                    params.append("--input-format")
+                    params.append(options.input_format)
+                params.append(in_filename)
+
+                any2theme.main(params)
             except Exception as info:
                 print('Error with %s, %r' % (in_filename, info))
                 raise
