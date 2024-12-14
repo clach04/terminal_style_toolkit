@@ -19,6 +19,7 @@ import optparse
 import os
 import sys
 
+import alacritty_reader
 import iterm2_reader
 import putty_colors_render_template
 import putty_reg2json
@@ -31,6 +32,7 @@ version = version_string = __version__ = '.'.join(map(str, __version_info__))
 FORMAT_TSTK = 'tstk'  # terminal tool kit json
 FORMAT_PUTTY = 'putty'  # Windows registry content as used by PuTTY https://www.chiark.greenend.org.uk/~sgtatham/putty/
 FORMAT_ITERM2 = 'iterm2'  # iTerm2 is a terminal emulator for Mac OS X https://github.com/gnachman/iTerm2
+FORMAT_ALACRITTY_TOML = 'alacritty_toml'  # Alacritty toml  # TODO old YAML
 
 
 class MyParser(optparse.OptionParser):
@@ -110,6 +112,8 @@ Examples:
         input_format = FORMAT_PUTTY
     elif in_filename_lower.endswith('.itermcolors'):
         input_format = FORMAT_ITERM2
+    elif in_filename_lower.endswith('.toml'):
+        input_format = FORMAT_ALACRITTY_TOML
     # TODO determine format file contents (magic)
 
     if input_format == FORMAT_TSTK:
@@ -121,6 +125,8 @@ Examples:
         color_dict = json.loads(x)
     elif input_format == FORMAT_ITERM2:
         color_dict = iterm2_reader.read_and_convert_iterm(in_filename)
+    elif input_format == FORMAT_ALACRITTY_TOML:
+        color_dict = alacritty_reader.read_and_convert_alacritty_toml(in_filename)
     elif input_format == FORMAT_PUTTY:
         # TODO refactor into putty_reg2json
         config_entry = []
