@@ -44,9 +44,13 @@ mappings = {
 
     "Cursor Color": "Colour5-hex",
     "Cursor Text Color": "Colour4-hex",
+    "Cursor Guide Color": "FIXME",
 
     "Selected Text Color": "FIXME",
     "Selection Color": "FIXME",
+
+    "Badge Color": "FIXME",
+    "Link Color": "FIXME",
 
 
     "Ansi 0 Color": "Colour6-hex",
@@ -68,7 +72,7 @@ mappings = {
     "Ansi 15 Color": "Colour21-hex",
 }
 DUMP_UNMAPPED = False
-IGNORE_UNKNOWN_KEYS = False
+IGNORE_UNKNOWN_KEYS = True
 
 def main(argv=None):
     argv = argv or sys.argv
@@ -101,6 +105,8 @@ def main(argv=None):
         except KeyError:
             if not IGNORE_UNKNOWN_KEYS:
                 raise
+            print('DEBUG unknown/mapped key %r' % (iterm_color_name,))
+            print('DEBUG "%s": "FIXME",' % (iterm_color_name,))
         if tstk_color_name == 'FIXME' and DUMP_UNMAPPED:
             print('%s\t%s' % (iterm_color_name, tstk_color_name))
         color_theme[tstk_color_name] = rgb_hex
