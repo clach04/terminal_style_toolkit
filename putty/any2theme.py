@@ -27,6 +27,10 @@ import putty_reg2json
 version_tuple = __version_info__ = (0, 0, 1, 'dev1')  # pep-440
 version = version_string = __version__ = '.'.join(map(str, __version_info__))
 
+# These really should be enums, but for py2.x want to keep external dependency count low
+FORMAT_TSTK = 'tstk'  # terminal tool kit json
+FORMAT_PUTTY = 'putty'  # Windows registry content as used by Putty
+
 
 class MyParser(optparse.OptionParser):
     def format_epilog(self, formatter):
@@ -91,16 +95,21 @@ Examples:
     in_filename_lower = in_filename.lower()
     in_filename_exten = os.path.splitext(in_filename_lower)[-1]
 
-    # TODO override input format on command line
-    # TODO determine format from filename extension and/or file contents
+    input_format = None  # TODO override input format on command line
     if in_filename_lower.endswith('.tstk'):
+        input_format = FORMAT_TSTK
+    elif in_filename_lower.endswith('.reg'):
+        input_format = FORMAT_PUTTY
+    # TODO determine format file contents (magic)
+
+    if input_format == FORMAT_TSTK:
         f = open(in_filename, 'r')
         x = f.read()
         f.close()
 
         # FIXME assume tstk json input
         color_dict = json.loads(x)
-    elif in_filename_lower.endswith('.reg'):
+    elif input_format == FORMAT_PUTTY:
         # TODO refactor into putty_reg2json
         config_entry = []
         # Simplistic registry file reader, assumes single byte or utf8 (i.e. not UCS2/UTF-16)
