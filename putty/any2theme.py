@@ -9,6 +9,7 @@
 TODO
     gogh json
     alacritty yaml/yml
+    mintty
     foot - https://codeberg.org/dnkl/foot/src/branch/master/themes - https://github.com/clach04/terminal_style_toolkit/issues/24
 
 """
@@ -57,7 +58,6 @@ def main(argv=None):
         epilog="""
 Examples:
 
-
     # generate Putty registry export theme to stdout
     py -3 any2theme.py some_theme.tstk
 
@@ -87,6 +87,12 @@ Examples:
 
     py -3 any2theme.py myfile.json -t mintty_theme.mustache -o myfile
 
+Available Output Templates:
+
+    terminal_style_toolkit_json.mustache    alacritty_nodim_yml.mustache
+    mintty_theme.mustache                   ms_colortool_ini.mustache
+    putty_reg.mustache                      pywal16_json.mustache
+    colortable_html.mustache
 """
     )
     parser.add_option("-o", "--output", help="Filename to output to (if not set use slug name. TODO what about extension?), use '-' for stdout")
