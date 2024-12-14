@@ -7,9 +7,10 @@
     tstk
 
 TODO
-    pywal16 json
+    pywal16 json - https://github.com/clach04/terminal_style_toolkit/issues/11
     gogh json
     alacritty yaml/yml
+    foot - https://codeberg.org/dnkl/foot/src/branch/master/themes - https://github.com/clach04/terminal_style_toolkit/issues/24
 
 """
 
