@@ -27,6 +27,9 @@ Examples:
     py -3 batch_build_any.py --output_extension .tstk -t terminal_style_toolkit_json.mustache *.reg
     py -3 batch_build_any.py --output_extension .tstk -t terminal_style_toolkit_json.mustache *.tstk
     py -3 batch_build_any.py --output_extension "" -t mintty_theme.mustache *.tstk
+    py -3 batch_build_any.py --output_extension .tstk -t terminal_style_toolkit_json.mustache *.itermcolors
+    py -3 batch_build_any.py --output_extension .tstk -t terminal_style_toolkit_json.mustache *.toml
+    py -3 batch_build_any.py --output_extension .tstk -t terminal_style_toolkit_json.mustache -i pywal *.json
 """
     )
     parser.add_option("--output-extension", "--output_extension", help="Output filename extension")
