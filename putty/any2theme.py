@@ -20,6 +20,7 @@ import optparse
 import os
 import sys
 
+import iterm2_reader
 import putty_colors_render_template
 import putty_reg2json
 
@@ -29,7 +30,8 @@ version = version_string = __version__ = '.'.join(map(str, __version_info__))
 
 # These really should be enums, but for py2.x want to keep external dependency count low
 FORMAT_TSTK = 'tstk'  # terminal tool kit json
-FORMAT_PUTTY = 'putty'  # Windows registry content as used by Putty
+FORMAT_PUTTY = 'putty'  # Windows registry content as used by PuTTY https://www.chiark.greenend.org.uk/~sgtatham/putty/
+FORMAT_ITERM2 = 'iterm2'  # iTerm2 is a terminal emulator for Mac OS X https://github.com/gnachman/iTerm2
 
 
 class MyParser(optparse.OptionParser):
@@ -107,6 +109,8 @@ Examples:
         input_format = FORMAT_TSTK
     elif in_filename_lower.endswith('.reg'):
         input_format = FORMAT_PUTTY
+    elif in_filename_lower.endswith('.itermcolors'):
+        input_format = FORMAT_ITERM2
     # TODO determine format file contents (magic)
 
     if input_format == FORMAT_TSTK:
@@ -116,6 +120,8 @@ Examples:
 
         # FIXME assume tstk json input
         color_dict = json.loads(x)
+    elif input_format == FORMAT_ITERM2:
+        color_dict = iterm2_reader.read_and_convert_iterm(in_filename)
     elif input_format == FORMAT_PUTTY:
         # TODO refactor into putty_reg2json
         config_entry = []
