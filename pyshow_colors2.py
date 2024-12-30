@@ -16,6 +16,8 @@ Sample usage with mintty under Windows:
     "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,65 python pyshow_colors2.py show_cursor
     "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,65 py -3 pyshow_colors2.py show_cursor
 
+    "C:\Program Files\Git\usr\bin\mintty.exe" -o Font=Consolas -o FontHeight=10 -o CursorType=block -o CursorBlinks=no --hold always --size 90,65 -o "ThemeFile=NAMEHERE" "--title=NAMEHERE"  py -3 pyshow_colors2.py
+
 """
 
 import os
