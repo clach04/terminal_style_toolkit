@@ -160,6 +160,7 @@ ANSI colors are often named:
   * https://iconscout.com/blog/best-color-palette-generators-for-any-design-project
   * https://colorffy.com/color-scheme-generator?color=257abb
   * https://github.com/clach04/themer
+  * [pastel](https://github.com/sharkdp/pastel) A command-line tool to generate, analyze, convert and manipulate colors
 
 ### vim
 
