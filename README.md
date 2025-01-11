@@ -197,6 +197,7 @@ and https://github.com/jan-warchol/selenized/issues/7
 
         # fix dircolors for Selenized
         export LS_COLORS="$LS_COLORS:ow=1;7;34:st=30;44:su=30;41"
+  * https://github.com/sharkdp/vivid A themeable LS_COLORS generator with a rich filetype datebase
 
 ### Related projects
 
