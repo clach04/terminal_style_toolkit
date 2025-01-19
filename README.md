@@ -240,8 +240,10 @@ Color schemes that pass eyeball test but I'd like to checkout:
 
   * iTerm2
       * https://github.com/mbadolato/iTerm2-Color-Schemes - preview limited
+          * https://iterm2colorschemes.com/
       * https://github.com/wozozo/Hemisu-Light-iTerm2
   * https://github.com/Gogh-Co/Gogh - OK preview, can at least see palette block to easily compare colors
+      * https://gogh-co.github.io/Gogh/
       * 16 color themes that have bright/bold versions of base colors
           * Aci
           * Argonaut
