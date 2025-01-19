@@ -154,6 +154,7 @@ ANSI colors are often named:
 
 ### Color Tools
 
+  * http://colorlab.wickline.org/colorblind/colorlab/ - view colors in web browser and simulate color blindness
   * https://terminal.sexy/
   * https://it-tools.tech/color-converter
       * https://github.com/CorentinTh/it-tools
