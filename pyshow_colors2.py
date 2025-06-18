@@ -25,9 +25,13 @@ import sys
 
 is_win = sys.platform.startswith('win')
 
+# TODO consider skipping for non-Windows entirely
 try:
-    import colorama
-    colorama.just_fix_windows_console()
+    import colorama  # https://github.com/tartley/colorama
+    try:
+        colorama.just_fix_windows_console()  # since v0.4.6
+    except AttributeError:
+        colorama.init()  # all versions, but may have other side-effects
 except ImportError:
     if not os.environ.get('SKIP_WIN_CHECK'):
         if is_win and not ('TERM' in os.environ or 'TERM_PROGRAM' in os.environ):
