@@ -28,8 +28,10 @@ Scripts / tools / config for terminal styling and colors / colours
 When testing out a color scheme/theme consider different use cases:
 
   * `pyshow_colors2.py`
+      * with ls_colors_test.txt
   * ls colors (LSCOLORS, LS_COLORS, `dircolors` and .dir_colors)
       * https://github.com/dracula/putty/issues/3
+      * ls_colors_test.txt
       * https://github.com/joshjon/bliss-dircolors - good starting point
   * neofetch
   * `vim` colorscheme
