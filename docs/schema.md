@@ -13,6 +13,8 @@ See sample.tstk for an example.
 
 sample.tstk is a minor modification to the default builtin Putty theme (which is a dark theme).
 
+Also see empty_template.tstk - this can be used as a place holder when defining a new color scheme from scratch.
+
 
 ## Schema
 
