@@ -8,7 +8,7 @@
 
 TODO
     gogh json
-    alacritty yaml/yml
+    alacritty yaml/yml - note potential file extension conflict with Base16 and Base24
     mintty
     foot - https://codeberg.org/dnkl/foot/src/branch/master/themes - https://github.com/clach04/terminal_style_toolkit/issues/24
 
@@ -19,7 +19,28 @@ import optparse
 import os
 import sys
 
+def fake_module(name):  # Optional import
+    # Fail with a clear message (possibly at an unexpected time) for module access and method/class/function
+    class MissingModule(object):
+        def __getattr__(self, attr):
+            raise ImportError('No module named %s' % name)
+
+        def __bool__(self):  # Not sure __nonzero__ check was working in py3
+            # truthy if checks on this will fail
+            return False
+        __nonzero__ = __bool__
+
+        def __call__(self, *args, **kwargs):
+            raise ImportError('No module named %s' % name)
+    return MissingModule()
+
+
+
 import alacritty_reader
+try:
+    import base24_reader
+except ImportError:
+    base24_reader = fake_module('base24_reader')  # better than; base24_reader = None
 import iterm2_reader
 import putty_colors_render_template
 import putty_reg2json
@@ -35,6 +56,7 @@ FORMAT_PUTTY = 'putty'  # Windows registry content as used by PuTTY https://www.
 FORMAT_ITERM2 = 'iterm2'  # iTerm2 is a terminal emulator for Mac OS X https://github.com/gnachman/iTerm2
 FORMAT_ALACRITTY_TOML = 'alacritty_toml'  # Alacritty toml  # TODO old YAML
 FORMAT_PYWAL = 'pywal'  # pywal16 json - https://github.com/clach04/terminal_style_toolkit/issues/11
+FORMAT_BASE24 = 'base24'  # Base24 https://github.com/tinted-theming/base24/blob/main/styling.md - superset of Base16
 
 ALL_FORMATS = []
 for name in dir():
@@ -132,6 +154,8 @@ Available Output Templates:
             input_format = FORMAT_ITERM2
         elif in_filename_lower.endswith('.toml'):
             input_format = FORMAT_ALACRITTY_TOML
+        elif in_filename_lower.endswith('.yaml'):  # See https://github.com/tinted-theming/schemes/tree/spec-0.11/base24
+            input_format = FORMAT_BASE24
         # TODO determine format file contents (magic)
 
     if input_format == FORMAT_TSTK:
@@ -145,6 +169,8 @@ Available Output Templates:
         color_dict = iterm2_reader.read_and_convert_iterm(in_filename)
     elif input_format == FORMAT_ALACRITTY_TOML:
         color_dict = alacritty_reader.read_and_convert_alacritty_toml(in_filename)
+    elif input_format == FORMAT_BASE24:
+        color_dict = base24_reader.read_and_convert_base24_yaml(in_filename)
     elif input_format == FORMAT_PUTTY:
         # TODO refactor into putty_reg2json
         config_entry = []
