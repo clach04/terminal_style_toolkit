@@ -1,0 +1,57 @@
+{
+    "####": "JSON template, result can be ran through https://github.com/clach04/terminal_style_toolkit/ tools",
+    "scheme-name": "sample ansi8",
+    "scheme-author": "clach04",
+    "scheme-slug": "sample_ansi8",
+    "scheme-comment":  "8 ANSI colors - This is 7 of the the default Putty ANSI colors with a modified blue - no bright colors or foreground, background, cursor, etc. are present",
+    "scheme-comment1": "",
+    "scheme-comment2": "",
+    "scheme-comment3": "",
+    "scheme-comment4": "",
+    "scheme-comment5": "",
+    "scheme-comment6": "",
+    "scheme-comment7": "",
+    "scheme-comment8": "",
+    "scheme-comment9": "",
+
+    "#Colour6-putty": "ANSI Black - 30m / 40m",
+    "Colour6-comment": "",
+    "Colour6-note": "",
+    "Colour6-hex": "000000",
+
+    "#Colour8-putty": "ANSI Red - 31m / 41m",
+    "Colour8-comment": "",
+    "Colour8-note": "",
+    "Colour8-hex": "bb0000",
+
+    "#Colour10-putty": "ANSI Green - 32m / 42m",
+    "Colour10-comment": "",
+    "Colour10-note": "",
+    "Colour10-hex": "00bb00",
+
+    "#Colour12-putty": "ANSI Yellow - 33m / 43m",
+    "Colour12-comment": "",
+    "Colour12-note": "",
+    "Colour12-hex": "bbbb00",
+
+    "#Colour14-putty": "ANSI Blue - 34m / 44m",
+    "Colour14-comment": "",
+    "Colour14-note": "",
+    "Colour14-hex": "4a4aff",
+
+    "#Colour16-putty": "ANSI Magenta - 35m / 45m",
+    "Colour16-comment": "",
+    "Colour16-note": "",
+    "Colour16-hex": "bb00bb",
+
+    "#Colour18-putty": "ANSI Cyan - 36m / 46m",
+    "Colour18-comment": "",
+    "Colour18-note": "",
+    "Colour18-hex": "00bbbb",
+
+    "#Colour20-putty": "ANSI White - 37m / 47m",
+    "Colour20-comment": "",
+    "Colour20-note": "",
+    "Colour20-hex": "bbbbbb"
+
+}
