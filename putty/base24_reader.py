@@ -75,6 +75,8 @@ def reverse_mapping():
 
 def read_and_convert_base24_yaml(in_filename):
     color_theme = {}
+    color_theme["scheme-comment"] = "Base24 import of %s" % (in_filename.replace('"', "'"))
+    #color_theme["scheme-slug"] = TODO?
 
     f = open(in_filename)  # just assume this will work, correct text mode and encoding - assume utf-8
     #base24_scheme = yaml.safe_load(f)
@@ -101,7 +103,7 @@ def read_and_convert_base24_yaml(in_filename):
     for entry_name in mapping:
         color_theme[mapping[entry_name]] = base24_scheme[entry_name]
 
-    # base00-base07 - just use, ias-is? Could need reverse mapping depending on "variant" - at least for light (TODO list and reverse....)
+    # base00-base07 - just use, as-is? Could need reverse mapping depending on "variant" - at least for light (TODO list and reverse....)
     #base24_scheme["variant"] == "dark"
     for entry_name in color_mapping:
         color_theme[color_mapping[entry_name]] = base24_scheme["palette"][entry_name]
