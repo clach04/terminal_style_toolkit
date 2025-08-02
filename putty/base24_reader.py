@@ -3,6 +3,9 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 """(Partially?) convert a Base24 color scheme/theme YAML file into json (to stdout) that can be used with tstk
+
+Base24 spec https://github.com/tinted-theming/base24/blob/main/styling.md
+Also see Base16 spec - https://github.com/tinted-theming/home/blob/main/styling.md
 """
 
 import os
@@ -76,7 +79,6 @@ def reverse_mapping():
 def read_and_convert_base24_yaml(in_filename):
     color_theme = {}
     color_theme["scheme-comment"] = "Base24 import of %s" % (in_filename.replace('"', "'"))
-    #color_theme["scheme-slug"] = TODO?
 
     f = open(in_filename)  # just assume this will work, correct text mode and encoding - assume utf-8
     #base24_scheme = yaml.safe_load(f)
@@ -88,6 +90,10 @@ def read_and_convert_base24_yaml(in_filename):
     #print('%s' % json.dumps(base24_scheme, indent=4)) 
     #print('-' * 65)
     assert base24_scheme["system"] == "base24"  # TODO make this an if, asserts can be optimized away...
+
+    if base24_scheme.get("slug"):
+        color_theme["scheme-slug"] = base24_scheme["slug"]  # Base16, not expected to see this for Base24
+    # else default using regular slug generation, outside of this function
 
     """
     # DEBUG init - make it easier to spot unfilled in colors
