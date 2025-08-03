@@ -38,7 +38,7 @@ def main(argv=None):
         color_dict = json.loads(x)
 
         putty_colors_render_template.print_colors_terminal(color_dict)
-        print("  %s : %s" % (filename, color_dict.get("scheme-name", "MISSING NAME")))
+        print("  %s : %s" % (os.path.basename(filename), color_dict.get("scheme-name", "MISSING NAME")))
 
     print('%d files' % len(filenames))
 
