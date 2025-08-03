@@ -83,7 +83,7 @@ def read_yaml_file(in_filename):
     f.close()
     return result_dict
 
-def convert_base24_yaml(base24_scheme, color_theme=None):
+def convert_base24_to_tstk(base24_scheme, color_theme=None):
     color_theme = color_theme or {}
     # TODO copy
     color_theme["scheme-comment1"] = "Base24 import of %s" % (base24_scheme.get("name", base24_scheme.get("scheme", "MISSING NAME")),)
@@ -132,7 +132,7 @@ def read_and_convert_base24_yaml(in_filename):
     color_theme["scheme-comment"] = "Base24 import of %s" % (in_filename.replace('"', "'"))
 
     base24_scheme = read_yaml_file(in_filename)
-    color_theme = convert_base24_yaml(base24_scheme, color_theme=color_theme)
+    color_theme = convert_base24_to_tstk(base24_scheme, color_theme=color_theme)
     return color_theme
 
 def main(argv=None):
