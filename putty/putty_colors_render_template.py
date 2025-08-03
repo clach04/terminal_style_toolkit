@@ -144,6 +144,13 @@ def print_colors_terminal(color_dict):
         if not hex_rgb.startswith('#'): hex_rgb = '#' + hex_rgb
         color_print(hex_rgb)
 
+def read_json_file(in_filename):
+    f = open(in_filename)  # just assume this will work, correct text mode and encoding - assume utf-8
+    x = f.read()
+    f.close()
+    result_dict = json.loads(x)
+    return result_dict
+
 ### start copy from parse pallete tools ###
 
 def unhex(hex_str):
