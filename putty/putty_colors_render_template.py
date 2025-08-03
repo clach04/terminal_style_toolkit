@@ -59,7 +59,8 @@ default_mapping_if_missing.update(default_mapping_ansi_to_bright)
 
 
 def derive_21_from_8_bright_as_copy(color_dict):
-    # TODO copy color_dict to avoid side effects
+    # copy color_dict to avoid side effects
+    color_dict = copy.copy(color_dict)
 
     for color_number in range(21 +1):
         color_string_prefix = 'Colour%d' % color_number
