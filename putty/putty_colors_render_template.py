@@ -19,6 +19,7 @@ Not tested non-ascii characters
 %25 == %
 """
 
+import copy
 import json
 import logging
 import os
@@ -33,14 +34,16 @@ log.setLevel(level=logging.INFO)
 #log.setLevel(level=logging.DEBUG)
 
 
-default_mapping_if_missing = {
+default_mapping_ansi_bg_fg = {
     'Colour0-hex': 'Colour20-hex',  # Default Foreground - default to ANSI White
     'Colour1-hex': 'Colour0-hex',  # Default Bold Foreground  -- equals to non-bold - default to Default Foreground
     "Colour2-hex": "Colour6-hex",  # Default Background - default to ANSI Black
     "Colour3-hex": "Colour2-hex",  # Default Bold Background  -- equals to non-bold - default to Default Background
     "Colour4-hex": "Colour2-hex",  # Cursor Text -- equals to default background - default to Default Background
     "Colour5-hex": 'Colour0-hex',  # Cursor Colour -- equals to default foreground - default to Default Foreground
+}
 
+default_mapping_ansi_to_bright = {
     "Colour7-hex": "Colour6-hex",  # ANSI Black Bright
     "Colour9-hex": "Colour8-hex",  # ANSI Red Bright
     "Colour11-hex": "Colour10-hex",  # ANSI Green Bright
@@ -50,6 +53,9 @@ default_mapping_if_missing = {
     "Colour19-hex": "Colour18-hex",  # ANSI Cyan Bright
     "Colour21-hex": "Colour20-hex",  # ANSI White Bright
 }
+
+default_mapping_if_missing = copy.copy(default_mapping_ansi_bg_fg)
+default_mapping_if_missing.update(default_mapping_ansi_to_bright)
 
 ### start copy from parse pallete tools ###
 
