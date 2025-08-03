@@ -27,7 +27,32 @@ import re
 import shlex
 import sys
 
+try:
+    import colorama  # only needed for Windows CMD
+except ImportError:
+    colorama = None
+
 import color_ops
+
+is_py3 = sys.version_info >= (3,)
+is_win = sys.platform.startswith('win')
+
+guess_color_available = colorama or (not is_win) or (is_win and ('TERM' in os.environ or 'TERM_PROGRAM' in os.environ))
+use_color = False
+if os.environ.get('NO_COLOR') or not sys.stdout.isatty():  # NO_COLOR https://no-color.org/
+    # skips processing for doing highlighting
+    use_color = False
+elif colorama:
+    # TODO only do below for Windows? looks like it may be a NOOP so may not need a windows check
+    try:
+        colorama.just_fix_windows_console()
+    except AttributeError:
+        # older version, for example '0.4.4'
+        colorama.init()
+    use_color = True
+else:
+    if guess_color_available:
+        use_color = True
 
 
 log = logging.getLogger(__name__)
@@ -85,6 +110,7 @@ def derive_21_from_8_bright(color_dict, color_function=color_ops.foxyfy, bright_
     # TODO (if not set,) set "scheme-comment" (or "scheme-comment1-9" - which ever is the first empty slot) with "generated from ...." note
     return color_dict
 
+
 def derive_21_from_8_bright_as_copy(color_dict):
     # copy color_dict to avoid side effects
     color_dict = copy.copy(color_dict)
@@ -103,6 +129,20 @@ def derive_21_from_8_bright_as_copy(color_dict):
     # TODO (if not set,) set "scheme-comment" (or "scheme-comment1-9" - which ever is the first empty slot) with "generated from ...." note
     return color_dict
 
+
+def color_print(colourHex):
+    '''Print a block/space in a hex colour, without a newline at the ends'''
+    colour = colourHex[1:]
+    print("\033[48;2;"+ ";".join([str(int(colour[0:2], 16)),
+    str(int(colour[2:4], 16)), str(int(colour[4:6], 16))]) + "m  \033[0m", end="")
+
+def print_colors_terminal(color_dict):
+    for color_number in range(21 +1):
+        color_string_prefix = 'Colour%d' % color_number
+        hex_lookup_name = '%s-hex' % color_string_prefix
+        hex_rgb = color_dict[hex_lookup_name]
+        if not hex_rgb.startswith('#'): hex_rgb = '#' + hex_rgb
+        color_print(hex_rgb)
 
 ### start copy from parse pallete tools ###
 
