@@ -88,6 +88,7 @@ def read_and_convert_base24_yaml(in_filename):
     color_theme["scheme-comment"] = "Base24 import of %s" % (in_filename.replace('"', "'"))
 
     base24_scheme = read_yaml_file(in_filename)
+    color_theme["scheme-comment1"] = "Base24 import of %s" % (base24_scheme.get("name", base24_scheme.get("scheme", "MISSING NAME")),)
 
     #print(base24_scheme)
     #print('-' * 65)
