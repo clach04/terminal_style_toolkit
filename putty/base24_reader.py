@@ -76,14 +76,18 @@ def reverse_mapping():
 
     return reverse_mapping_dict
 
+def read_yaml_file(in_filename):
+    f = open(in_filename)  # just assume this will work, correct text mode and encoding - assume utf-8
+    #result_dict = yaml.safe_load(f)
+    result_dict = yaml.load(f, Loader=yaml.BaseLoader)  # resolve the Norway problem
+    f.close()
+    return result_dict
+
 def read_and_convert_base24_yaml(in_filename):
     color_theme = {}
     color_theme["scheme-comment"] = "Base24 import of %s" % (in_filename.replace('"', "'"))
 
-    f = open(in_filename)  # just assume this will work, correct text mode and encoding - assume utf-8
-    #base24_scheme = yaml.safe_load(f)
-    base24_scheme = yaml.load(f, Loader=yaml.BaseLoader)  # resolve the Norway problem
-    f.close()
+    base24_scheme = read_yaml_file(in_filename)
 
     #print(base24_scheme)
     #print('-' * 65)
