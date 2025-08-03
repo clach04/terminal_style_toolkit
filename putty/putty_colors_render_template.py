@@ -57,6 +57,25 @@ default_mapping_ansi_to_bright = {
 default_mapping_if_missing = copy.copy(default_mapping_ansi_bg_fg)
 default_mapping_if_missing.update(default_mapping_ansi_to_bright)
 
+
+def derive_21_from_8_bright_as_copy(color_dict):
+    # TODO copy color_dict to avoid side effects
+
+    for color_number in range(21 +1):
+        color_string_prefix = 'Colour%d' % color_number
+        # ONLY check for hex
+        hex_lookup_name = '%s-hex' % color_string_prefix
+        hex_rgb = color_dict.get(hex_lookup_name)
+        if not hex_rgb:
+            copy_color_name = default_mapping_if_missing[hex_lookup_name]
+            color_dict[hex_lookup_name] = color_dict[copy_color_name]
+            comment_lookup_name = '%s-comment' % color_string_prefix
+            color_dict[comment_lookup_name] = "Copied from %s" % (copy_color_name,)
+
+    # TODO (if not set,) set "scheme-comment" (or "scheme-comment1-9" - which ever is the first empty slot) with "generated from ...." note
+    return color_dict
+
+
 ### start copy from parse pallete tools ###
 
 def unhex(hex_str):
