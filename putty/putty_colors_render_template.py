@@ -27,6 +27,8 @@ import re
 import shlex
 import sys
 
+import color_ops
+
 
 log = logging.getLogger(__name__)
 logging.basicConfig()
@@ -57,6 +59,31 @@ default_mapping_ansi_to_bright = {
 default_mapping_if_missing = copy.copy(default_mapping_ansi_bg_fg)
 default_mapping_if_missing.update(default_mapping_ansi_to_bright)
 
+
+# TODO review lighten process, both function and default value
+def derive_21_from_8_bright(color_dict, color_function=color_ops.foxyfy, bright_amount=1):
+    # copy color_dict to avoid side effects
+    color_dict = copy.copy(color_dict)
+
+    for hex_lookup_name in default_mapping_ansi_bg_fg:
+        hex_rgb = color_dict.get(hex_lookup_name)
+        if not hex_rgb:
+            copy_color_name = default_mapping_ansi_bg_fg[hex_lookup_name]
+            color_dict[hex_lookup_name] = color_dict[copy_color_name]
+            comment_lookup_name = hex_lookup_name.replace('-hex', '-comment')
+            color_dict[comment_lookup_name] = "Copied from %s" % (copy_color_name,)
+
+    for hex_lookup_name in default_mapping_ansi_to_bright:
+        hex_rgb = color_dict.get(hex_lookup_name)
+        if not hex_rgb:
+            copy_color_name = default_mapping_ansi_to_bright[hex_lookup_name]
+            color_dict[hex_lookup_name] = color_function(color_dict[copy_color_name], bright_amount)
+            # TODO if color_dict[hex_lookup_name] == color_dict[copy_color_name]: darken instead? potentially swap?
+            comment_lookup_name = hex_lookup_name.replace('-hex', '-comment')
+            color_dict[comment_lookup_name] = "Generated from %s" % (copy_color_name,)
+
+    # TODO (if not set,) set "scheme-comment" (or "scheme-comment1-9" - which ever is the first empty slot) with "generated from ...." note
+    return color_dict
 
 def derive_21_from_8_bright_as_copy(color_dict):
     # copy color_dict to avoid side effects

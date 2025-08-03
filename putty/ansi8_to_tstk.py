@@ -31,7 +31,8 @@ def main(argv=None):
     f.close()
     color_dict = json.loads(x)
 
-    derive_21_from_8 = putty_colors_render_template.derive_21_from_8_bright_as_copy  # TODO implement a brighten/lighten generator
+    #derive_21_from_8 = putty_colors_render_template.derive_21_from_8_bright_as_copy  # simply copy to "bright" colors
+    derive_21_from_8 = putty_colors_render_template.derive_21_from_8_bright  # base bright colors on base colors
     color_theme = derive_21_from_8(color_dict)
     #print('%s' % json.dumps(color_theme, indent=4))  # TODO sort, also consider using render - or use any2theme.py
     print('%s' % json.dumps(color_theme, indent=4, sort_keys=True))  # TODO consider using render - or use any2theme.py
