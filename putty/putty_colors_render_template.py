@@ -130,11 +130,17 @@ def derive_21_from_8_bright_as_copy(color_dict):
     return color_dict
 
 
-def color_print(colourHex):
+BRIGHT_PINK_MISSING_INDICATOR = "FFA8EB"
+def color_print(colourHex, bad_color=BRIGHT_PINK_MISSING_INDICATOR):
     '''Print a block/space in a hex colour, without a newline at the ends'''
     colour = colourHex[1:]
-    print("\033[48;2;"+ ";".join([str(int(colour[0:2], 16)),
-    str(int(colour[2:4], 16)), str(int(colour[4:6], 16))]) + "m  \033[0m", end="")
+    #print(colour)
+    #print(colour + ' - ' + repr(hex2rgb_ints(colour, bad_color='ee0000')))
+    r, g, b = hex2rgb_ints(colour, bad_color=bad_color)
+    #print(colour[0:2] + ' - ', end="")
+    #print(int(colour[0:2], 16))
+    #print("\033[48;2;"+ ";".join([str(r), str(g), str(b)]) + "m  \033[0m", end="")
+    print("\033[48;2;" + ("%d;%d;%d" % (r, g, b)) + "m  \033[0m", end="")
 
 def print_colors_terminal(color_dict):
     for color_number in range(21 +1):
@@ -162,15 +168,21 @@ def unhex(hex_str):
     """
     return int(hex_str, 16)
 
-def hex2rgb_ints(hex_str):
+def hex2rgb_ints(hex_str, bad_color=None):
     """Given '#123456' return (18, 52, 86)
+    If bad_color (hex string, withOUT leading # or 0x) is specified, use that if fail to generate color due to non-hex values
     """
     hex_str = hex_str.strip().replace('#', '')  # remove '#'
     hex_str = hex_str.strip().replace('0x', '')  # remove '0x'
     if len(hex_str) != len('123456'):
         raise NotImplementedError('input strings of length %d %r' % (len(hex_str), hex_str))
 
-    return unhex(hex_str[0:2]), unhex(hex_str[2:4]), unhex(hex_str[4:6])
+    try:
+        result = unhex(hex_str[0:2]), unhex(hex_str[2:4]), unhex(hex_str[4:6])
+    except ValueError:
+        result = unhex(bad_color[0:2]), unhex(bad_color[2:4]), unhex(bad_color[4:6])
+
+    return result
 
 ### end copy ###
 
