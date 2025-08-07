@@ -45,7 +45,7 @@ def main(argv=None):
 
     for filename in filenames:
 
-        f = open(filename)  # just assume this will work, correct text mode and encoding - assume utf-8
+        f = open(filename, encoding='utf8')  # note py3 only...?
         #base24_scheme = yaml.safe_load(f)
         base24_scheme = yaml.load(f, Loader=yaml.BaseLoader)  # resolve the Norway problem
         f.close()
