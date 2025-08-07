@@ -129,30 +129,33 @@ ColorTool can use:
 
 ### Color Codes
 
-ANSI colors are often named:
+ANSI colors are numbered:
 
-    0    black
-    1    dark red
-    2    dark green
-    3    brown
-    4    dark blue
-    5    dark magenta
-    6    dark cyan
+    0	black
+    1	red
+    2	green
+    3	yellow
+    4	blue
+    5	magenta
+    6	cyan
+    7	white
 
-    7    light grey
-    8    dark grey
-    9    red
-    10   green
-    11   yellow
-    12   blue
-    13   magenta
-    14   cyan
-    15   white
+    8	bright black
+    9	bright red
+    10	bright green
+    11	bright yellow
+    12	bright blue
+    13	bright magenta
+    14	bright cyan
+    15	bright white
 
   * https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit
+  * https://jakob-bagterp.github.io/colorist-for-python/ansi-escape-codes/standard-16-colors/
+  * https://hexdocs.pm/color_palette/color_table.html
   * https://github.com/termstandard/colors
   * https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences/75985833#75985833
     useful table of codes
+  * https://github.com/Gbox4/ansicodes - interactive web page for generating ANSI escape codes
 
 ### Color Tools
 
@@ -214,7 +217,7 @@ and https://github.com/jan-warchol/selenized/issues/7
   * https://github.com/monolifed/scite_theme scite themes from base16 config
   * https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/tools
   * https://github.com/Gogh-Co/Gogh/tree/master/tools
-  * Base-16 and derivatives
+  * Base-16/Base16 and derivatives
   * https://github.com/worron/ACYLS - Any Color You Like Simple icon pack
   * Windows Color Pickers
       * http://instant-eyedropper.com/
