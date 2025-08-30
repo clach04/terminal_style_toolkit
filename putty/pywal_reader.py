@@ -23,6 +23,8 @@ Sample Usage:
     py -3 putty/json2putty_reg.py sunset_dream_tstk.json putty/terminal_style_toolkit_json.mustache sunset_dream.tstk
     echo edit sunset_dream.tstk - see above notes
     py -3 putty/json2putty_reg.py sunset_dream.tstk
+    python putty\any2theme.py test.tstk -t putty\base24_scheme.mustache > base24_test.yaml
+    python putty\console_view_base24.py  base24_test.yaml
     py -3 putty/json2putty_reg.py sunset_dream.tstk putty/colortable_html.mustache sunset_dream.html
 
 pywal16 - https://github.com/eylles/pywal16.git
