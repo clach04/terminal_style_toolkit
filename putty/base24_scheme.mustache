@@ -1,36 +1,44 @@
 system: "base24"
 name: "{{scheme-name}}"
 author: "{{scheme-author}}"
+description: "{{scheme-comment}}"
 variant: "FIXME"
 #variant: "light"
 #variant: "dark"
+# Expect order of base00-base07 (dark to light versus light to dark) to differ depending on variant
+# Consider replacing FIXME with; "#FFA8EB"  # bright pink - as a not filled-in/defined color marker
 palette:
-  base00: "{{Colour2-hex}}"
-  base01: "{{Colour6-hex}}"
-  base02: "{{Colour7-hex}}"
-  base03: "{{FIXME}}"  # TODO review
-  base04: "{{FIXME}}"  # TODO review
-  base05: "{{Colour0-hex}}"
-  base06: "{{Colour20-hex}}"
-  base07: "{{Colour21-hex}}"
+  # https://github.com/tinted-theming/base24/blob/main/styling.md
+  # https://github.com/tinted-theming/home/blob/main/styling.md
+  # https://github.com/chriskempson/base16/blob/main/styling.md
+  base00: "#{{Colour2-hex}}"  # Default Background  # FIXME/TODO use color comment/note {{Colour2-comment}} {{Colour2-note}} - etc.
+  base01: "#{{Colour6-hex}}"  # Darker Background (Darkest Gray) (Used for status bars, line number and folding marks)
+  base02: "#{{Colour7-hex}}"  # Selection Background (Bright Black)
+  base03: "#{{FIXME}}"  # TODO review  # Comments, Invisibles, Line Highlighting (Grey)
+  base04: "#{{FIXME}}"  # TODO review  # Dark/Light Foreground (Used for status bars) (Light Grey)
+  base05: "#{{Colour0-hex}}"  # Default Foreground, Caret, Delimiters, Operators (Foreground)
+  base06: "#{{Colour20-hex}}"  # Dark Foreground (Not often used) (White)
+  base07: "#{{Colour21-hex}}"  # Dark Background (Not often used) (Bright White)
 
-  base08: "{{Colour8-hex}}"
-  base09: "{{FIXME}}"  # TODO review - Orange
-  base0A: "{{Colour12-hex}}"
-  base0B: "{{Colour10-hex}}"
-  base0C: "{{Colour18-hex}}"
-  base0D: "{{Colour14-hex}}"
-  base0E: "{{Colour16-hex}}"
-  base0F: "{{FIXME}}"  # TODO review - Dark Red or Brown, could derive dark red from base08
+  # ANSI8 (without Black/White) + 2 (Orange + Dark Red/Brown)
+  base08: "#{{Colour8-hex}}"   # Red
+  base09: "#{{FIXME}}"  # TODO review - Orange
+  base0A: "#{{Colour12-hex}}"  # Yellow
+  base0B: "#{{Colour10-hex}}"  # Green
+  base0C: "#{{Colour18-hex}}"  # Aqua / Cyan
+  base0D: "#{{Colour14-hex}}"  # Blue
+  base0E: "#{{Colour16-hex}}"  # Purple / Magenta
+  base0F: "#{{FIXME}}"  # TODO review - Dark Red or Brown, could derive dark red from base08
 
-  base10: "{{FIXME}}"  # TODO review - consider deriving based on base00
-  base11: "{{FIXME}}"  # TODO review - consider deriving based on base00
-  base12: "{{Colour9-hex}}"
-  base13: "{{Colour13-hex}}"
-  base14: "{{Colour11-hex}}"
-  base15: "{{Colour19-hex}}"
-  base16: "{{Colour15-hex}}"
-  base17: "{{Colour17-hex}}"
+  # ANSI16 Bright/Bold (without Black/White)
+  base10: "#{{FIXME}}"  # TODO review - consider deriving based on base00  # (Darker Black)	Darker Background
+  base11: "#{{FIXME}}"  # TODO review - consider deriving based on base00  # (Darkest Black)	The Darkest Background
+  base12: "#{{Colour9-hex}}"   # Bright Red
+  base13: "#{{Colour13-hex}}"  # Bright Yellow
+  base14: "#{{Colour11-hex}}"  # Bright Green
+  base15: "#{{Colour19-hex}}"  # Bright Cyan
+  base16: "#{{Colour15-hex}}"  # Bright Blue
+  base17: "#{{Colour17-hex}}"  # Bright Magenta / Bright Purple
 
 #{{scheme-comment}}
 #{{scheme-comment1}}
