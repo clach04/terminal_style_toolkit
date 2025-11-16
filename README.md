@@ -313,6 +313,7 @@ Color schemes that pass eyeball test but I'd like to checkout:
   * pywal
       * https://github.com/embark-theme/pywal
           * https://embark-theme.github.io/#palette
+      * https://codeberg.org/explosion-mental/wallust-themes/src/branch/master/colorschemes
   * vim
       * https://github.com/twerth/ir_black/
       * https://github.com/lifepillar/vim-wwdc16-theme/blob/master/colors/wwdc16.vim - note in Putty seems to work best when `:set t_Co=16`
