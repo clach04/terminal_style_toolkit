@@ -90,6 +90,19 @@ In general avoid:
   * putty/json2putty_reg.py - convert (Putty) json into Putty registry import and html preview - Used to create https://github.com/clach04/putty_themes
   * Also see https://github.com/clach04/themer
 
+### any2theme
+
+Examples:
+
+    python putty/any2theme.py --help
+
+    # generate Putty registry export
+    py -3 any2theme.py some_theme.tstk --output_extension .reg
+    python putty/any2theme.py  C:\code\terminal\putty_themes\raw_themes\dracula.tstk --output_extension .reg
+
+    # generate Base24 theme
+    TODO... base24_scheme.mustache
+
 ## Misc tools
 
   * mintty_screenshot.py - launch mintty with specific theme and run pyshow_colors2 and then take a screenshot
