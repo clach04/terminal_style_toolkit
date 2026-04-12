@@ -85,7 +85,7 @@ In general avoid:
   * putty/any2theme.py - Convert many input theme formats and render with any template (or output raw tstk json). Input files supported; tstk json, Alacritty TOML, iTerm2, Putty reg, pywal16
   * parse_palette_tools.py - tools for dumping palettes for easier read/conversion
   * alacritty_yaml2toml.py - rough convert alacritty YAML into alacritty TOML
-  * goghjson2puttyjson.py - tools for converting [Gogh JSON](https://github.com/Gogh-Co/Gogh/tree/master/json) Color Schemes from https://github.com/Gogh-Co/Gogh/ into json that Putty conversion tools (json2putty_reg.py) can use
+  * goghjson2puttyjson.py - tools for converting [Gogh JSON](https://github.com/Gogh-Co/Gogh/tree/master/json) Color Schemes from https://github.com/Gogh-Co/Gogh/ into json that Putty conversion tools (json2putty_reg.py) can use. Use output with `python putty\any2theme.py  --output_extension .tstk -t terminal_style_toolkit_json.mustache -i tstk ...`
   * pywaltemplate2puttymustache.py - convert pywal16 template
   * putty/json2putty_reg.py - convert (Putty) json into Putty registry import and html preview - Used to create https://github.com/clach04/putty_themes
   * Also see https://github.com/clach04/themer
@@ -99,6 +99,21 @@ Examples:
     # generate Putty registry export
     py -3 any2theme.py some_theme.tstk --output_extension .reg
     python putty/any2theme.py  C:\code\terminal\putty_themes\raw_themes\dracula.tstk --output_extension .reg
+
+
+    # generate Terminal Style Toolkit json tstk file
+    py -3 any2theme.py some_theme.tstk --output_extension .tstk -t terminal_style_toolkit_json.mustache
+    # From putty registry export
+    py -3 any2theme.py --output_extension .tstk -t terminal_style_toolkit_json.mustache some_theme.reg
+    # From alacritty TOML export
+    py -3 any2theme.py --output_extension .tstk -t terminal_style_toolkit_json.mustache some_theme.toml
+
+
+TODO support alacritty.toml like (see existing issue for similar support for tstk):
+
+    [colors.cursor]
+    text = "CellBackground"
+
 
     # generate Base24 theme
     TODO... base24_scheme.mustache
