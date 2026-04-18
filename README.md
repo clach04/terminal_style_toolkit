@@ -65,6 +65,8 @@ In general avoid:
 
   * [sample_text_editor.txt](sample_text_editor.txt) utf-8 text file to test view/edit of fixed width fonts.
     Not suitable for in depth syntax highlighting tests.
+  * Short code samples for different languages are available in https://github.com/clach04/Dracula_cursor/tree/main/dev/sample
+    clone/mirror of https://github.com/dracula/cursor/tree/main/dev/sample
   * https://github.com/altercation/solarized/tree/master/utils/tests has a collection of (small) different source code file types for testing syntax highlighting.
   * https://github.com/darekkay/config-files/tree/master/color-schemes/example-files
 
@@ -141,6 +143,10 @@ See [Putty tools readme](./putty/README.md) and also https://github.com/clach04/
 ## Microsoft Windows CMD.exe
 
 See colors https://github.com/microsoft/terminal/blob/71c75561e5df3db53cfe6f9da1173a46441b99ed/src/tools/ansi-color/ansi-color.cmd
+https://github.com/microsoft/terminal/blob/main/src/tools/ansi-color/ansi-color.cmd
+for example:
+
+    ansi-color.cmd colortest.def
 
 See Color Tool (ColorTool) https://github.com/microsoft/terminal/releases/tag/1904.29002
 The `campbell.ini` color scheme is the Windows 10 Fall Creator's Update CMD out-of-box colors if need to restore to original colors.
@@ -153,9 +159,9 @@ NOTE latest ColorTool source is located in https://github.com/microsoft/terminal
 
 ColorTool can use:
 
-1. json format as used by concfg https://github.com/lukesampson/concfg
-2. XML format as used by iTerm2-Color-Schemes - https://github.com/mbadolato/iTerm2-Color-Schemes/
-3. INI format, as provided in samples for ColorTool https://github.com/microsoft/terminal/tree/main/src/tools/ColorTool
+ 1. json format as used by concfg https://github.com/lukesampson/concfg
+ 2. XML format as used by iTerm2-Color-Schemes - https://github.com/mbadolato/iTerm2-Color-Schemes/
+ 3. INI format, as provided in samples for ColorTool https://github.com/microsoft/terminal/tree/main/src/tools/ColorTool
 
 ## Resources
 
