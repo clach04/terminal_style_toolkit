@@ -108,6 +108,8 @@ Examples:
     # From alacritty TOML export
     py -3 any2theme.py --output_extension .tstk -t terminal_style_toolkit_json.mustache some_theme.toml
 
+    # Generate Microsoft ColorTool INI output
+    py -3 any2theme.py some_theme.tstk --output_extension .ini -t ms_colortool_ini.mustache
 
 TODO support alacritty.toml like (see existing issue for similar support for tstk):
 
