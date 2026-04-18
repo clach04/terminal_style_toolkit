@@ -138,6 +138,8 @@ See [Putty tools readme](./putty/README.md) and also https://github.com/clach04/
 
 ## Microsoft Windows CMD.exe
 
+See colors https://github.com/microsoft/terminal/blob/71c75561e5df3db53cfe6f9da1173a46441b99ed/src/tools/ansi-color/ansi-color.cmd
+
 See Color Tool (ColorTool) https://github.com/microsoft/terminal/releases/tag/1904.29002
 The `campbell.ini` color scheme is the Windows 10 Fall Creator's Update CMD out-of-box colors if need to restore to original colors.
 
