@@ -22,7 +22,7 @@ JSON file.
 
 ### Metadata
 
-Example content take from sample.tstk
+Example content taken from sample.tstk
 
     "scheme-name": "Default_fixed_blue-dark",
     "scheme-author": "Putty authors and Dag Wieers",
