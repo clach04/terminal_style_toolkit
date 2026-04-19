@@ -210,6 +210,7 @@ ANSI colors are numbered:
 
   * https://bytefluent.com/vivify/ A ColorScheme Editor for Vim
   * https://github.com/chrisbra/Colorizer vim plugin to visualize hex color codes
+  * https://github.com/lifepillar/vim-colortemplate - handle 2 color to full color
 
 vim themes that only use ANSI (16) colors - https://jeffkreeftmeijer.com/vim-16-color/
   * https://github.com/noahfrederick/vim-noctu
