@@ -208,6 +208,8 @@ ANSI colors are numbered:
 
 ### vim
 
+NOTE Windows vim for cmd does NOT support italics https://github.com/vim/vim/commit/ac8a10ab7672aa5fd359f76d34d8b0187728b92d
+
   * https://bytefluent.com/vivify/ A ColorScheme Editor for Vim
   * https://github.com/chrisbra/Colorizer vim plugin to visualize hex color codes
   * https://github.com/lifepillar/vim-colortemplate - handle 2 color to full color
