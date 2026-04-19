@@ -4,7 +4,7 @@
 
 The templates used by tstk are Mustache templates.
 There are tools to convert other templates into tstk templates
-for example, `pywaltemplate2puttymustache.py`.
+for example, any2theme.py, `pywaltemplate2puttymustache.py`.
 
 ## Template Variables
 
