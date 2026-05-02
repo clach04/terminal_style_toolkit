@@ -194,6 +194,7 @@ ANSI colors are numbered:
   * https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences/75985833#75985833
     useful table of codes
   * https://github.com/Gbox4/ansicodes - interactive web page for generating ANSI escape codes
+      * https://github.com/clach04/ansicodes - clone with github pages https://clach04.github.io/ansicodes/
 
 ### Color Tools
 
