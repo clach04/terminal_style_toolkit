@@ -163,6 +163,8 @@ ColorTool can use:
  2. XML format as used by iTerm2-Color-Schemes - https://github.com/mbadolato/iTerm2-Color-Schemes/
  3. INI format, as provided in samples for ColorTool https://github.com/microsoft/terminal/tree/main/src/tools/ColorTool
 
+See ms_colortool_ini.mustache for generating ColorTool color themes.
+
 ## Resources
 
 ### Color Codes
@@ -195,6 +197,30 @@ ANSI colors are numbered:
     useful table of codes
   * https://github.com/Gbox4/ansicodes - interactive web page for generating ANSI escape codes
       * https://github.com/clach04/ansicodes - clone with github pages https://clach04.github.io/ansicodes/
+
+Mappings; ColorTool, Putty / tstk, and Base24 / Tinted Theming
+
+    ColorTool INI Key | Colour Variable | Base24 Variable
+    ------------------+-----------------+-----------------
+    BACKGROUND        | Colour2         | base00
+    DARK_BLACK        | Colour6         | base01
+    BRIGHT_BLACK      | Colour7         | base02
+    FOREGROUND        | Colour0         | base05
+    DARK_WHITE        | Colour20        | base06
+    BRIGHT_WHITE      | Colour21        | base07
+    DARK_RED          | Colour8         | base08
+    BRIGHT_RED        | Colour9         | base12
+    DARK_YELLOW       | Colour12        | base0A
+    BRIGHT_YELLOW     | Colour13        | base13
+    DARK_GREEN        | Colour10        | base0B
+    BRIGHT_GREEN      | Colour11        | base14
+    DARK_CYAN         | Colour18        | base0C
+    BRIGHT_CYAN       | Colour19        | base15
+    DARK_BLUE         | Colour14        | base0D
+    BRIGHT_BLUE       | Colour15        | base16
+    DARK_MAGENTA      | Colour16        | base0E
+    BRIGHT_MAGENTA    | Colour17        | base17
+
 
 ### Color Tools
 
