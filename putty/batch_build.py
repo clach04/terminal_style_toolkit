@@ -2,7 +2,10 @@
 # -*- coding: us-ascii -*-
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
-"""Batch process inputs to create theme.
+r"""Batch process inputs to create theme.
+
+    py -3 ..\putty\batch_build.py C:\code\terminal\putty_themes\raw_themes\  ..\putty\mintty_theme.mustache  ""
+
 """
 
 import glob
