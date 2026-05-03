@@ -203,8 +203,8 @@ Mappings; ColorTool, Putty / tstk, and Base24 / Tinted Theming
     ColorTool INI Key | Colour Variable | Base24 Variable
     ------------------+-----------------+-----------------
     BACKGROUND        | Colour2         | base00
-    DARK_BLACK        | Colour6         | base01
-    BRIGHT_BLACK      | Colour7         | base02
+    DARK_BLACK        | Colour6         | base00 / base01
+    BRIGHT_BLACK      | Colour7         | base03 / base02
     FOREGROUND        | Colour0         | base05
     DARK_WHITE        | Colour20        | base06
     BRIGHT_WHITE      | Colour21        | base07
