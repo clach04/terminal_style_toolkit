@@ -19,12 +19,40 @@ Not tested non-ascii characters
 %25 == %
 """
 
+import copy
 import json
 import logging
 import os
 import re
 import shlex
 import sys
+
+try:
+    import colorama  # only needed for Windows CMD
+except ImportError:
+    colorama = None
+
+import color_ops
+
+is_py3 = sys.version_info >= (3,)
+is_win = sys.platform.startswith('win')
+
+guess_color_available = colorama or (not is_win) or (is_win and ('TERM' in os.environ or 'TERM_PROGRAM' in os.environ))
+use_color = False
+if os.environ.get('NO_COLOR') or not sys.stdout.isatty():  # NO_COLOR https://no-color.org/
+    # skips processing for doing highlighting
+    use_color = False
+elif colorama:
+    # TODO only do below for Windows? looks like it may be a NOOP so may not need a windows check
+    try:
+        colorama.just_fix_windows_console()
+    except AttributeError:
+        # older version, for example '0.4.4'
+        colorama.init()
+    use_color = True
+else:
+    if guess_color_available:
+        use_color = True
 
 
 log = logging.getLogger(__name__)
@@ -33,14 +61,16 @@ log.setLevel(level=logging.INFO)
 #log.setLevel(level=logging.DEBUG)
 
 
-default_mapping_if_missing = {
+default_mapping_ansi_bg_fg = {
     'Colour0-hex': 'Colour20-hex',  # Default Foreground - default to ANSI White
     'Colour1-hex': 'Colour0-hex',  # Default Bold Foreground  -- equals to non-bold - default to Default Foreground
     "Colour2-hex": "Colour6-hex",  # Default Background - default to ANSI Black
     "Colour3-hex": "Colour2-hex",  # Default Bold Background  -- equals to non-bold - default to Default Background
     "Colour4-hex": "Colour2-hex",  # Cursor Text -- equals to default background - default to Default Background
     "Colour5-hex": 'Colour0-hex',  # Cursor Colour -- equals to default foreground - default to Default Foreground
+}
 
+default_mapping_ansi_to_bright = {
     "Colour7-hex": "Colour6-hex",  # ANSI Black Bright
     "Colour9-hex": "Colour8-hex",  # ANSI Red Bright
     "Colour11-hex": "Colour10-hex",  # ANSI Green Bright
@@ -50,6 +80,82 @@ default_mapping_if_missing = {
     "Colour19-hex": "Colour18-hex",  # ANSI Cyan Bright
     "Colour21-hex": "Colour20-hex",  # ANSI White Bright
 }
+
+default_mapping_if_missing = copy.copy(default_mapping_ansi_bg_fg)
+default_mapping_if_missing.update(default_mapping_ansi_to_bright)
+
+
+# TODO review lighten process, both function and default value
+def derive_21_from_8_bright(color_dict, color_function=color_ops.foxyfy, bright_amount=1):
+    # copy color_dict to avoid side effects
+    color_dict = copy.copy(color_dict)
+
+    for hex_lookup_name in default_mapping_ansi_bg_fg:
+        hex_rgb = color_dict.get(hex_lookup_name)
+        if not hex_rgb:
+            copy_color_name = default_mapping_ansi_bg_fg[hex_lookup_name]
+            color_dict[hex_lookup_name] = color_dict[copy_color_name]
+            comment_lookup_name = hex_lookup_name.replace('-hex', '-comment')
+            color_dict[comment_lookup_name] = "Copied from %s" % (copy_color_name,)
+
+    for hex_lookup_name in default_mapping_ansi_to_bright:
+        hex_rgb = color_dict.get(hex_lookup_name)
+        if not hex_rgb:
+            copy_color_name = default_mapping_ansi_to_bright[hex_lookup_name]
+            color_dict[hex_lookup_name] = color_function(color_dict[copy_color_name], bright_amount)
+            # TODO if color_dict[hex_lookup_name] == color_dict[copy_color_name]: darken instead? potentially swap?
+            comment_lookup_name = hex_lookup_name.replace('-hex', '-comment')
+            color_dict[comment_lookup_name] = "Generated from %s" % (copy_color_name,)
+
+    # TODO (if not set,) set "scheme-comment" (or "scheme-comment1-9" - which ever is the first empty slot) with "generated from ...." note
+    return color_dict
+
+
+def derive_21_from_8_bright_as_copy(color_dict):
+    # copy color_dict to avoid side effects
+    color_dict = copy.copy(color_dict)
+
+    for color_number in range(21 +1):
+        color_string_prefix = 'Colour%d' % color_number
+        # ONLY check for hex
+        hex_lookup_name = '%s-hex' % color_string_prefix
+        hex_rgb = color_dict.get(hex_lookup_name)
+        if not hex_rgb:
+            copy_color_name = default_mapping_if_missing[hex_lookup_name]
+            color_dict[hex_lookup_name] = color_dict[copy_color_name]
+            comment_lookup_name = '%s-comment' % color_string_prefix
+            color_dict[comment_lookup_name] = "Copied from %s" % (copy_color_name,)
+
+    # TODO (if not set,) set "scheme-comment" (or "scheme-comment1-9" - which ever is the first empty slot) with "generated from ...." note
+    return color_dict
+
+
+BRIGHT_PINK_MISSING_INDICATOR = "FFA8EB"
+def color_print(colourHex, bad_color=BRIGHT_PINK_MISSING_INDICATOR):
+    '''Print a block/space in a hex colour, without a newline at the ends'''
+    colour = colourHex[1:]
+    #print(colour)
+    #print(colour + ' - ' + repr(hex2rgb_ints(colour, bad_color='ee0000')))
+    r, g, b = hex2rgb_ints(colour, bad_color=bad_color)
+    #print(colour[0:2] + ' - ', end="")
+    #print(int(colour[0:2], 16))
+    #print("\033[48;2;"+ ";".join([str(r), str(g), str(b)]) + "m  \033[0m", end="")
+    print("\033[48;2;" + ("%d;%d;%d" % (r, g, b)) + "m  \033[0m", end="")
+
+def print_colors_terminal(color_dict):
+    for color_number in range(21 +1):
+        color_string_prefix = 'Colour%d' % color_number
+        hex_lookup_name = '%s-hex' % color_string_prefix
+        hex_rgb = color_dict[hex_lookup_name]
+        if not hex_rgb.startswith('#'): hex_rgb = '#' + hex_rgb
+        color_print(hex_rgb)
+
+def read_json_file(in_filename):
+    f = open(in_filename)  # just assume this will work, correct text mode and encoding - assume utf-8
+    x = f.read()
+    f.close()
+    result_dict = json.loads(x)
+    return result_dict
 
 ### start copy from parse pallete tools ###
 
@@ -62,15 +168,21 @@ def unhex(hex_str):
     """
     return int(hex_str, 16)
 
-def hex2rgb_ints(hex_str):
+def hex2rgb_ints(hex_str, bad_color=None):
     """Given '#123456' return (18, 52, 86)
+    If bad_color (hex string, withOUT leading # or 0x) is specified, use that if fail to generate color due to non-hex values
     """
     hex_str = hex_str.strip().replace('#', '')  # remove '#'
     hex_str = hex_str.strip().replace('0x', '')  # remove '0x'
     if len(hex_str) != len('123456'):
         raise NotImplementedError('input strings of length %d %r' % (len(hex_str), hex_str))
 
-    return unhex(hex_str[0:2]), unhex(hex_str[2:4]), unhex(hex_str[4:6])
+    try:
+        result = unhex(hex_str[0:2]), unhex(hex_str[2:4]), unhex(hex_str[4:6])
+    except ValueError:
+        result = unhex(bad_color[0:2]), unhex(bad_color[2:4]), unhex(bad_color[4:6])
+
+    return result
 
 ### end copy ###
 

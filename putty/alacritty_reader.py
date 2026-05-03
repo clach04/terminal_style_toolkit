@@ -71,11 +71,8 @@ mapping = {
     }
 }
 
-def main(argv=None):
-    argv = argv or sys.argv
-    #print('Python %s on %s' % (sys.version, sys.platform))
 
-    theme_filename = argv[1]
+def read_and_convert_alacritty_toml(theme_filename):
     color_theme = {}
 
     """
@@ -118,6 +115,16 @@ def main(argv=None):
     color_theme["Colour5-hex"] = color_theme.get("Colour5-hex", color_theme["Colour0-hex"])  # Cursor Colour -- equals to default foreground
 
     color_theme["scheme-name"] = os.path.basename(theme_filename)  ## filename as a starting point, will need manually editing later
+
+    return color_theme
+
+
+def main(argv=None):
+    argv = argv or sys.argv
+    #print('Python %s on %s' % (sys.version, sys.platform))
+
+    theme_filename = argv[1]
+    color_theme = read_and_convert_alacritty_toml(theme_filename)
 
     print('%s' % json.dumps(color_theme, indent=4))  # TODO sort, also consider using render
     #print('%s' % json.dumps(mapping, indent=4))  # TODO sort, also consider using render

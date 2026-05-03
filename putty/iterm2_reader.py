@@ -44,9 +44,13 @@ mappings = {
 
     "Cursor Color": "Colour5-hex",
     "Cursor Text Color": "Colour4-hex",
+    "Cursor Guide Color": "FIXME",
 
     "Selected Text Color": "FIXME",
     "Selection Color": "FIXME",
+
+    "Badge Color": "FIXME",
+    "Link Color": "FIXME",
 
 
     "Ansi 0 Color": "Colour6-hex",
@@ -68,13 +72,9 @@ mappings = {
     "Ansi 15 Color": "Colour21-hex",
 }
 DUMP_UNMAPPED = False
+IGNORE_UNKNOWN_KEYS = True
 
-def main(argv=None):
-    argv = argv or sys.argv
-    #print('Python %s on %s' % (sys.version, sys.platform))
-
-    theme_filename = argv[1]
-
+def read_and_convert_iterm(theme_filename):
     f = open(theme_filename, 'rb')
     iterm_theme = plist_load(f)
     f.close()
@@ -95,13 +95,32 @@ def main(argv=None):
         #print('%s\t#%02x%02x%02x' % (iterm_color_name, r, g, b))
         iterm2hex[iterm_color_name] = rgb_hex
         #iterm2hex[iterm_color_name] = "FIXME"
-        tstk_color_name = mappings[iterm_color_name]
+        try:
+            tstk_color_name = mappings[iterm_color_name]
+        except KeyError:
+            if not IGNORE_UNKNOWN_KEYS:
+                raise
+            print('DEBUG unknown/mapped key %r' % (iterm_color_name,))
+            print('DEBUG "%s": "FIXME",' % (iterm_color_name,))
+            continue
+        if tstk_color_name == 'FIXME' and IGNORE_UNKNOWN_KEYS:
+            continue
+            #raise NotImplementedError('unknown/mapped key %r' % (iterm_color_name,))
         if tstk_color_name == 'FIXME' and DUMP_UNMAPPED:
             print('%s\t%s' % (iterm_color_name, tstk_color_name))
         color_theme[tstk_color_name] = rgb_hex
 
     # TODO idea loop through and default missing items?
     color_theme["Colour3-hex"] = color_theme.get("Colour3-hex", color_theme["Colour2-hex"])  # Default Bold Background  -- equals to non-bold
+
+    return color_theme
+
+def main(argv=None):
+    argv = argv or sys.argv
+    #print('Python %s on %s' % (sys.version, sys.platform))
+
+    theme_filename = argv[1]
+    color_theme = read_and_convert_iterm(theme_filename)
 
     #print('%s' % json.dumps(iterm2hex, indent=4, sort_keys=True))  # sorting order is not in natural order :-(
     #print('-'*65)

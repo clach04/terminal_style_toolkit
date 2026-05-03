@@ -28,8 +28,10 @@ Scripts / tools / config for terminal styling and colors / colours
 When testing out a color scheme/theme consider different use cases:
 
   * `pyshow_colors2.py`
+      * with ls_colors_test.txt
   * ls colors (LSCOLORS, LS_COLORS, `dircolors` and .dir_colors)
       * https://github.com/dracula/putty/issues/3
+      * ls_colors_test.txt
       * https://github.com/joshjon/bliss-dircolors - good starting point
   * neofetch
   * `vim` colorscheme
@@ -63,6 +65,8 @@ In general avoid:
 
   * [sample_text_editor.txt](sample_text_editor.txt) utf-8 text file to test view/edit of fixed width fonts.
     Not suitable for in depth syntax highlighting tests.
+  * Short code samples for different languages are available in https://github.com/clach04/Dracula_cursor/tree/main/dev/sample
+    clone/mirror of https://github.com/dracula/cursor/tree/main/dev/sample
   * https://github.com/altercation/solarized/tree/master/utils/tests has a collection of (small) different source code file types for testing syntax highlighting.
   * https://github.com/darekkay/config-files/tree/master/color-schemes/example-files
 
@@ -80,14 +84,43 @@ In general avoid:
 
 ## Conversion tools
 
+  * putty/any2theme.py - Convert many input theme formats and render with any template (or output raw tstk json). Input files supported; tstk json, Alacritty TOML, iTerm2, Putty reg, pywal16
   * parse_palette_tools.py - tools for dumping palettes for easier read/conversion
-  * alacritty_toml2tstk_json.py - convert alacritty TOML Color Schemes
-  * goghjson2puttyjson.py - tools for converting [Gogh JSON](https://github.com/Gogh-Co/Gogh/tree/master/json) Color Schemes from https://github.com/Gogh-Co/Gogh/ into json that Putty conversion tools (json2putty_reg.py) can use
-  * iterm2_theme2tstk_json.py - convert iTerm2 Color Schemes
+  * alacritty_yaml2toml.py - rough convert alacritty YAML into alacritty TOML
+  * goghjson2puttyjson.py - tools for converting [Gogh JSON](https://github.com/Gogh-Co/Gogh/tree/master/json) Color Schemes from https://github.com/Gogh-Co/Gogh/ into json that Putty conversion tools (json2putty_reg.py) can use. Use output with `python putty\any2theme.py  --output_extension .tstk -t terminal_style_toolkit_json.mustache -i tstk ...`
   * pywaltemplate2puttymustache.py - convert pywal16 template
-  * pywaltheme2tstk_json.py - convert pywal16 color theme
   * putty/json2putty_reg.py - convert (Putty) json into Putty registry import and html preview - Used to create https://github.com/clach04/putty_themes
   * Also see https://github.com/clach04/themer
+
+### any2theme
+
+Examples:
+
+    python putty/any2theme.py --help
+
+    # generate Putty registry export
+    py -3 any2theme.py some_theme.tstk --output_extension .reg
+    python putty/any2theme.py  C:\code\terminal\putty_themes\raw_themes\dracula.tstk --output_extension .reg
+
+
+    # generate Terminal Style Toolkit json tstk file
+    py -3 any2theme.py some_theme.tstk --output_extension .tstk -t terminal_style_toolkit_json.mustache
+    # From putty registry export
+    py -3 any2theme.py --output_extension .tstk -t terminal_style_toolkit_json.mustache some_theme.reg
+    # From alacritty TOML export
+    py -3 any2theme.py --output_extension .tstk -t terminal_style_toolkit_json.mustache some_theme.toml
+
+    # Generate Microsoft ColorTool INI output
+    py -3 any2theme.py some_theme.tstk --output_extension .ini -t ms_colortool_ini.mustache
+
+TODO support alacritty.toml like (see existing issue for similar support for tstk):
+
+    [colors.cursor]
+    text = "CellBackground"
+
+
+    # generate Base24 theme
+    TODO... base24_scheme.mustache
 
 ## Misc tools
 
@@ -97,7 +130,7 @@ In general avoid:
 
 ## Putty
 
-See [Putty tools readme](./putty/README.md)
+See [Putty tools readme](./putty/README.md) and also https://github.com/clach04/putty_themes/
 
   * python_windows_registry_putty_colors.py - dumps session names and colors (only)
     along with simple show sessions that use the exact same same-color scheme feature
@@ -108,6 +141,12 @@ See [Putty tools readme](./putty/README.md)
   * https://www.thegeekstuff.com/2009/07/10-practical-putty-tips-and-tricks-you-probably-didnt-know/
 
 ## Microsoft Windows CMD.exe
+
+See colors https://github.com/microsoft/terminal/blob/71c75561e5df3db53cfe6f9da1173a46441b99ed/src/tools/ansi-color/ansi-color.cmd
+https://github.com/microsoft/terminal/blob/main/src/tools/ansi-color/ansi-color.cmd
+for example:
+
+    ansi-color.cmd colortest.def
 
 See Color Tool (ColorTool) https://github.com/microsoft/terminal/releases/tag/1904.29002
 The `campbell.ini` color scheme is the Windows 10 Fall Creator's Update CMD out-of-box colors if need to restore to original colors.
@@ -120,51 +159,61 @@ NOTE latest ColorTool source is located in https://github.com/microsoft/terminal
 
 ColorTool can use:
 
-1. json format as used by concfg https://github.com/lukesampson/concfg
-2. XML format as used by iTerm2-Color-Schemes - https://github.com/mbadolato/iTerm2-Color-Schemes/
-3. INI format, as provided in samples for ColorTool https://github.com/microsoft/terminal/tree/main/src/tools/ColorTool
+ 1. json format as used by concfg https://github.com/lukesampson/concfg
+ 2. XML format as used by iTerm2-Color-Schemes - https://github.com/mbadolato/iTerm2-Color-Schemes/
+ 3. INI format, as provided in samples for ColorTool https://github.com/microsoft/terminal/tree/main/src/tools/ColorTool
 
 ## Resources
 
 ### Color Codes
 
-ANSI colors are often named:
+ANSI colors are numbered:
 
-    0    black
-    1    dark red
-    2    dark green
-    3    brown
-    4    dark blue
-    5    dark magenta
-    6    dark cyan
+    0	black
+    1	red
+    2	green
+    3	yellow
+    4	blue
+    5	magenta
+    6	cyan
+    7	white
 
-    7    light grey
-    8    dark grey
-    9    red
-    10   green
-    11   yellow
-    12   blue
-    13   magenta
-    14   cyan
-    15   white
+    8	bright black
+    9	bright red
+    10	bright green
+    11	bright yellow
+    12	bright blue
+    13	bright magenta
+    14	bright cyan
+    15	bright white
 
   * https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit
+  * https://jakob-bagterp.github.io/colorist-for-python/ansi-escape-codes/standard-16-colors/
+  * https://hexdocs.pm/color_palette/color_table.html
   * https://github.com/termstandard/colors
   * https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences/75985833#75985833
     useful table of codes
+  * https://github.com/Gbox4/ansicodes - interactive web page for generating ANSI escape codes
+      * https://github.com/clach04/ansicodes - clone with github pages https://clach04.github.io/ansicodes/
 
 ### Color Tools
 
+  * http://colorlab.wickline.org/colorblind/colorlab/ - view colors in web browser and simulate color blindness
   * https://terminal.sexy/
   * https://it-tools.tech/color-converter
       * https://github.com/CorentinTh/it-tools
   * https://iconscout.com/blog/best-color-palette-generators-for-any-design-project
   * https://colorffy.com/color-scheme-generator?color=257abb
   * https://github.com/clach04/themer
+  * [pastel](https://github.com/sharkdp/pastel) A command-line tool to generate, analyze, convert and manipulate colors
 
 ### vim
 
-  * https://bytefluent.com/vivify/
+NOTE Windows vim for cmd does NOT support italics https://github.com/vim/vim/commit/ac8a10ab7672aa5fd359f76d34d8b0187728b92d
+
+  * https://bytefluent.com/vivify/ A ColorScheme Editor for Vim
+  * https://github.com/chrisbra/Colorizer vim plugin to visualize hex color codes
+  * https://github.com/lifepillar/vim-colortemplate - handle 2 color to full color
 
 vim themes that only use ANSI (16) colors - https://jeffkreeftmeijer.com/vim-16-color/
   * https://github.com/noahfrederick/vim-noctu
@@ -176,6 +225,13 @@ vim themes that only use ANSI (16) colors - https://jeffkreeftmeijer.com/vim-16-
       * https://github.com/AlphaTechnolog/pywal.nvim
       * https://github.com/sonjiku/yawnc.nvim
 
+### Midnight Commander
+
+See https://github.com/jan-warchol/selenized/tree/putty/mc
+and https://github.com/jan-warchol/selenized/issues/7
+
+> MC's default color settings assume that terminal's blue will be very dark and suitable for use as background.
+
 ### ls colors / dir_colors
 
   * https://www.systutorials.com/docs/linux/man/5-dir_colors/
@@ -184,6 +240,13 @@ vim themes that only use ANSI (16) colors - https://jeffkreeftmeijer.com/vim-16-
   * https://github.com/nordtheme/dircolors
   * https://github.com/clach04?submit=Search&q=dircolors&tab=stars&type=&sort=&direction=&submit=Search
   * https://github.com/dracula/putty/issues/3 - Unreadable colors/colors with a=rwx permission directory and ls in color mode - default dircolors conflicts with terminal colors
+  * Suggestion from https://github.com/jan-warchol/selenized/tree/putty/dircolors
+    related to https://github.com/jan-warchol/selenized/issues/1
+
+        # fix dircolors for Selenized
+        export LS_COLORS="$LS_COLORS:ow=1;7;34:st=30;44:su=30;41"
+  * https://github.com/sharkdp/vivid A themeable LS_COLORS generator with a rich filetype datebase
+  * https://github.com/trapd00r/LS_COLORS - nice selection of consistent colors flr filetypes
 
 ### Related projects
 
@@ -196,7 +259,7 @@ vim themes that only use ANSI (16) colors - https://jeffkreeftmeijer.com/vim-16-
   * https://github.com/monolifed/scite_theme scite themes from base16 config
   * https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/tools
   * https://github.com/Gogh-Co/Gogh/tree/master/tools
-  * Base-16 and derivatives
+  * Base-16/Base16 and derivatives
   * https://github.com/worron/ACYLS - Any Color You Like Simple icon pack
   * Windows Color Pickers
       * http://instant-eyedropper.com/
@@ -226,8 +289,10 @@ Color schemes that pass eyeball test but I'd like to checkout:
 
   * iTerm2
       * https://github.com/mbadolato/iTerm2-Color-Schemes - preview limited
+          * https://iterm2colorschemes.com/
       * https://github.com/wozozo/Hemisu-Light-iTerm2
   * https://github.com/Gogh-Co/Gogh - OK preview, can at least see palette block to easily compare colors
+      * https://gogh-co.github.io/Gogh/
       * 16 color themes that have bright/bold versions of base colors
           * Aci
           * Argonaut
@@ -290,6 +355,7 @@ Color schemes that pass eyeball test but I'd like to checkout:
   * pywal
       * https://github.com/embark-theme/pywal
           * https://embark-theme.github.io/#palette
+      * https://codeberg.org/explosion-mental/wallust-themes/src/branch/master/colorschemes
   * vim
       * https://github.com/twerth/ir_black/
       * https://github.com/lifepillar/vim-wwdc16-theme/blob/master/colors/wwdc16.vim - note in Putty seems to work best when `:set t_Co=16`

@@ -16,6 +16,8 @@ Sample usage with mintty under Windows:
     "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,65 python pyshow_colors2.py show_cursor
     "C:\Program Files\Git\usr\bin\mintty.exe" --title "mintty show colors" --hold  always --size 90,65 py -3 pyshow_colors2.py show_cursor
 
+    "C:\Program Files\Git\usr\bin\mintty.exe" -o Font=Consolas -o FontHeight=10 -o CursorType=block -o CursorBlinks=no --hold always --size 90,65 -o "ThemeFile=NAMEHERE" "--title=NAMEHERE"  py -3 pyshow_colors2.py
+
 """
 
 import os
@@ -23,9 +25,13 @@ import sys
 
 is_win = sys.platform.startswith('win')
 
+# TODO consider skipping for non-Windows entirely
 try:
-    import colorama
-    colorama.just_fix_windows_console()
+    import colorama  # https://github.com/tartley/colorama
+    try:
+        colorama.just_fix_windows_console()  # since v0.4.6
+    except AttributeError:
+        colorama.init()  # all versions, but may have other side-effects
 except ImportError:
     if not os.environ.get('SKIP_WIN_CHECK'):
         if is_win and not ('TERM' in os.environ or 'TERM_PROGRAM' in os.environ):

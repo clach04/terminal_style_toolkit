@@ -101,7 +101,7 @@ INSTRUCTIONS!
 
 
 Finally do operators line up?
-	
+
 More C-like code:
 
     int  two_spaces_preceeding=0;
@@ -163,3 +163,8 @@ Unicode glpyhs (encoded in UTF8)
 ☠ poison/skull crossbones
 ☢ radioactive
 ☣ biohazard
+
+## Sample code for syntax highlighting
+
+Short code samples are available in https://github.com/dracula/cursor/tree/main/dev/sample
+clone/mirror at https://github.com/clach04/Dracula_cursor/tree/main/dev/sample
