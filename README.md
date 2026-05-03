@@ -113,14 +113,14 @@ Examples:
     # Generate Microsoft ColorTool INI output
     py -3 any2theme.py some_theme.tstk --output_extension .ini -t ms_colortool_ini.mustache
 
+    # generate Base24 theme
+    py -3 any2theme.py some_theme.tstk --output_extension .yaml -t base24_scheme.mustache
+
 TODO support alacritty.toml like (see existing issue for similar support for tstk):
 
     [colors.cursor]
     text = "CellBackground"
 
-
-    # generate Base24 theme
-    TODO... base24_scheme.mustache
 
 ## Misc tools
 
