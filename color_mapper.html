@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TSTK Color Mapper</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #1e1e2e; color: #cdd6f4; padding: 16px; display: flex; flex-direction: column; }
+h1 { font-size: 1.4em; margin-bottom: 12px; color: #cba6f7; flex-shrink: 0; }
+.container { display: flex; gap: 16px; flex: 1; min-height: 0; }
+.left { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+.right { flex: 1.5; min-width: 400px; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+textarea { width: 100%; height: 220px; flex-shrink: 0; background: #181825; color: #cdd6f4; border: 1px solid #45475a; border-radius: 6px; padding: 8px; font-family: monospace; font-size: 13px; resize: vertical; }
+button { background: #cba6f7; color: #1e1e2e; border: none; border-radius: 6px; padding: 8px 16px; font-weight: 600; cursor: pointer; font-size: 13px; }
+button:hover { background: #b4befe; }
+button.secondary { background: #45475a; color: #cdd6f4; }
+button.secondary:hover { background: #585b70; }
+.btn-row { display: flex; gap: 8px; align-items: center; }
+.palette-label { font-size: 0.85em; color: #a6adc8; font-weight: 600; }
+.palette-wrap { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.palette { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; min-height: 60px; overflow-y: auto; padding: 8px; background: #181825; border: 1px solid #45475a; border-radius: 6px; align-content: flex-start; }
+.palette-used { flex: none; max-height: 160px; min-height: 40px; }
+.swatch { width: 80px; border: 2px solid #45475a; border-radius: 6px; cursor: grab; overflow: hidden; transition: border-color 0.15s; user-select: none; }
+.swatch:hover { border-color: #cba6f7; }
+.swatch.dragging { opacity: 0.4; }
+.swatch-color { height: 36px; }
+.swatch-info { padding: 3px 4px; background: #1e1e2e; font-size: 10px; line-height: 1.3; }
+.swatch-hex { color: #cdd6f4; font-family: monospace; }
+.swatch-name { color: #a6adc8; font-size: 9px; word-break: break-all; }
+.slot-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.slot-table th { text-align: left; padding: 4px 6px; background: #313244; color: #a6adc8; font-weight: 600; position: sticky; top: 0; }
+.slot-table td { padding: 4px 6px; border-bottom: 1px solid #313244; vertical-align: middle; }
+.putty-name { color: #f9e2af; font-family: monospace; white-space: nowrap; font-size: 11px; }
+.drop-zone { min-width: 90px; min-height: 40px; border: 2px dashed #45475a; border-radius: 4px; display: flex; align-items: center; justify-content: center; transition: border-color 0.15s, background 0.15s; padding: 2px; }
+.drop-zone.drag-over { border-color: #cba6f7; background: rgba(203,166,247,0.1); }
+.drop-zone.has-color { border-style: solid; border-color: #45475a; }
+.drop-zone.has-color.dragging { opacity: 0.4; }
+.drag-handle { cursor: grab; color: #585b70; font-size: 14px; padding: 0 2px; user-select: none; flex-shrink: 0; }
+.drag-handle:hover { color: #cba6f7; }
+.mini-swatch { display: flex; align-items: center; gap: 6px; width: 100%; }
+.mini-color { width: 28px; height: 28px; border-radius: 3px; border: 1px solid #585b70; flex-shrink: 0; }
+.mini-text { font-family: monospace; font-size: 11px; color: #cdd6f4; }
+.mini-name { font-size: 10px; color: #a6adc8; }
+.comment-input { width: 120px; background: #181825; color: #cdd6f4; border: 1px solid #45475a; border-radius: 3px; padding: 2px 4px; font-size: 11px; }
+.clear-btn { background: none; border: none; color: #f38ba8; cursor: pointer; font-size: 14px; padding: 0 4px; line-height: 1; }
+.clear-btn:hover { color: #eba0ac; }
+.meta-grid { display: grid; grid-template-columns: 120px 1fr; gap: 6px 8px; align-items: center; background: #181825; padding: 10px; border: 1px solid #45475a; border-radius: 6px; }
+.meta-grid label { font-size: 12px; color: #a6adc8; }
+.meta-grid input { width: 100%; background: #1e1e2e; color: #cdd6f4; border: 1px solid #45475a; border-radius: 3px; padding: 4px 6px; font-size: 12px; }
+.slots-scroll { max-height: 520px; overflow-y: auto; background: #181825; border: 1px solid #45475a; border-radius: 6px; }
+.status { font-size: 12px; color: #a6adc8; padding: 4px 0; }
+</style>
+</head>
+<body>
+
+<h1>TSTK Color Mapper</h1>
+
+<div class="container">
+  <div class="left">
+    <div>
+      <label class="palette-label">Paste hex codes (one per line, optional name after):</label>
+      <textarea id="inputText" placeholder="#FF5F00&#10;#2C78BF&#9;bright_blue&#10;#519F50  green&#10;black  #121110"></textarea>
+    </div>
+    <div class="btn-row">
+      <button onclick="parseColors()">Parse Colors</button>
+      <span class="status" id="status"></span>
+    </div>
+    <div class="palette-wrap">
+      <div class="palette-label">Available Colors (drag to slots →)</div>
+      <div class="palette" id="palette"></div>
+      <div class="palette-label" style="margin-top:8px">Used / Mapped Colors</div>
+      <div class="palette palette-used" id="paletteUsed"></div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div>
+      <div class="palette-label">Scheme Metadata</div>
+      <div class="meta-grid">
+        <label for="metaName">scheme-name</label><input id="metaName" value="My Theme">
+        <label for="metaAuthor">scheme-author</label><input id="metaAuthor" value="">
+        <label for="metaSlug">scheme-slug</label><input id="metaSlug" value="My_Theme">
+        <label for="metaComment">scheme-comment</label><input id="metaComment" value="">
+      </div>
+    </div>
+    <div>
+      <div class="palette-label">PuTTY Color Slots (drop colors here)</div>
+      <div class="slots-scroll">
+        <table class="slot-table">
+          <thead><tr><th>#</th><th>Slot</th><th>Color</th><th>Comment</th><th></th></tr></thead>
+          <tbody id="slotBody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button onclick="exportTstk()">Export .tstk</button>
+      <button class="secondary" onclick="clearAll()">Clear All Slots</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SLOTS = [
+  { index: 0, putty: "Default Foreground" },
+  { index: 1, putty: "Default Bold Foreground  -- equals to non-bold" },
+  { index: 2, putty: "Default Background" },
+  { index: 3, putty: "Default Bold Background  -- equals to non-bold" },
+  { index: 4, putty: "Cursor Text -- equals to default background" },
+  { index: 5, putty: "Cursor Colour -- equals to default foreground" },
+  { index: 6, putty: "ANSI Black - 30m / 40m" },
+  { index: 7, putty: "ANSI Black Bright - 1;30m" },
+  { index: 8, putty: "ANSI Red - 31m / 41m" },
+  { index: 9, putty: "ANSI Red Bright - 1;31m" },
+  { index: 10, putty: "ANSI Green - 32m / 42m" },
+  { index: 11, putty: "ANSI Green Bright - 1;32m" },
+  { index: 12, putty: "ANSI Yellow - 33m / 43m" },
+  { index: 13, putty: "ANSI Yellow Bright - 1;33m" },
+  { index: 14, putty: "ANSI Blue - 34m / 44m" },
+  { index: 15, putty: "ANSI Blue Bright - 1;34m" },
+  { index: 16, putty: "ANSI Magenta - 35m / 45m" },
+  { index: 17, putty: "ANSI Magenta Bright - 1;35m" },
+  { index: 18, putty: "ANSI Cyan - 36m / 46m" },
+  { index: 19, putty: "ANSI Cyan Bright - 1;36m" },
+  { index: 20, putty: "ANSI White - 37m / 47m" },
+  { index: 21, putty: "ANSI White Bright - 1;37m" },
+];
+
+let parsedColors = [];
+let slotAssignments = new Array(22).fill(null);
+let dragSourceSlot = null;
+
+function normalizeHex(raw) {
+  let h = raw.replace(/^#/, '');
+  if (h.length === 3) {
+    h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+  }
+  if (/^[0-9a-fA-F]{6}$/.test(h)) {
+    return h.toLowerCase();
+  }
+  return null;
+}
+
+function parseColors() {
+  const text = document.getElementById('inputText').value;
+  const lines = text.split('\n');
+  parsedColors = [];
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+
+    const hexMatches = [...trimmed.matchAll(/#([0-9a-fA-F]{3,8})\b/g)];
+    for (const m of hexMatches) {
+      const hex = normalizeHex('#' + m[1]);
+      if (!hex) continue;
+
+      const before = trimmed.substring(0, m.index).trim();
+      const after = trimmed.substring(m.index + m[0].length).trim();
+      let name = '';
+
+      const beforeParts = before.split(/[\t ]+/).filter(Boolean);
+      if (beforeParts.length > 0) {
+        const lastBefore = beforeParts[beforeParts.length - 1];
+        if (!/^#?[0-9a-fA-F]{3,8}$/i.test(lastBefore)) {
+          name = lastBefore;
+        }
+      }
+      if (!name && after) {
+        const afterParts = after.split(/[\t ]+/).filter(Boolean);
+        if (afterParts.length > 0) {
+          name = afterParts[0];
+        }
+      }
+
+      if (!parsedColors.find(c => c.hex === hex && c.name === name)) {
+        parsedColors.push({ hex, name });
+      }
+    }
+
+    if (hexMatches.length === 0) {
+      const parts = trimmed.split(/[\t ]+/).filter(Boolean);
+      if (parts.length >= 2) {
+        const possibleHex = parts.find(p => /^[0-9a-fA-F]{6}$/.test(p.replace(/^#/, '')));
+        if (possibleHex) {
+          const hex = normalizeHex(possibleHex);
+          if (hex) {
+            const name = parts.filter(p => p !== possibleHex).join(' ');
+            if (!parsedColors.find(c => c.hex === hex && c.name === name)) {
+              parsedColors.push({ hex, name });
+            }
+          }
+        }
+      }
+    }
+  }
+
+  document.getElementById('status').textContent = `Parsed ${parsedColors.length} color(s)`;
+  renderPalette();
+}
+
+function renderPalette() {
+  const usedHexes = new Set(slotAssignments.filter(Boolean).map(c => c.hex));
+  const available = [];
+  const used = [];
+  parsedColors.forEach((color, i) => {
+    const entry = { ...color, origIndex: i };
+    if (usedHexes.has(color.hex)) {
+      used.push(entry);
+    } else {
+      available.push(entry);
+    }
+  });
+
+  renderSwatches('palette', available);
+  renderSwatches('paletteUsed', used);
+}
+
+function renderSwatches(containerId, colors) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  if (colors.length === 0 && containerId === 'paletteUsed') {
+    container.innerHTML = '<span style="color:#585b70;font-size:11px;padding:8px">No colors assigned yet</span>';
+    return;
+  }
+  colors.forEach(color => {
+    const swatch = document.createElement('div');
+    swatch.className = 'swatch';
+    swatch.draggable = true;
+    swatch.dataset.index = color.origIndex;
+    swatch.innerHTML = `
+      <div class="swatch-color" style="background-color:#${color.hex}"></div>
+      <div class="swatch-info">
+        <div class="swatch-hex">#${color.hex}</div>
+        ${color.name ? `<div class="swatch-name">${escapeHtml(color.name)}</div>` : ''}
+      </div>`;
+
+    swatch.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('application/json', JSON.stringify(color));
+      e.dataTransfer.effectAllowed = 'copy';
+      swatch.classList.add('dragging');
+    });
+    swatch.addEventListener('dragend', () => swatch.classList.remove('dragging'));
+    container.appendChild(swatch);
+  });
+}
+
+function renderSlots() {
+  const tbody = document.getElementById('slotBody');
+  tbody.innerHTML = '';
+  SLOTS.forEach((slot, i) => {
+    const tr = document.createElement('tr');
+    const assigned = slotAssignments[i];
+
+    let colorCell;
+    if (assigned) {
+      colorCell = `
+        <td>
+          <div class="drop-zone has-color" data-slot="${i}">
+            <div class="mini-swatch">
+              <div class="drag-handle" data-slot-src="${i}" title="Drag to move">⣿</div>
+              <div class="mini-color" style="background-color:#${assigned.hex}"></div>
+              <div>
+                <div class="mini-text">#${assigned.hex}</div>
+                ${assigned.name ? `<div class="mini-name">${escapeHtml(assigned.name)}</div>` : ''}
+              </div>
+            </div>
+          </div>
+        </td>`;
+    } else {
+      colorCell = `
+        <td>
+          <div class="drop-zone" data-slot="${i}">
+            <span style="color:#585b70;font-size:11px">drop here</span>
+          </div>
+        </td>`;
+    }
+
+    tr.innerHTML = `
+      <td style="color:#585b70">${i}</td>
+      <td class="putty-name">${escapeHtml(slot.putty)}</td>
+      ${colorCell}
+      <td><input class="comment-input" data-slot="${i}" value="${escapeHtml(assigned ? assigned.name : '')}" placeholder="comment" oninput="updateComment(${i}, this.value)"></td>
+      <td>${assigned ? `<button class="clear-btn" onclick="clearSlot(${i})" title="Remove">&times;</button>` : ''}</td>`;
+
+    tbody.appendChild(tr);
+  });
+
+  document.querySelectorAll('.drag-handle').forEach(handle => {
+    handle.setAttribute('draggable', 'true');
+    handle.addEventListener('dragstart', e => {
+      dragSourceSlot = parseInt(handle.dataset.slotSrc);
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', '');
+      handle.closest('.drop-zone').classList.add('dragging');
+    });
+    handle.addEventListener('dragend', () => {
+      document.querySelectorAll('.drop-zone.dragging').forEach(z => z.classList.remove('dragging'));
+      dragSourceSlot = null;
+    });
+  });
+
+  document.querySelectorAll('.drop-zone').forEach(zone => {
+    zone.addEventListener('dragover', e => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = dragSourceSlot !== null ? 'move' : 'copy';
+      zone.classList.add('drag-over');
+    });
+    zone.addEventListener('dragleave', e => {
+      if (!zone.contains(e.relatedTarget)) {
+        zone.classList.remove('drag-over');
+      }
+    });
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      zone.classList.remove('drag-over');
+      const targetIdx = parseInt(zone.dataset.slot);
+      if (dragSourceSlot !== null) {
+        if (dragSourceSlot !== targetIdx) {
+          const tmp = slotAssignments[targetIdx];
+          slotAssignments[targetIdx] = slotAssignments[dragSourceSlot];
+          slotAssignments[dragSourceSlot] = tmp;
+        }
+        dragSourceSlot = null;
+      } else {
+        try {
+          const color = JSON.parse(e.dataTransfer.getData('application/json'));
+          slotAssignments[targetIdx] = color;
+        } catch(err) {}
+      }
+      setTimeout(() => { renderSlots(); renderPalette(); }, 0);
+    });
+  });
+}
+
+function updateComment(slotIdx, value) {
+  if (slotAssignments[slotIdx]) {
+    slotAssignments[slotIdx].name = value;
+  }
+}
+
+function clearSlot(slotIdx) {
+  slotAssignments[slotIdx] = null;
+  renderSlots();
+  renderPalette();
+}
+
+function clearAll() {
+  slotAssignments = new Array(22).fill(null);
+  renderSlots();
+  renderPalette();
+}
+
+function exportTstk() {
+  const obj = {
+    "####": "JSON template, result can be ran through https://github.com/clach04/terminal_style_toolkit/ tools",
+    "scheme-name": document.getElementById('metaName').value,
+    "scheme-author": document.getElementById('metaAuthor').value,
+    "scheme-slug": document.getElementById('metaSlug').value,
+    "scheme-comment": document.getElementById('metaComment').value,
+  };
+  for (let i = 1; i <= 9; i++) obj[`scheme-comment${i}`] = "";
+
+  SLOTS.forEach((slot, i) => {
+    const assigned = slotAssignments[i];
+    obj[`#Colour${i}-putty`] = slot.putty;
+    obj[`Colour${i}-comment`] = assigned ? assigned.name : "";
+    obj[`Colour${i}-note`] = "";
+    obj[`Colour${i}-hex`] = assigned ? assigned.hex : "000000";
+  });
+
+  const json = JSON.stringify(obj, null, 4);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = (document.getElementById('metaSlug').value || 'theme') + '.tstk';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function escapeHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+renderSlots();
+</script>
+</body>
+</html>
