@@ -65,6 +65,7 @@ button.secondary:hover { background: #585b70; }
     </div>
     <div class="btn-row">
       <button onclick="parseColors()">Parse Colors</button>
+      <button onclick="autoMapColors()">Auto-map</button>
       <span class="status" id="status"></span>
     </div>
     <div class="palette-wrap">
@@ -156,21 +157,24 @@ function parseColors() {
       const hex = normalizeHex('#' + m[1]);
       if (!hex) continue;
 
-      const before = trimmed.substring(0, m.index).trim();
-      const after = trimmed.substring(m.index + m[0].length).trim();
+      const parts = trimmed.split(/[\t ]+/).filter(Boolean);
       let name = '';
 
-      const beforeParts = before.split(/[\t ]+/).filter(Boolean);
-      if (beforeParts.length > 0) {
-        const lastBefore = beforeParts[beforeParts.length - 1];
-        if (!/^#?[0-9a-fA-F]{3,8}$/i.test(lastBefore)) {
-          name = lastBefore;
+      const hexToken = m[0];
+      const hexIdx = parts.findIndex(p => p === hexToken || p === hexToken.toUpperCase());
+      if (hexIdx > 0) {
+        const candidate = parts[0];
+        if (!/^#?[0-9a-fA-F]{3,8}$/i.test(candidate) && !candidate.startsWith('rgb') && !candidate.startsWith('hsl')) {
+          name = candidate;
         }
-      }
-      if (!name && after) {
-        const afterParts = after.split(/[\t ]+/).filter(Boolean);
-        if (afterParts.length > 0) {
-          name = afterParts[0];
+      } else {
+        const before = trimmed.substring(0, m.index).trim();
+        const beforeParts = before.split(/[\t ]+/).filter(Boolean);
+        if (beforeParts.length > 0) {
+          const lastBefore = beforeParts[beforeParts.length - 1];
+          if (!/^#?[0-9a-fA-F]{3,8}$/i.test(lastBefore) && !lastBefore.startsWith('rgb') && !lastBefore.startsWith('hsl')) {
+            name = lastBefore;
+          }
         }
       }
 
@@ -197,6 +201,48 @@ function parseColors() {
   }
 
   document.getElementById('status').textContent = `Parsed ${parsedColors.length} color(s)`;
+  renderPalette();
+}
+
+function autoMapColors() {
+  const brightColors = ['black','red','green','yellow','blue','magenta','cyan','white'];
+  console.log('parsedColors:', JSON.stringify(parsedColors));
+
+  function matchSlot(colorName) {
+    const name = colorName.toLowerCase().replace(/[\s_-]/g, '');
+    const isBright = name.startsWith('bright');
+    const base = isBright ? name.slice(6) : name;
+
+    for (const bc of brightColors) {
+      const bNorm = bc.replace(/[\s_-]/g, '');
+      if (base === bNorm) {
+        for (let s = 6; s <= 21; s++) {
+          const slotNorm = SLOTS[s].putty.toLowerCase().replace(/[\s_-]/g, '');
+          const slotHasBright = slotNorm.includes('bright');
+          const slotHasColor = slotNorm.includes(bNorm);
+          if (slotHasColor && isBright === slotHasBright && !slotAssignments[s]) {
+            return s;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  let mapped = 0;
+  for (const color of parsedColors) {
+    const name = color.name || '';
+    if (!name) continue;
+    const slotIdx = matchSlot(name);
+    console.log(`matchSlot("${name}") => ${slotIdx}`);
+    if (slotIdx !== null) {
+      slotAssignments[slotIdx] = color;
+      mapped++;
+    }
+  }
+
+  document.getElementById('status').textContent = `Auto-mapped ${mapped} color(s)`;
+  renderSlots();
   renderPalette();
 }
 
