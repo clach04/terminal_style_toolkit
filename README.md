@@ -124,7 +124,7 @@ TODO support alacritty.toml like (see existing issue for similar support for tst
 
 ## Misc tools
 
-  * color_mapper.html - Local web browser parser/mapper that can generate tstk json files.
+  * [color_mapper.html](https://clach04.github.io/terminal_style_toolkit/color_mapper.html) - Local web browser parser/mapper that can generate tstk json files.
     Try it out by copy/pasting the table from https://github.com/srcery-colors/srcery-palette
   * mintty_screenshot.py - launch mintty with specific theme and run pyshow_colors2 and then take a screenshot
     To setup: `pip install -r requirements_optional.txt`
