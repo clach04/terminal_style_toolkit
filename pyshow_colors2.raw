@@ -1,0 +1,64 @@
+                         black     red   green  yellow    blue magenta    cyan   white
+                         40m     41m     42m     43m     44m     45m     46m     47m
+  normal     m   [mgYw   [m[40m  gYw  [0m [m[41m  gYw  [0m [m[42m  gYw  [0m [m[43m  gYw  [0m [m[44m  gYw  [0m [m[45m  gYw  [0m [m[46m  gYw  [0m [m[47m  gYw  [0m[0m
+    bold    1m   [1mgYw   [1m[40m  gYw  [0m [1m[41m  gYw  [0m [1m[42m  gYw  [0m [1m[43m  gYw  [0m [1m[44m  gYw  [0m [1m[45m  gYw  [0m [1m[46m  gYw  [0m [1m[47m  gYw  [0m[0m
+   black   30m   [30mgYw   [30m[40m  gYw  [0m [30m[41m  gYw  [0m [30m[42m  gYw  [0m [30m[43m  gYw  [0m [30m[44m  gYw  [0m [30m[45m  gYw  [0m [30m[46m  gYw  [0m [30m[47m  gYw  [0m[0m
+  blackB 1;30m   [1;30mgYw   [1;30m[40m  gYw  [0m [1;30m[41m  gYw  [0m [1;30m[42m  gYw  [0m [1;30m[43m  gYw  [0m [1;30m[44m  gYw  [0m [1;30m[45m  gYw  [0m [1;30m[46m  gYw  [0m [1;30m[47m  gYw  [0m[0m
+     red   31m   [31mgYw   [31m[40m  gYw  [0m [31m[41m  gYw  [0m [31m[42m  gYw  [0m [31m[43m  gYw  [0m [31m[44m  gYw  [0m [31m[45m  gYw  [0m [31m[46m  gYw  [0m [31m[47m  gYw  [0m[0m
+    redB 1;31m   [1;31mgYw   [1;31m[40m  gYw  [0m [1;31m[41m  gYw  [0m [1;31m[42m  gYw  [0m [1;31m[43m  gYw  [0m [1;31m[44m  gYw  [0m [1;31m[45m  gYw  [0m [1;31m[46m  gYw  [0m [1;31m[47m  gYw  [0m[0m
+   green   32m   [32mgYw   [32m[40m  gYw  [0m [32m[41m  gYw  [0m [32m[42m  gYw  [0m [32m[43m  gYw  [0m [32m[44m  gYw  [0m [32m[45m  gYw  [0m [32m[46m  gYw  [0m [32m[47m  gYw  [0m[0m
+  greenB 1;32m   [1;32mgYw   [1;32m[40m  gYw  [0m [1;32m[41m  gYw  [0m [1;32m[42m  gYw  [0m [1;32m[43m  gYw  [0m [1;32m[44m  gYw  [0m [1;32m[45m  gYw  [0m [1;32m[46m  gYw  [0m [1;32m[47m  gYw  [0m[0m
+  yellow   33m   [33mgYw   [33m[40m  gYw  [0m [33m[41m  gYw  [0m [33m[42m  gYw  [0m [33m[43m  gYw  [0m [33m[44m  gYw  [0m [33m[45m  gYw  [0m [33m[46m  gYw  [0m [33m[47m  gYw  [0m[0m
+ yellowB 1;33m   [1;33mgYw   [1;33m[40m  gYw  [0m [1;33m[41m  gYw  [0m [1;33m[42m  gYw  [0m [1;33m[43m  gYw  [0m [1;33m[44m  gYw  [0m [1;33m[45m  gYw  [0m [1;33m[46m  gYw  [0m [1;33m[47m  gYw  [0m[0m
+    blue   34m   [34mgYw   [34m[40m  gYw  [0m [34m[41m  gYw  [0m [34m[42m  gYw  [0m [34m[43m  gYw  [0m [34m[44m  gYw  [0m [34m[45m  gYw  [0m [34m[46m  gYw  [0m [34m[47m  gYw  [0m[0m
+   blueB 1;34m   [1;34mgYw   [1;34m[40m  gYw  [0m [1;34m[41m  gYw  [0m [1;34m[42m  gYw  [0m [1;34m[43m  gYw  [0m [1;34m[44m  gYw  [0m [1;34m[45m  gYw  [0m [1;34m[46m  gYw  [0m [1;34m[47m  gYw  [0m[0m
+ magenta   35m   [35mgYw   [35m[40m  gYw  [0m [35m[41m  gYw  [0m [35m[42m  gYw  [0m [35m[43m  gYw  [0m [35m[44m  gYw  [0m [35m[45m  gYw  [0m [35m[46m  gYw  [0m [35m[47m  gYw  [0m[0m
+magentaB 1;35m   [1;35mgYw   [1;35m[40m  gYw  [0m [1;35m[41m  gYw  [0m [1;35m[42m  gYw  [0m [1;35m[43m  gYw  [0m [1;35m[44m  gYw  [0m [1;35m[45m  gYw  [0m [1;35m[46m  gYw  [0m [1;35m[47m  gYw  [0m[0m
+    cyan   36m   [36mgYw   [36m[40m  gYw  [0m [36m[41m  gYw  [0m [36m[42m  gYw  [0m [36m[43m  gYw  [0m [36m[44m  gYw  [0m [36m[45m  gYw  [0m [36m[46m  gYw  [0m [36m[47m  gYw  [0m[0m
+   cyanB 1;36m   [1;36mgYw   [1;36m[40m  gYw  [0m [1;36m[41m  gYw  [0m [1;36m[42m  gYw  [0m [1;36m[43m  gYw  [0m [1;36m[44m  gYw  [0m [1;36m[45m  gYw  [0m [1;36m[46m  gYw  [0m [1;36m[47m  gYw  [0m[0m
+   white   37m   [37mgYw   [37m[40m  gYw  [0m [37m[41m  gYw  [0m [37m[42m  gYw  [0m [37m[43m  gYw  [0m [37m[44m  gYw  [0m [37m[45m  gYw  [0m [37m[46m  gYw  [0m [37m[47m  gYw  [0m[0m
+  whiteB 1;37m   [1;37mgYw   [1;37m[40m  gYw  [0m [1;37m[41m  gYw  [0m [1;37m[42m  gYw  [0m [1;37m[43m  gYw  [0m [1;37m[44m  gYw  [0m [1;37m[45m  gYw  [0m [1;37m[46m  gYw  [0m [1;37m[47m  gYw  [0m[0m
+
+[40m   [0m[41m   [0m[42m   [0m[43m   [0m[44m   [0m[45m   [0m[46m   [0m[47m   [0m
+[100m   [0m[101m   [0m[102m   [0m[103m   [0m[104m   [0m[105m   [0m[106m   [0m[107m   [0m[109m   [0m
+
+ black    red  green yellow  blue  magenta  cyan  white
+ [30m████[1m▄[0m  [31m████[1m▄[0m  [32m████[1m▄[0m  [33m████[1m▄[0m  [34m████[1m▄[0m  [35m████[1m▄[0m  [36m████[1m▄[0m  [37m████[1m▄[0m
+ [30m████[1m█[0m  [31m████[1m█[0m  [32m████[1m█[0m  [33m████[1m█[0m  [34m████[1m█[0m  [35m████[1m█[0m  [36m████[1m█[0m  [37m████[1m█[0m
+ [30m████[1m█[0m  [31m████[1m█[0m  [32m████[1m█[0m  [33m████[1m█[0m  [34m████[1m█[0m  [35m████[1m█[0m  [36m████[1m█[0m  [37m████[1m█[0m
+ [1m[30m ▀▀▀▀  [1m[31m ▀▀▀▀   [32m▀▀▀▀   [33m▀▀▀▀   [34m▀▀▀▀   [35m▀▀▀▀   [36m▀▀▀▀   [37m▀▀▀▀[0m
+
+[0mCOLOR_NC (No color)
+[1;37mCOLOR_WHITE	[0;30mCOLOR_BLACK
+[0;34mCOLOR_BLUE	[1;34mCOLOR_LIGHT_BLUE
+[0;32mCOLOR_GREEN	[1;32mCOLOR_LIGHT_GREEN
+[0;36mCOLOR_CYAN	[1;36mCOLOR_LIGHT_CYAN
+[0;31mCOLOR_RED	[1;31mCOLOR_LIGHT_RED
+[0;35mCOLOR_PURPLE	[1;35mCOLOR_LIGHT_PURPLE
+[0;33mCOLOR_YELLOW	[1;33mCOLOR_LIGHT_YELLOW
+[1;30mCOLOR_GRAY	[0;37mCOLOR_LIGHT_GRAY
+[0m
+$ ls --color=always test-dircolors/
+bug                       some_file.C      [0m[01;31msome_file.jar[0m   some_file.rc
+core                      some_file.cc     some_file.java  some_file.res
+[01;34mdirectory_g+w[0m             some_file.cfg    [01;35msome_file.jpeg[0m  [01;31msome_file.rpm[0m
+[34;42mdirectory_o+w[0m             some_file.class  [01;35msome_file.jpg[0m   some_file.rst
+[01;34mdirectory-standard[0m        some_file.conf   some_file.ksh   some_file.s
+[30;42mdirectory_+t_o+w[0m          some_file.cpp    some_file.l     some_file.sh
+[01;34mdir-sticky[0m                some_file.csh    some_file.ll    some_file.sql
+[34;42mdracula_putty_issue_3[0m     some_file.cxx    some_file.log   some_file.swp
+[01;32mexecutable_demo[0m           [01;31msome_file.deb[0m    [01;31msome_file.lzh[0m   some_file.t
+[37;41mexecutable_demo_setuid_a[0m  [01;35msome_file.dl[0m     some_file.md    [01;31msome_file.tar[0m
+[30;43mexecutable_demo_setuid_g[0m  some_file.eo     some_file.mk    some_file.tar.gzog
+[37;41mexecutable_demo_setuid_u[0m  some_file.err    some_file.mkd   some_file.tcsh
+[01;36mlink_to_device[0m            [01;35msome_file.fli[0m    [00;36msome_file.mp3[0m   some_file.tmp
+[40;31;01mlink_to_missing_device[0m    some_file.for    [01;35msome_file.mp4[0m   some_file.txt
+[40;31;01mlink_to_missing_file[0m      some_file.FPP    [01;35msome_file.mpg[0m   [01;35msome_file.xbm[0m
+[01;36mlink_to_normal[0m            [01;35msome_file.gif[0m    some_file.o     some_file.xml
+log                       [01;35msome_file.gl[0m     [00;36msome_file.ogg[0m   [01;35msome_file.xpm[0m
+makefile                  some_file.gmk    [01;35msome_file.ogv[0m   some_file.y
+README.md                 some_file.hh     some_file.pm    tags
+report                    some_file.hpp    [01;35msome_file.png[0m   [01;32mtest.dll[0m
+[01;35msome_file.avi[0m             some_file.hs     [01;35msome_file.ppm[0m   [01;32mtest.exe[0m
+some_file.bash            some_file.html   some_file.py    [01;32mtest.so[0m
+

@@ -29,6 +29,7 @@ When testing out a color scheme/theme consider different use cases:
 
   * `pyshow_colors2.py`
       * with ls_colors_test.txt
+      * WINDOWS `SET SKIP_WIN_CHECK=true` and `set PYTHONUTF8=1` to redirect to a file
   * ls colors (LSCOLORS, LS_COLORS, `dircolors` and .dir_colors)
       * https://github.com/dracula/putty/issues/3
       * ls_colors_test.txt

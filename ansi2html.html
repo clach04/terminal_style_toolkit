@@ -384,21 +384,39 @@
             showToast("Cleared input text");
         };
 
-        window.loadSampleText = function() {
-            currentRawText = "\u001b[1;35m=== SYSTEM DIAGNOSTIC LOG ===\u001b[0m\n" +
-                             "\u001b[32m[OK]\u001b[0m Initializing secure kernel modules...\n" +
-                             "\u001b[32m[OK]\u001b[0m Mounting encrypted virtual storage...\n" +
-                             "\u001b[41;37m BLOCK COLOR TEST LINE 1 \u001b[0m\n" +
-                             "\u001b[41;37m BLOCK COLOR TEST LINE 2 \u001b[0m\n" +
-                             "\u001b[33m[WARN]\u001b[0m Network bandwidth threshold approaching \u001b[1;33m85%\u001b[0m\n" +
-                             "\u001b[31m[ERROR]\u001b[0m Failed to ping upstream telemetry server \u001b[1;31m(Connection Timed Out)\u001b[0m\n" +
-                             "\u001b[36m[INFO]\u001b[0m Retrying connection sequence in 5 seconds...\n" +
-                             "\u001b[1;32mSUCCESS:\u001b[0m Core services online. Welcome \u001b[44;37m Administrator \u001b[0m!";
-            
-            document.getElementById('raw-text-input').value = currentRawText;
-            window.switchInputMode('paste');
-            window.triggerConversion();
-            showToast("Loaded sample ANSI log successfully!");
+        // Default sample: raw ANSI capture from pyshow_colors2.py (pyshow_colors2.raw),
+        // fetched from the repo (works when served over http, e.g. GitHub Pages).
+        // Fallback sample below is used when fetch fails (e.g. file:// protocol).
+        const SAMPLE_RAW_FILENAME = 'pyshow_colors2.raw';
+        const FALLBACK_SAMPLE_TEXT = "\u001b[1;35m=== SYSTEM DIAGNOSTIC LOG ===\u001b[0m\n" +
+            "\u001b[32m[OK]\u001b[0m Could not load " + SAMPLE_RAW_FILENAME + " (try serving via a local web server)\n" +
+            "\u001b[36m[INFO]\u001b[0m e.g. python -m http.server, then browse to this page\n" +
+            "\u001b[1;32mSample:\u001b[0m \u001b[41;37m BLOCK COLOR TEST \u001b[0m \u001b[42;30mgYw\u001b[0m \u001b[43;30mgYw\u001b[0m \u001b[44;37mgYw\u001b[0m";
+
+        window.loadSampleText = async function() {
+            let sampleText = null;
+            try {
+                const response = await fetch(SAMPLE_RAW_FILENAME);
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                sampleText = await response.text();
+            } catch (err) {
+                // fetch fails on file:// protocol (CORS) or if file is missing
+                console.warn('Could not fetch %s: %s', SAMPLE_RAW_FILENAME, err);
+            }
+
+            if (sampleText) {
+                currentRawText = sampleText;
+                document.getElementById('raw-text-input').value = currentRawText;
+                window.switchInputMode('paste');
+                window.triggerConversion();
+                showToast("Loaded color test sample from " + SAMPLE_RAW_FILENAME + "!");
+            } else {
+                currentRawText = FALLBACK_SAMPLE_TEXT;
+                document.getElementById('raw-text-input').value = currentRawText;
+                window.switchInputMode('paste');
+                window.triggerConversion();
+                showToast("Using fallback sample - " + SAMPLE_RAW_FILENAME + " not reachable", "error");
+            }
         };
 
         window.copyRawHTML = function() {
