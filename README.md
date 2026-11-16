@@ -116,6 +116,9 @@ Examples:
     # generate Base24 theme
     py -3 any2theme.py some_theme.tstk --output_extension .yaml -t base24_scheme.mustache
 
+    # generate CSS suitable for use with ansi2html.html
+    py -3 any2theme.py some_theme.tstk --output_extension .css -t ansi2html_css.mustache
+
 TODO support alacritty.toml like (see existing issue for similar support for tstk):
 
     [colors.cursor]
