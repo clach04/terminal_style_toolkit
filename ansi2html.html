@@ -39,6 +39,8 @@
             line-height: 1.0 !important;
         }
     </style>
+    <!-- Live target for user-supplied Custom CSS / Color Scheme (see Parser Options panel) -->
+    <style id="user-custom-css"></style>
 </head>
 <body class="bg-slate-900 text-slate-100 h-full flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
 
@@ -125,6 +127,23 @@
                             <input type="checkbox" id="opt-escape" class="sr-only peer" checked onchange="triggerConversion()">
                             <div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600 relative"></div>
                         </label>
+
+                        <!-- Custom CSS / Color Scheme text entry field -->
+                        <div class="pt-2">
+                            <div class="flex items-center justify-between mb-1.5">
+                                <label for="opt-custom-css" class="text-sm text-slate-300 group-hover:text-white transition-colors">Custom CSS (Color Scheme)</label>
+                                <button onclick="resetCustomCSS()" type="button" title="Restore default color scheme"
+                                        class="text-[10px] uppercase tracking-wide text-slate-400 hover:text-indigo-300 border border-slate-600 hover:border-indigo-400/60 rounded px-1.5 py-0.5 transition-colors">
+                                    Reset
+                                </button>
+                            </div>
+                            <textarea id="opt-custom-css" spellcheck="false" rows="8"
+                                      class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-[11px] leading-relaxed font-mono text-emerald-300/90 focus:outline-none focus:border-indigo-500 resize-y"
+                                      oninput="applyCustomCSS()"></textarea>
+                            <p class="text-[10px] text-slate-500 mt-1.5 leading-snug">
+                                Live CSS applied to the terminal preview. Prefilled with the <span class="text-slate-400">Solarized Dark</span> color scheme &mdash; edit any color value and the preview updates instantly.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -205,6 +224,53 @@
         let activeInputMode = 'drop';
         let activeOutputView = 'preview';
 
+        // ---------------------------------------------------------------
+        // Custom CSS / Color Scheme support
+        // ---------------------------------------------------------------
+
+        // User-editable Custom CSS, prefilled with a Solarized Dark color scheme.
+        // NOTE: with "Use CSS Classes" enabled, ansi_up v6 emits class names like
+        // "ansi-red-fg" / "ansi-bright-green-fg" (see ansi_up.ts transform_to_html),
+        // NOT the old fg1..fg15 naming - so the selectors below use those names.
+        const DEFAULT_CUSTOM_CSS = [
+            /* Solarized Dark color scheme */
+            '#terminal-output { background-color: #002b36; color: #93a1a1; }',
+            '#terminal-output .ansi-black-fg { color: #073642; }',
+            '#terminal-output .ansi-red-fg { color: #dc322f; }',
+            '#terminal-output .ansi-green-fg { color: #859900; }',
+            '#terminal-output .ansi-yellow-fg { color: #b58900; }',
+            '#terminal-output .ansi-blue-fg { color: #268bd2; }',
+            '#terminal-output .ansi-magenta-fg { color: #d33682; }',
+            '#terminal-output .ansi-cyan-fg { color: #2aa198; }',
+            '#terminal-output .ansi-white-fg { color: #eee8d5; }',
+            '#terminal-output .ansi-bright-black-fg { color: #586e75; }',
+            '#terminal-output .ansi-bright-red-fg { color: #cb4b16; }',
+            '#terminal-output .ansi-bright-green-fg { color: #586e75; }',
+            '#terminal-output .ansi-bright-yellow-fg { color: #657b83; }',
+            '#terminal-output .ansi-bright-blue-fg { color: #839496; }',
+            '#terminal-output .ansi-bright-magenta-fg { color: #6c71c4; }',
+            '#terminal-output .ansi-bright-cyan-fg { color: #93a1a1; }',
+            '#terminal-output .ansi-bright-white-fg { color: #fdf6e3; }',
+            /* Backgrounds (SGR 40-47, 100-107) */
+            '#terminal-output .ansi-black-bg { background-color: #073642; }',
+            '#terminal-output .ansi-red-bg { background-color: #dc322f; }',
+            '#terminal-output .ansi-green-bg { background-color: #859900; }',
+            '#terminal-output .ansi-yellow-bg { background-color: #b58900; }',
+            '#terminal-output .ansi-blue-bg { background-color: #268bd2; }',
+            '#terminal-output .ansi-magenta-bg { background-color: #d33682; }',
+            '#terminal-output .ansi-cyan-bg { background-color: #2aa198; }',
+            '#terminal-output .ansi-white-bg { background-color: #eee8d5; }',
+            '#terminal-output .ansi-bright-black-bg { background-color: #586e75; }',
+            '#terminal-output .ansi-bright-red-bg { background-color: #cb4b16; }',
+            '#terminal-output .ansi-bright-green-bg { background-color: #586e75; }',
+            '#terminal-output .ansi-bright-yellow-bg { background-color: #657b83; }',
+            '#terminal-output .ansi-bright-blue-bg { background-color: #839496; }',
+            '#terminal-output .ansi-bright-magenta-bg { background-color: #6c71c4; }',
+            '#terminal-output .ansi-bright-cyan-bg { background-color: #93a1a1; }',
+            '#terminal-output .ansi-bright-white-bg { background-color: #fdf6e3; }'
+        ].join('\n');
+        const CUSTOM_CSS_STORAGE_KEY = 'ansi2html_custom_css';
+
         // Make functions globally available for inline event handlers
         window.switchInputMode = function(mode) {
             activeInputMode = mode;
@@ -247,6 +313,26 @@
             }
         };
 
+        // Apply the contents of the Custom CSS text entry field live.
+        // Respects the existing "Use CSS Classes" toggle: when ansi_up emits
+        // class names instead of inline styles, the custom color scheme can
+        // actually take effect.
+        window.applyCustomCSS = function() {
+            const cssText = document.getElementById('opt-custom-css').value;
+            try {
+                if (window.localStorage) {
+                    localStorage.setItem(CUSTOM_CSS_STORAGE_KEY, cssText);
+                }
+            } catch (err) { /* storage unavailable - ignore */ }
+            document.getElementById('user-custom-css').textContent = cssText;
+        };
+
+        window.resetCustomCSS = function() {
+            document.getElementById('opt-custom-css').value = DEFAULT_CUSTOM_CSS;
+            window.applyCustomCSS();
+            showToast("Custom CSS reset to Solarized Dark default");
+        };
+
         window.triggerConversion = function() {
             const useClasses = document.getElementById('opt-classes').checked;
             const escapeHtml = document.getElementById('opt-escape').checked;
@@ -268,6 +354,18 @@
                 let finalRenderHTML = htmlOutput;
                 if (useClasses) {
                     finalRenderHTML = `<style>${ansiUp.ansi_classes}</style>\n` + htmlOutput;
+                    // Also apply ansi_up's own stylesheet to the live preview,
+                    // so class-based colors render there too (bold, underline, etc.)
+                    let styleEl = document.getElementById('ansi-up-classes-style');
+                    if (!styleEl) {
+                        styleEl = document.createElement('style');
+                        styleEl.id = 'ansi-up-classes-style';
+                        document.head.appendChild(styleEl);
+                    }
+                    styleEl.textContent = ansiUp.ansi_classes;
+                } else {
+                    const styleEl = document.getElementById('ansi-up-classes-style');
+                    if (styleEl) styleEl.textContent = '';
                 }
 
                 document.getElementById('terminal-output').innerHTML = htmlOutput;
@@ -328,7 +426,8 @@
                 showToast("No content to download!", "error");
                 return;
             }
-            const fullDocument = `<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <title>Converted Terminal Log</title>\n    <style>\n        body { background-color: #090d16; color: #e2e8f0; font-family: 'JetBrains Mono', Courier, monospace; padding: 2rem; }\n        pre {\n            font-family: 'JetBrains Mono', Courier, monospace !important;\n            line-height: 1.0 !important;\n            letter-spacing: 0px !important;\n            white-space: pre !important;\n            margin: 0 !important;\n            padding: 0 !important;\n        }\n    </style>\n</head>\n<body>\n    <pre>${rawCode}</pre>\n</body>\n</html>`;
+            const customCSS = document.getElementById('opt-custom-css').value || '';
+            const fullDocument = `<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <title>Converted Terminal Log</title>\n    <style>\n        body { background-color: #090d16; color: #e2e8f0; font-family: 'JetBrains Mono', Courier, monospace; padding: 2rem; }\n        pre {\n            font-family: 'JetBrains Mono', Courier, monospace !important;\n            line-height: 1.0 !important;\n            letter-spacing: 0px !important;\n            white-space: pre !important;\n            margin: 0 !important;\n            padding: 0 !important;\n        }\n${customCSS}\n    </style>\n</head>\n<body>\n    <pre>${rawCode}</pre>\n</body>\n</html>`;
             
             const blob = new Blob([fullDocument], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
@@ -414,6 +513,20 @@
 
         // Load sample initially
         window.loadSampleText();
+
+        // Custom CSS / Color Scheme field: restore saved value or prefill default.
+        // Runs after the sample load so the preview renders with the scheme applied.
+        (function initCustomCSS() {
+            const cssField = document.getElementById('opt-custom-css');
+            let savedCSS = null;
+            try {
+                if (window.localStorage) {
+                    savedCSS = localStorage.getItem(CUSTOM_CSS_STORAGE_KEY);
+                }
+            } catch (err) { /* storage unavailable - ignore */ }
+            cssField.value = (savedCSS !== null) ? savedCSS : DEFAULT_CUSTOM_CSS;
+            window.applyCustomCSS();
+        })();
     </script>
 </body>
 </html>
